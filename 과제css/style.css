@@ -49,7 +49,7 @@ html {
     scroll-behavior: smooth;
 }
 
-/* 여행 페이지의 본문 너비 */
+/* 여행 페이지 전체 너비 */
 .trip-header,
 .trip-nav,
 main,
@@ -73,42 +73,38 @@ footer {
     margin-bottom: 30px;
 }
 
-/* 이동 메뉴 링크 */
+/* 상단 이동 메뉴 버튼 */
 .trip-nav a {
     display: inline-block;
     margin: 5px 15px;
     padding: 8px 15px;
-
     color: #6D4C41;
     background-color: #FFF8F5;
-
     border: 1px solid #BCAAA4;
     border-radius: 20px;
-
     text-decoration: none;
 }
 
-/* 이동 메뉴에 마우스를 올렸을 때 */
+/* 상단 메뉴에 마우스를 올렸을 때 */
 .trip-nav a:hover {
     color: #FFF8F5;
     background-color: #8D6E63;
     text-decoration: none;
 }
 
-/* 국기 카드 전체 배치 */
+/* 나라별 앨범 카드 전체 배치 */
 .flag-list {
     display: flex;
     justify-content: center;
     gap: 25px;
     flex-wrap: wrap;
-
     margin-top: 30px;
     margin-bottom: 30px;
 }
 
-/* 나라별 카드 */
+/* 나라별 앨범 카드 */
 .flag-card {
-    width: 200px;
+    width: 220px;
     text-align: center;
 }
 
@@ -116,22 +112,39 @@ footer {
 .flag-card a {
     display: block;
     padding: 20px;
-
     color: #5D4037;
     background-color: #FFFFFF;
-
     border: 2px solid #D7CCC8;
     border-radius: 15px;
-
     box-shadow: 0 5px 10px rgba(93, 64, 55, 0.15);
     text-decoration: none;
-
     transition: 0.3s;
 }
 
 /* 국기 크기 */
 .flag {
-    font-size: 65px;
+    font-size: 60px;
+}
+
+/* 나라 이름 */
+.flag-card h3 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+/* 연도 */
+.flag-card p {
+    margin: 5px 0;
+}
+
+/* 앨범 보기 */
+.flag-card small {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 10px;
+
+    background-color: #FFF5F8;
+    border-radius: 12px;
 }
 
 /* 나라 카드에 마우스를 올렸을 때 */
@@ -146,13 +159,27 @@ footer {
     margin-top: 40px;
     margin-bottom: 40px;
     padding: 25px;
-
     background-color: #FFFFFF;
     border: 1px solid #D7CCC8;
     border-radius: 15px;
 }
 
-/* 사진 배치 */
+/* 2024 오스트리아·체코 안의 나라별 영역 */
+.trip-country {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #FFF8F5;
+    border: 1px solid #D7CCC8;
+    border-radius: 12px;
+}
+
+/* 오스트리아·체코 소제목 */
+.trip-country h3 {
+    margin-top: 0;
+    color: #6D4C41;
+}
+
+/* 사진 전체 배치 */
 .gallery {
     display: flex;
     justify-content: center;
@@ -160,30 +187,25 @@ footer {
     flex-wrap: wrap;
 }
 
-/* 사진과 설명을 묶은 영역 */
+/* 사진과 설명 한 묶음 */
 .gallery figure {
     width: 280px;
     margin: 0;
     padding: 10px;
-
     text-align: center;
     background-color: #FFF8F5;
-
     border: 1px solid #D7CCC8;
     border-radius: 12px;
-
     overflow: hidden;
 }
 
-/* 사진 크기 */
+/* 사진 크기 통일 */
 .gallery img {
     width: 100%;
     height: 200px;
-
     object-fit: cover;
     border-radius: 8px;
-
-    transition: 0.3s;
+    transition: transform 0.3s;
 }
 
 /* 사진에 마우스를 올렸을 때 확대 */
@@ -202,6 +224,7 @@ footer {
 .food-layout {
     display: flex;
     gap: 20px;
+    align-items: stretch;
 }
 
 /* 먹거리와 여행 팁 박스 */
@@ -209,7 +232,6 @@ footer {
 .travel-tip {
     flex: 1;
     padding: 20px;
-
     background-color: #FFFFFF;
     border: 1px solid #D7CCC8;
     border-radius: 12px;
@@ -236,4 +258,19 @@ footer {
 footer {
     padding: 30px 0;
     text-align: center;
+}
+
+/* 화면이 작을 때 */
+@media (max-width: 800px) {
+    .food-layout {
+        flex-direction: column;
+    }
+
+    .trip-nav a {
+        margin: 5px;
+    }
+
+    .gallery figure {
+        width: 90%;
+    }
 }
