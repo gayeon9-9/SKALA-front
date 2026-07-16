@@ -466,3 +466,46 @@ html {
         bottom: 15px;
     }
 }
+
+/* =====================================================
+   회원가입 페이지 (signUp.html)
+===================================================== */
+
+/* 상단 회원가입 헤더 고정 */
+.signup-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    padding: 15px 0;
+
+    text-align: center;
+    background-color: #FFF8F5;
+
+    box-shadow: 0 2px 8px rgba(93, 64, 55, 0.15);
+
+    z-index: 1000;
+}
+
+/* 공통 h1 스타일보다 회원가입 헤더 스타일을 우선 적용 */
+.signup-header h1 {
+    margin: 0;
+    padding: 5px;
+
+    font-size: 32px;
+    border: none;
+    background-color: transparent;
+}
+
+.signup-header p {
+    margin: 5px 0 0;
+}
+
+/* 고정 헤더에 폼이 가려지지 않게 아래로 내리기 */
+.signup-header + form {
+    width: 90%;
+    max-width: 750px;
+
+    margin: 150px auto 50px;
+}
