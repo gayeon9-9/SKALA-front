@@ -1,6 +1,6 @@
-/* =====================================================
-   공통 스타일 (모든 페이지)
-===================================================== */
+// ==============================================
+ <!-- 공통 페이지 수정--> 
+================================================ //
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
@@ -39,4 +39,201 @@ a {
 a:hover {
     color: #A0522D;
     text-decoration: underline;
+}
+
+// ==============================================
+ <!-- 여행 페이지 수정 (myTrip.html)--> 
+================================================ //
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* 여행 페이지의 본문 너비 */
+.trip-header,
+.trip-nav,
+main,
+footer {
+    width: 90%;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 여행 페이지 상단 */
+.trip-header {
+    padding: 30px;
+    text-align: center;
+}
+
+/* 상단 이동 메뉴 */
+.trip-nav {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+/* 이동 메뉴 링크 */
+.trip-nav a {
+    display: inline-block;
+    margin: 5px 15px;
+    padding: 8px 15px;
+
+    color: #6D4C41;
+    background-color: #FFF8F5;
+
+    border: 1px solid #BCAAA4;
+    border-radius: 20px;
+
+    text-decoration: none;
+}
+
+/* 이동 메뉴에 마우스를 올렸을 때 */
+.trip-nav a:hover {
+    color: #FFF8F5;
+    background-color: #8D6E63;
+    text-decoration: none;
+}
+
+/* 국기 카드 전체 배치 */
+.flag-list {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/* 나라별 카드 */
+.flag-card {
+    width: 200px;
+    text-align: center;
+}
+
+/* 나라별 카드 안의 링크 */
+.flag-card a {
+    display: block;
+    padding: 20px;
+
+    color: #5D4037;
+    background-color: #FFFFFF;
+
+    border: 2px solid #D7CCC8;
+    border-radius: 15px;
+
+    box-shadow: 0 5px 10px rgba(93, 64, 55, 0.15);
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+/* 국기 크기 */
+.flag {
+    font-size: 65px;
+}
+
+/* 나라 카드에 마우스를 올렸을 때 */
+.flag-card a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 18px rgba(93, 64, 55, 0.25);
+    text-decoration: none;
+}
+
+/* 나라별 앨범 영역 */
+.country-album {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding: 25px;
+
+    background-color: #FFFFFF;
+    border: 1px solid #D7CCC8;
+    border-radius: 15px;
+}
+
+/* 사진 배치 */
+.gallery {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* 사진과 설명을 묶은 영역 */
+.gallery figure {
+    width: 280px;
+    margin: 0;
+    padding: 10px;
+
+    text-align: center;
+    background-color: #FFF8F5;
+
+    border: 1px solid #D7CCC8;
+    border-radius: 12px;
+
+    overflow: hidden;
+}
+
+/* 사진 크기 */
+.gallery img {
+    width: 100%;
+    height: 200px;
+
+    object-fit: cover;
+    border-radius: 8px;
+
+    transition: 0.3s;
+}
+
+/* 사진에 마우스를 올렸을 때 확대 */
+.gallery figure:hover img {
+    transform: scale(1.05);
+}
+
+/* 사진 설명 */
+.gallery figcaption {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #6D4C41;
+}
+
+/* 먹거리와 여행 팁 2단 배치 */
+.food-layout {
+    display: flex;
+    gap: 20px;
+}
+
+/* 먹거리와 여행 팁 박스 */
+.food-content,
+.travel-tip {
+    flex: 1;
+    padding: 20px;
+
+    background-color: #FFFFFF;
+    border: 1px solid #D7CCC8;
+    border-radius: 12px;
+}
+
+/* 여행 팁 강조 */
+.travel-tip {
+    border-left: 6px solid #A1887F;
+}
+
+/* 영상 영역 */
+#video {
+    text-align: center;
+}
+
+/* 영상 크기 */
+#video video {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 12px;
+}
+
+/* 푸터 */
+footer {
+    padding: 30px 0;
+    text-align: center;
 }
