@@ -1,31 +1,42 @@
+/* =====================================================
+   공통 스타일 (모든 페이지)
+===================================================== */
+
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
-body{
+body {
     font-family: 'Noto Sans KR', sans-serif;
     line-height: 1.7;
-    color:#333;
-    background:#FFF5F8;
+    color: #5D4037;
+    background-color: #FFF5F8;
 }
-body{
-    h1 {
-    color: #7E57C2;
+
+h1 {
+    color: #6D4C41;
     font-size: 36px;
     text-align: center;
-
     padding: 15px;
-    border: 3px solid #B39DDB;
-    border-radius: 12px;
-    background-color: #F8F2FF;
     margin-bottom: 30px;
+    border: 3px solid #BCAAA4;
+    border-radius: 12px;
+    background-color: #FFF8F5;
 }
 
-    h2 {
-    color: #5b08eb;
+h2 {
+    color: #795548;
     font-size: 24px;
     padding: 10px;
-    border-left: 6px solid #9575CD;
-    background-color: #FCF8FF;
-
     margin-top: 30px;
+    border-left: 6px solid #A1887F;
+    background-color: #FFF8F5;
 }
+
+a {
+    color: #795548;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #A0522D;
+    text-decoration: underline;
 }
