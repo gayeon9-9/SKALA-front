@@ -1,14 +1,12 @@
 /* =====================================================
    회원가입 페이지 JavaScript
 ===================================================== */
-const otherInterestCheck =
-    document.getElementById("otherInterestCheck");
-
-const otherInterestInput =
-    document.getElementById("otherInterest");
-
 
 document.addEventListener("DOMContentLoaded", function () {
+    /* -------------------------------------------------
+       HTML 요소 가져오기
+    ------------------------------------------------- */
+
     const signupForm = document.getElementById("signupForm");
 
     const userIdInput = document.getElementById("userId");
@@ -17,25 +15,62 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const userPwInput = document.getElementById("userPw");
     const userPwCheckInput = document.getElementById("userPwCheck");
+    const togglePasswordButton = document.getElementById(
+        "togglePasswordButton"
+    );
+
     const passwordCheckMessage = document.getElementById(
         "passwordCheckMessage"
     );
 
-    const userTelInput = document.getElementById("userTel");
+    const passwordStrengthBar = document.getElementById(
+        "passwordStrengthBar"
+    );
 
+    const passwordStrengthText = document.getElementById(
+        "passwordStrengthText"
+    );
+
+    const userEmailInput = document.getElementById("userEmail");
     const emailDomainSelect = document.getElementById("emailDomain");
+
     const directEmailDomainInput = document.getElementById(
         "directEmailDomain"
     );
 
-    const joinPathSelect = document.getElementById("joinPath");
-    const directJoinPathInput = document.getElementById(
-        "directJoinPath"
-    );
+    const userNameInput = document.getElementById("userName");
+    const userBirthInput = document.getElementById("userBirth");
+    const userTelInput = document.getElementById("userTel");
 
     const regionSelect = document.getElementById("region");
     const districtArea = document.getElementById("districtArea");
     const townArea = document.getElementById("townArea");
+
+    const otherInterestCheck = document.getElementById(
+        "otherInterestCheck"
+    );
+
+    const otherInterestInput = document.getElementById(
+        "otherInterest"
+    );
+
+    const joinPathSelect = document.getElementById("joinPath");
+
+    const directJoinPathInput = document.getElementById(
+        "directJoinPath"
+    );
+
+    const introInput = document.getElementById("intro");
+    const introCount = document.getElementById("introCount");
+
+    const agreeCheckbox = document.getElementById("agree");
+
+    const progressText = document.getElementById("progressText");
+    const progressBar = document.getElementById("progressBar");
+
+    const clearInputButtons = document.querySelectorAll(
+        ".clear-input-button"
+    );
 
     const usedIds = [
         "admin",
@@ -48,7 +83,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =================================================
-       1. 아이디 중복 확인
+       1. 생년월일 미래 날짜 차단
+    ================================================= */
+
+    const today = new Date();
+    const todayString = today.toISOString().split("T")[0];
+
+    userBirthInput.max = todayString;
+
+
+    /* =================================================
+       2. 아이디 중복 확인
     ================================================= */
 
     checkIdButton.addEventListener("click", function () {
@@ -90,19 +135,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
             isIdChecked = true;
         }
+
+        updateProgress();
     });
 
-    /* 아이디를 수정하면 다시 중복확인 */
+    /* 아이디가 변경되면 다시 중복확인 */
     userIdInput.addEventListener("input", function () {
         isIdChecked = false;
 
         idCheckMessage.textContent = "";
         idCheckMessage.className = "validation-message";
+
+        updateProgress();
     });
 
 
     /* =================================================
-       2. 비밀번호 길이 및 일치 확인
+       3. 비밀번호 확인
     ================================================= */
 
     function checkPassword() {
@@ -175,55 +224,158 @@ document.addEventListener("DOMContentLoaded", function () {
         return true;
     }
 
-    userPwInput.addEventListener("input", checkPassword);
-    userPwCheckInput.addEventListener("input", checkPassword);
+    userPwInput.addEventListener("input", function () {
+        checkPassword();
+        updatePasswordStrength();
+        updateProgress();
+    });
+
+    userPwCheckInput.addEventListener("input", function () {
+        checkPassword();
+        updateProgress();
+    });
 
 
     /* =================================================
-   전화번호 자동 하이픈
-================================================= */
+       4. 비밀번호 보기/숨기기
+    ================================================= */
 
-userTelInput.addEventListener("input", function () {
-    const number = this.value
-        .replace(/[^0-9]/g, "")
-        .slice(0, 11);
+    togglePasswordButton.addEventListener("click", function () {
+        const isPasswordVisible =
+            userPwInput.type === "text";
 
-    if (number.length === 0) {
-        this.value = "";
-    } else if (number.length < 3) {
-        this.value = number;
-    } else if (number.length === 3) {
-        /* 010 입력 즉시 하이픈 추가 */
-        this.value = number + "-";
-    } else if (number.length < 7) {
-        this.value =
-            number.slice(0, 3) +
-            "-" +
-            number.slice(3);
-    } else if (number.length === 7) {
-        /* 가운데 번호 4자리 입력 즉시 두 번째 하이픈 추가 */
-        this.value =
-            number.slice(0, 3) +
-            "-" +
-            number.slice(3, 7) +
-            "-";
-    } else {
-        this.value =
-            number.slice(0, 3) +
-            "-" +
-            number.slice(3, 7) +
-            "-" +
-            number.slice(7, 11);
+        if (isPasswordVisible) {
+            userPwInput.type = "password";
+            userPwCheckInput.type = "password";
+
+            this.textContent = "보기";
+        } else {
+            userPwInput.type = "text";
+            userPwCheckInput.type = "text";
+
+            this.textContent = "숨기기";
+        }
+    });
+
+
+    /* =================================================
+       5. 비밀번호 안전도
+    ================================================= */
+
+    function updatePasswordStrength() {
+        const password = userPwInput.value;
+
+        let score = 0;
+
+        if (password.length >= 8) {
+            score += 1;
+        }
+
+        if (/[A-Za-z]/.test(password)) {
+            score += 1;
+        }
+
+        if (/[0-9]/.test(password)) {
+            score += 1;
+        }
+
+        if (/[^A-Za-z0-9]/.test(password)) {
+            score += 1;
+        }
+
+        passwordStrengthBar.className =
+            "password-strength-bar";
+
+        if (password === "") {
+            passwordStrengthBar.style.width = "0%";
+            passwordStrengthText.textContent =
+                "비밀번호 안전도: 입력 전";
+
+            return;
+        }
+
+        if (score <= 1) {
+            passwordStrengthBar.style.width = "25%";
+            passwordStrengthBar.classList.add("strength-weak");
+
+            passwordStrengthText.textContent =
+                "비밀번호 안전도: 약함";
+
+            return;
+        }
+
+        if (score === 2) {
+            passwordStrengthBar.style.width = "50%";
+            passwordStrengthBar.classList.add("strength-normal");
+
+            passwordStrengthText.textContent =
+                "비밀번호 안전도: 보통";
+
+            return;
+        }
+
+        if (score === 3) {
+            passwordStrengthBar.style.width = "75%";
+            passwordStrengthBar.classList.add("strength-good");
+
+            passwordStrengthText.textContent =
+                "비밀번호 안전도: 양호";
+
+            return;
+        }
+
+        passwordStrengthBar.style.width = "100%";
+        passwordStrengthBar.classList.add("strength-strong");
+
+        passwordStrengthText.textContent =
+            "비밀번호 안전도: 강함";
     }
 
-    /* 커서를 입력값 맨 뒤로 이동 */
-    this.setSelectionRange(
-        this.value.length,
-        this.value.length
-    );
-});
+
     /* =================================================
-       4. 이메일 도메인 직접 입력
+       6. 전화번호 자동 하이픈
+    ================================================= */
+
+    userTelInput.addEventListener("input", function () {
+        const number = this.value
+            .replace(/[^0-9]/g, "")
+            .slice(0, 11);
+
+        if (number.length === 0) {
+            this.value = "";
+        } else if (number.length < 3) {
+            this.value = number;
+        } else if (number.length === 3) {
+            this.value = number + "-";
+        } else if (number.length < 7) {
+            this.value =
+                number.slice(0, 3) +
+                "-" +
+                number.slice(3);
+        } else if (number.length === 7) {
+            this.value =
+                number.slice(0, 3) +
+                "-" +
+                number.slice(3, 7) +
+                "-";
+        } else {
+            this.value =
+                number.slice(0, 3) +
+                "-" +
+                number.slice(3, 7) +
+                "-" +
+                number.slice(7, 11);
+        }
+
+        this.setSelectionRange(
+            this.value.length,
+            this.value.length
+        );
+    });
+
+
+    /* =================================================
+       7. 이메일 도메인 직접 입력
     ================================================= */
 
     emailDomainSelect.addEventListener("change", function () {
@@ -236,18 +388,17 @@ userTelInput.addEventListener("input", function () {
             directEmailDomainInput.value = "";
 
             directEmailDomainInput.focus();
-            return;
+        } else {
+            directEmailDomainInput.hidden = true;
+            directEmailDomainInput.required = false;
+            directEmailDomainInput.value = "";
         }
 
-        directEmailDomainInput.hidden = true;
-        directEmailDomainInput.required = false;
-        directEmailDomainInput.value = "";
+        updateProgress();
     });
 
-    /*
-       직접입력 칸이 비어 있는 상태에서 포커스가 빠지면
-       다시 드롭다운을 표시한다.
-    */
+    directEmailDomainInput.addEventListener("input", updateProgress);
+
     directEmailDomainInput.addEventListener("blur", function () {
         if (this.value.trim() !== "") {
             return;
@@ -259,11 +410,15 @@ userTelInput.addEventListener("input", function () {
         emailDomainSelect.hidden = false;
         emailDomainSelect.required = true;
         emailDomainSelect.value = "";
+
+        updateProgress();
     });
+
+    userEmailInput.addEventListener("input", updateProgress);
 
 
     /* =================================================
-       5. 가입경로 직접 입력
+       8. 가입경로 직접 입력
     ================================================= */
 
     joinPathSelect.addEventListener("change", function () {
@@ -272,13 +427,12 @@ userTelInput.addEventListener("input", function () {
 
             directJoinPathInput.hidden = false;
             directJoinPathInput.value = "";
+
             directJoinPathInput.focus();
-
-            return;
+        } else {
+            directJoinPathInput.hidden = true;
+            directJoinPathInput.value = "";
         }
-
-        directJoinPathInput.hidden = true;
-        directJoinPathInput.value = "";
     });
 
     directJoinPathInput.addEventListener("blur", function () {
@@ -292,8 +446,9 @@ userTelInput.addEventListener("input", function () {
         joinPathSelect.value = "";
     });
 
+
     /* =================================================
-   관심 분야 '그 외' 직접 입력
+       9. 관심 분야 '그 외'
     ================================================= */
 
     otherInterestCheck.addEventListener("change", function () {
@@ -306,8 +461,39 @@ userTelInput.addEventListener("input", function () {
         }
     });
 
+
     /* =================================================
-       6. 전국 시·도 및 시·군·구 데이터
+       10. 자기소개 글자 수
+    ================================================= */
+
+    introInput.addEventListener("input", function () {
+        introCount.textContent = this.value.length;
+    });
+
+
+    /* =================================================
+       11. 입력값 지우기 버튼
+    ================================================= */
+
+    clearInputButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            const targetId = this.dataset.target;
+            const targetInput = document.getElementById(targetId);
+
+            targetInput.value = "";
+            targetInput.focus();
+
+            targetInput.dispatchEvent(
+                new Event("input", {
+                    bubbles: true
+                })
+            );
+        });
+    });
+
+
+    /* =================================================
+       12. 시·도별 시·군·구
     ================================================= */
 
     const districtData = {
@@ -417,7 +603,7 @@ userTelInput.addEventListener("input", function () {
 
 
     /* =================================================
-       7. 지역 선택창 생성
+       13. 지역 선택창 생성
     ================================================= */
 
     regionSelect.addEventListener("change", function () {
@@ -466,11 +652,6 @@ userTelInput.addEventListener("input", function () {
         });
     });
 
-
-    /*
-       전국의 모든 읍·면·동을 코드에 직접 넣으면
-       수천 줄이 되므로 시·군·구를 선택한 뒤 직접 입력한다.
-    */
     function createTownInput(selectedDistrict) {
         townArea.innerHTML = "";
 
@@ -499,7 +680,60 @@ userTelInput.addEventListener("input", function () {
 
 
     /* =================================================
-       8. 제출 전 최종 확인
+       14. 필수정보 진행률
+    ================================================= */
+
+    function isEmailComplete() {
+        const emailIdComplete =
+            userEmailInput.value.trim() !== "";
+
+        let domainComplete = false;
+
+        if (emailDomainSelect.hidden) {
+            domainComplete =
+                directEmailDomainInput.value.trim() !== "";
+        } else {
+            domainComplete =
+                emailDomainSelect.value !== "";
+        }
+
+        return emailIdComplete && domainComplete;
+    }
+
+    function updateProgress() {
+        const requiredChecks = [
+            isIdChecked,
+            userPwInput.value.length >= 8,
+            checkPassword(),
+            isEmailComplete(),
+            userNameInput.value.trim() !== "",
+            agreeCheckbox.checked
+        ];
+
+        const completedCount = requiredChecks.filter(
+            function (item) {
+                return item;
+            }
+        ).length;
+
+        const totalCount = requiredChecks.length;
+
+        progressText.textContent =
+            completedCount + " / " + totalCount;
+
+        const progressPercent =
+            (completedCount / totalCount) * 100;
+
+        progressBar.style.width =
+            progressPercent + "%";
+    }
+
+    userNameInput.addEventListener("input", updateProgress);
+    agreeCheckbox.addEventListener("change", updateProgress);
+
+
+    /* =================================================
+       15. 제출 전 최종 확인
     ================================================= */
 
     signupForm.addEventListener("submit", function (event) {
@@ -523,27 +757,25 @@ userTelInput.addEventListener("input", function () {
             return;
         }
 
-        if (
-            emailDomainSelect.hidden &&
-            directEmailDomainInput.value.trim() === ""
-        ) {
-            event.preventDefault();
-
-            alert("이메일 도메인을 입력해 주세요.");
-
-            directEmailDomainInput.focus();
-            return;
-        }
-
         if (!signupForm.checkValidity()) {
             event.preventDefault();
             signupForm.reportValidity();
+
+            return;
+        }
+
+        const isConfirmed = confirm(
+            "입력한 정보로 회원가입하시겠습니까?"
+        );
+
+        if (!isConfirmed) {
+            event.preventDefault();
         }
     });
 
 
     /* =================================================
-       9. 다시 작성 버튼
+       16. 다시 작성 버튼
     ================================================= */
 
     signupForm.addEventListener("reset", function () {
@@ -556,8 +788,19 @@ userTelInput.addEventListener("input", function () {
             passwordCheckMessage.textContent = "";
             passwordCheckMessage.className = "validation-message";
 
+            userPwInput.type = "password";
+            userPwCheckInput.type = "password";
+            togglePasswordButton.textContent = "보기";
+
             userPwInput.setCustomValidity("");
             userPwCheckInput.setCustomValidity("");
+
+            passwordStrengthBar.style.width = "0%";
+            passwordStrengthBar.className =
+                "password-strength-bar";
+
+            passwordStrengthText.textContent =
+                "비밀번호 안전도: 입력 전";
 
             emailDomainSelect.hidden = false;
             emailDomainSelect.required = true;
@@ -571,12 +814,21 @@ userTelInput.addEventListener("input", function () {
             directJoinPathInput.hidden = true;
             directJoinPathInput.value = "";
 
+            otherInterestCheck.checked = false;
+            otherInterestInput.hidden = true;
+            otherInterestInput.value = "";
+
             districtArea.innerHTML = "";
             townArea.innerHTML = "";
 
-            otherInterestInput.hidden = true;
-            otherInterestInput.required = false;
-            otherInterestInput.value = "";
+            introCount.textContent = "0";
+
+            progressText.textContent = "0 / 6";
+            progressBar.style.width = "0%";
         }, 0);
     });
+
+
+    /* 처음 페이지가 열렸을 때 진행률 초기화 */
+    updateProgress();
 });

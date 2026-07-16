@@ -10,9 +10,22 @@
 </head>
 
 <body>
+    <!-- 상단 고정 헤더 -->
     <header class="signup-header">
         <h1>👤 회원가입</h1>
         <p><b>SKALA 회원가입 페이지입니다.</b></p>
+
+        <!-- 필수 정보 입력 진행률 -->
+        <div class="signup-progress">
+            <div class="progress-info">
+                <span>필수 정보 입력</span>
+                <strong id="progressText">0 / 6</strong>
+            </div>
+
+            <div class="progress-track">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+        </div>
     </header>
 
     <form
@@ -22,23 +35,34 @@
     >
         <!-- 계정 정보 -->
         <fieldset>
-            <legend>계정 정보(필수)</legend>
+            <legend>계정 정보</legend>
 
             <!-- 아이디 -->
-            <p>
+            <p class="form-row">
                 <label for="userId">아이디 :</label>
 
-                <input
-                    type="text"
-                    id="userId"
-                    name="userId"
-                    minlength="4"
-                    maxlength="12"
-                    pattern="[A-Za-z0-9]{4,12}"
-                    title="영문과 숫자만 사용하여 4~12자로 입력해 주세요."
-                    placeholder="4~12자 영문/숫자"
-                    required
-                >
+                <span class="input-with-button">
+                    <input
+                        type="text"
+                        id="userId"
+                        name="userId"
+                        minlength="4"
+                        maxlength="12"
+                        pattern="[A-Za-z0-9]{4,12}"
+                        title="영문과 숫자만 사용하여 4~12자로 입력해 주세요."
+                        placeholder="4~12자 영문/숫자"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="clear-input-button"
+                        data-target="userId"
+                        aria-label="아이디 지우기"
+                    >
+                        ×
+                    </button>
+                </span>
 
                 <button
                     type="button"
@@ -47,7 +71,7 @@
                     중복 확인
                 </button>
 
-                <small>(필수)</small>
+                <small class="required-mark">(필수)</small>
             </p>
 
             <p
@@ -56,24 +80,45 @@
             ></p>
 
             <!-- 비밀번호 -->
-            <p>
+            <p class="form-row">
                 <label for="userPw">비밀번호 :</label>
 
                 <input
                     type="password"
                     id="userPw"
-                    name="userPw"
                     minlength="8"
                     title="비밀번호는 8자 이상 입력해 주세요."
                     placeholder="8자 이상 입력"
                     required
                 >
 
-                <small>(필수)</small>
+                <button
+                    type="button"
+                    id="togglePasswordButton"
+                    class="sub-button"
+                >
+                    보기
+                </button>
+
+                <small class="required-mark">(필수)</small>
             </p>
 
+            <!-- 비밀번호 안전도 -->
+            <div class="password-strength-area">
+                <div class="password-strength-track">
+                    <div
+                        id="passwordStrengthBar"
+                        class="password-strength-bar"
+                    ></div>
+                </div>
+
+                <span id="passwordStrengthText">
+                    비밀번호 안전도: 입력 전
+                </span>
+            </div>
+
             <!-- 비밀번호 확인 -->
-            <p>
+            <p class="form-row">
                 <label for="userPwCheck">비밀번호 확인 :</label>
 
                 <input
@@ -85,7 +130,7 @@
                     required
                 >
 
-                <small>(필수)</small>
+                <small class="required-mark">(필수)</small>
             </p>
 
             <p
@@ -94,16 +139,27 @@
             ></p>
 
             <!-- 이메일 -->
-            <p>
+            <p class="form-row email-row">
                 <label for="userEmail">이메일 :</label>
 
-                <input
-                    type="text"
-                    id="userEmail"
-                    name="userEmail"
-                    placeholder="example"
-                    required
-                >
+                <span class="input-with-button email-id-area">
+                    <input
+                        type="text"
+                        id="userEmail"
+                        name="userEmail"
+                        placeholder="example"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="clear-input-button"
+                        data-target="userEmail"
+                        aria-label="이메일 지우기"
+                    >
+                        ×
+                    </button>
+                </span>
 
                 <span class="email-symbol">@</span>
 
@@ -131,7 +187,7 @@
                     >
                 </span>
 
-                <small>(필수)</small>
+                <small class="required-mark">(필수)</small>
             </p>
         </fieldset>
 
@@ -140,7 +196,7 @@
             <legend>개인 프로필 정보</legend>
 
             <!-- 이름 -->
-            <p>
+            <p class="form-row">
                 <label for="userName">이름 :</label>
 
                 <input
@@ -150,11 +206,11 @@
                     required
                 >
 
-                <small>(필수)</small>
+                <small class="required-mark">(필수)</small>
             </p>
 
             <!-- 생년월일 -->
-            <p>
+            <p class="form-row">
                 <label for="userBirth">생년월일 :</label>
 
                 <input
@@ -162,22 +218,37 @@
                     id="userBirth"
                     name="userBirth"
                 >
+
+                <small class="optional-mark">(선택)</small>
             </p>
 
             <!-- 전화번호 -->
-            <p>
+            <p class="form-row">
                 <label for="userTel">전화번호 :</label>
 
-                <input
-                    type="tel"
-                    id="userTel"
-                    name="userTel"
-                    placeholder="010-0000-0000"
-                    pattern="010-[0-9]{4}-[0-9]{4}"
-                    title="010-0000-0000 형식으로 입력해 주세요."
-                    maxlength="13"
-                    inputmode="numeric"
-                >
+                <span class="input-with-button">
+                    <input
+                        type="tel"
+                        id="userTel"
+                        name="userTel"
+                        placeholder="010-0000-0000"
+                        pattern="010-[0-9]{4}-[0-9]{4}"
+                        title="010-0000-0000 형식으로 입력해 주세요."
+                        maxlength="13"
+                        inputmode="numeric"
+                    >
+
+                    <button
+                        type="button"
+                        class="clear-input-button"
+                        data-target="userTel"
+                        aria-label="전화번호 지우기"
+                    >
+                        ×
+                    </button>
+                </span>
+
+                <small class="optional-mark">(선택)</small>
             </p>
 
             <!-- 성별 -->
@@ -211,10 +282,12 @@
                     >
                     선택 안 함
                 </label>
+
+                <small class="optional-mark">(선택)</small>
             </p>
 
             <!-- 지역 -->
-            <p>
+            <p class="form-row">
                 <label for="region">지역 :</label>
 
                 <select
@@ -240,18 +313,19 @@
                     <option value="gyeongnam">경상남도</option>
                     <option value="jeju">제주특별자치도</option>
                 </select>
+
+                <small class="optional-mark">(선택)</small>
             </p>
 
-            <!-- JS에서 시·군·구 선택창 생성 -->
+            <!-- JS로 생성되는 주소 입력 영역 -->
             <div id="districtArea"></div>
-
-            <!-- 시·군·구 선택 후 읍·면·동 입력창 생성 -->
             <div id="townArea"></div>
 
-           <!-- 관심 분야 -->
+            <!-- 관심 분야 -->
             <div class="interest-group">
                 <p class="interest-title">
-                    관심 분야 (중복 선택 가능) :
+                    관심 분야 (중복 선택 가능)
+                    <small class="optional-mark">(선택)</small>
                 </p>
 
                 <label>
@@ -310,7 +384,7 @@
             </div>
 
             <!-- 가입경로 -->
-            <p>
+            <p class="form-row">
                 <label for="joinPath">가입경로 :</label>
 
                 <span class="replace-input-area">
@@ -334,6 +408,8 @@
                         hidden
                     >
                 </span>
+
+                <small class="optional-mark">(선택)</small>
             </p>
         </fieldset>
 
@@ -341,19 +417,25 @@
         <fieldset>
             <legend>자기소개</legend>
 
-            <p class="intro-row">
+            <div class="intro-row">
                 <label for="intro">
                     나를 표현하는 한 줄 소개 또는 가입 인사 :
                 </label>
 
-                <textarea
-                    id="intro"
-                    name="intro"
-                    rows="5"
-                    maxlength="200"
-                    placeholder="여기에 내용을 입력하세요. (최대 200자)"
-                ></textarea>
-            </p>
+                <div class="intro-input-area">
+                    <textarea
+                        id="intro"
+                        name="intro"
+                        rows="5"
+                        maxlength="200"
+                        placeholder="여기에 내용을 입력하세요. (최대 200자)"
+                    ></textarea>
+
+                    <p class="intro-count">
+                        <span id="introCount">0</span> / 200자
+                    </p>
+                </div>
+            </div>
         </fieldset>
 
         <!-- 약관 동의 -->
@@ -373,7 +455,7 @@
                     이용약관 및 개인정보 수집에 동의합니다.
                 </label>
 
-                <small>(필수)</small>
+                <small class="required-mark">(필수)</small>
 
                 <a
                     href="terms.html"
