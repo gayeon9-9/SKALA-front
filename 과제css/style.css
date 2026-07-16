@@ -86,16 +86,13 @@ html {
 .trip-page .trip-header {
     position: relative;
     overflow: hidden;
-
     min-height: 330px;
     padding: 60px 30px;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 12px;
-
     color: #FFF8F5;
     text-align: center;
 
@@ -108,7 +105,6 @@ html {
 /* 히어로 배경 그라데이션 */
 .trip-page .trip-header::before {
     content: "";
-
     position: absolute;
     top: 0;
     right: 0;
@@ -134,10 +130,8 @@ html {
 .trip-page .trip-header h1 {
     margin: 0;
     padding: 0;
-
     color: #FFF8F5;
     font-size: 2.2rem;
-
     border: none;
     border-radius: 0;
     background-color: transparent;
@@ -157,13 +151,10 @@ html {
     position: fixed;
     top: 0;
     left: 0;
-
     width: 100%;
     padding: 12px 0;
-
     text-align: center;
     background-color: #FFF8F5;
-
     box-shadow: 0 2px 8px rgba(93, 64, 55, 0.15);
     z-index: 1000;
 }
@@ -180,13 +171,10 @@ html {
 
     margin: 5px 15px;
     padding: 8px 15px;
-
     color: #6D4C41;
     background-color: #FFF8F5;
-
     border: 1px solid #BCAAA4;
     border-radius: 20px;
-
     text-decoration: none;
     transition: 0.2s;
 }
@@ -209,7 +197,6 @@ html {
     justify-content: center;
     gap: 25px;
     flex-wrap: wrap;
-
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -225,16 +212,12 @@ html {
     display: block;
     height: 100%;
     padding: 20px;
-
     color: #5D4037;
     background-color: #FFFFFF;
-
     border: 2px solid #D7CCC8;
     border-radius: 15px;
-
     box-shadow: 0 5px 10px rgba(93, 64, 55, 0.15);
     text-decoration: none;
-
     transition:
         transform 0.3s,
         box-shadow 0.3s;
@@ -259,10 +242,8 @@ html {
 /* 앨범 보기 */
 .trip-page .flag-card small {
     display: inline-block;
-
     margin-top: 10px;
     padding: 5px 10px;
-
     background-color: #FFF5F8;
     border-radius: 12px;
 }
@@ -279,7 +260,6 @@ html {
     margin-top: 40px;
     margin-bottom: 40px;
     padding: 25px;
-
     background-color: #FFFFFF;
     border: 1px solid #D7CCC8;
     border-radius: 15px;
@@ -289,7 +269,6 @@ html {
 .trip-page .trip-country {
     margin-top: 30px;
     padding: 20px;
-
     background-color: #FFF8F5;
     border: 1px solid #D7CCC8;
     border-radius: 12px;
@@ -314,26 +293,20 @@ html {
     width: 280px;
     margin: 0;
     padding: 10px;
-
     text-align: center;
     background-color: #FFF8F5;
-
     border: 1px solid #D7CCC8;
     border-radius: 12px;
-
     overflow: hidden;
 }
 
 /* 사진 크기 통일 */
 .trip-page .gallery img {
     display: block;
-
     width: 100%;
     height: 200px;
-
     object-fit: cover;
     border-radius: 8px;
-
     transition: transform 0.3s;
 }
 
@@ -380,11 +353,9 @@ html {
 /* 영상 크기 */
 .trip-page #video video {
     display: block;
-
     width: 100%;
     max-width: 600px;
     margin: 20px auto;
-
     border-radius: 12px;
 }
 
@@ -400,19 +371,14 @@ html {
     position: fixed;
     right: 25px;
     bottom: 25px;
-
     display: inline-block;
     padding: 10px 16px;
-
     color: #FFF8F5;
     background-color: #8D6E63;
-
     border-radius: 50px;
     box-shadow: 0 4px 10px rgba(93, 64, 55, 0.3);
-
     text-decoration: none;
     transform: translateY(0);
-
     transition: transform 0.2s;
     z-index: 500;
 }
@@ -471,41 +437,447 @@ html {
    회원가입 페이지 (signUp.html)
 ===================================================== */
 
-/* 상단 회원가입 헤더 고정 */
+/* 모든 입력 요소의 실제 크기에 padding과 border를 포함 */
+.signup-header,
+.signup-header + form,
+.signup-header + form * {
+    box-sizing: border-box;
+}
+
+/* 화면 상단에 고정되는 회원가입 헤더 */
 .signup-header {
     position: fixed;
     top: 0;
     left: 0;
 
     width: 100%;
-    padding: 15px 0;
+    padding: 12px 20px;
 
     text-align: center;
     background-color: #FFF8F5;
-
-    box-shadow: 0 2px 8px rgba(93, 64, 55, 0.15);
+    border-bottom: 1px solid #D7CCC8;
+    box-shadow: 0 3px 12px rgba(93, 64, 55, 0.15);
 
     z-index: 1000;
 }
 
-/* 공통 h1 스타일보다 회원가입 헤더 스타일을 우선 적용 */
+/* 공통 h1 스타일을 회원가입 헤더에서는 간단하게 재설정 */
 .signup-header h1 {
     margin: 0;
-    padding: 5px;
+    padding: 0;
 
-    font-size: 32px;
+    color: #6D4C41;
+    font-size: 30px;
+
     border: none;
+    border-radius: 0;
     background-color: transparent;
 }
 
+/* 헤더 안내 문구 */
 .signup-header p {
-    margin: 5px 0 0;
+    margin: 4px 0 0;
+    color: #8D6E63;
+    font-size: 14px;
 }
 
-/* 고정 헤더에 폼이 가려지지 않게 아래로 내리기 */
+/* 회원가입 폼 전체 너비 및 고정 헤더 아래 여백 */
 .signup-header + form {
     width: 90%;
-    max-width: 750px;
+    max-width: 850px;
 
-    margin: 150px auto 50px;
+    margin: 135px auto 60px;
+}
+
+/* 계정 정보, 개인 프로필 등 각 입력 영역 */
+.signup-header + form > fieldset {
+    margin: 0 0 28px;
+    padding: 28px 32px;
+
+    background-color: #FFFFFF;
+    border: 2px solid #D7CCC8;
+    border-radius: 16px;
+    box-shadow: 0 5px 15px rgba(93, 64, 55, 0.1);
+}
+
+/* fieldset 제목 */
+.signup-header + form > fieldset > legend {
+    padding: 0 12px;
+
+    color: #6D4C41;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* 각 입력 행의 위아래 간격 */
+.signup-header + form fieldset p {
+    margin: 18px 0;
+}
+
+/* 아이디, 비밀번호 등의 항목 이름 */
+.signup-header + form fieldset p > label[for] {
+    display: inline-block;
+    width: 145px;
+
+    color: #5D4037;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+/* text, password, tel, date 입력창 공통 디자인 */
+.signup-header + form input[type="text"],
+.signup-header + form input[type="password"],
+.signup-header + form input[type="tel"],
+.signup-header + form input[type="date"] {
+    width: 330px;
+    max-width: 100%;
+    padding: 10px 12px;
+
+    color: #5D4037;
+    font-family: inherit;
+    font-size: 15px;
+
+    background-color: #FFFDFC;
+    border: 1px solid #BCAAA4;
+    border-radius: 8px;
+
+    outline: none;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        background-color 0.2s;
+}
+
+/* 비밀번호 확인창은 안내 문구가 길어 조금 더 넓게 표시 */
+.signup-header + form #userPwCheck {
+    width: 390px;
+}
+
+/* 드롭다운 메뉴 */
+.signup-header + form select {
+    padding: 10px 12px;
+
+    color: #5D4037;
+    font-family: inherit;
+    font-size: 15px;
+
+    background-color: #FFFDFC;
+    border: 1px solid #BCAAA4;
+    border-radius: 8px;
+
+    outline: none;
+    cursor: pointer;
+}
+
+/* 이메일 아이디 입력칸 */
+.signup-header + form #userEmail {
+    width: 210px;
+}
+
+/* 이메일 도메인 선택창 */
+.signup-header + form #emailDomain {
+    min-width: 145px;
+}
+
+/* 자기소개 입력창 */
+.signup-header + form textarea {
+    width: 100%;
+    min-height: 130px;
+    margin-top: 10px;
+    padding: 12px 14px;
+
+    color: #5D4037;
+    font-family: inherit;
+    font-size: 15px;
+    line-height: 1.6;
+
+    background-color: #FFFDFC;
+    border: 1px solid #BCAAA4;
+    border-radius: 10px;
+
+    outline: none;
+    resize: vertical;
+
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        background-color 0.2s;
+}
+
+/* 입력창이나 선택창을 클릭했을 때 */
+.signup-header + form input:focus,
+.signup-header + form select:focus,
+.signup-header + form textarea:focus {
+    background-color: #FFFFFF;
+    border-color: #8D6E63;
+    box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.16);
+}
+
+/* 자기소개 제목과 입력창을 가로로 배치 */
+.signup-header + form .intro-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+/* 자기소개 안내 문구 */
+.signup-header + form .intro-row label {
+    width: 260px;
+    flex-shrink: 0;
+    margin-top: 10px;
+
+    font-weight: bold;
+}
+
+/* 기존 textarea의 width: 100%를 자기소개 부분에서만 다시 설정 */
+.signup-header + form .intro-row textarea {
+    flex: 1;
+    width: auto;
+    margin-top: 0;
+}
+
+/* 필수 항목 안내 */
+.signup-header + form small {
+    margin-left: 6px;
+    color: #A0522D;
+    font-size: 12px;
+}
+
+/* 라디오 버튼과 체크박스의 항목 문구 */
+.signup-header + form label:has(input[type="radio"]),
+.signup-header + form label:has(input[type="checkbox"]) {
+    display: inline-block;
+    width: auto;
+    margin-right: 18px;
+
+    font-weight: normal;
+    cursor: pointer;
+}
+
+/* 라디오 버튼과 체크박스 자체 */
+.signup-header + form input[type="radio"],
+.signup-header + form input[type="checkbox"] {
+    margin-right: 5px;
+    accent-color: #8D6E63;
+    cursor: pointer;
+}
+
+/* 관심 분야는 줄 간격을 조금 넓게 표시 */
+.signup-header + form input[name="interest"] {
+    margin-top: 8px;
+}
+
+/* 아이디 중복확인 버튼 */
+.signup-header + form #checkIdButton {
+    margin-left: 7px;
+    padding: 9px 14px;
+
+    color: #6D4C41;
+    font-family: inherit;
+    font-weight: bold;
+
+    background-color: #FFF5F8;
+    border: 1px solid #BCAAA4;
+    border-radius: 8px;
+
+    cursor: pointer;
+    transition:
+        color 0.2s,
+        background-color 0.2s,
+        transform 0.2s;
+}
+
+/* 중복확인 버튼에 마우스를 올렸을 때 */
+.signup-header + form #checkIdButton:hover {
+    color: #FFFFFF;
+    background-color: #8D6E63;
+    transform: translateY(-1px);
+}
+
+/* 아이디 및 비밀번호 확인 결과가 표시될 영역 */
+.signup-header + form #idCheckMessage,
+.signup-header + form #passwordCheckMessage {
+    min-height: 20px;
+    margin: -8px 0 10px 145px;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* JS에서 생성할 시·군·구와 읍·면·동 영역 */
+.signup-header + form #districtArea,
+.signup-header + form #townArea {
+    margin: 10px 0 10px 145px;
+}
+
+/* 약관 보기 링크 */
+.signup-header + form a[href="terms.html"] {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 5px 9px;
+
+    color: #795548;
+    background-color: #FFF5F8;
+    border-radius: 6px;
+
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* 약관 보기 링크에 마우스를 올렸을 때 */
+.signup-header + form a[href="terms.html"]:hover {
+    color: #FFFFFF;
+    background-color: #8D6E63;
+    text-decoration: none;
+}
+
+/* 약관 페이지 돌아가기 버튼 */
+.terms-back-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 11px 18px;
+
+    color: #FFFFFF;
+    background-color: #8D6E63;
+    border: 1px solid #8D6E63;
+    border-radius: 9px;
+
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(93, 64, 55, 0.2);
+
+    transition:
+        background-color 0.2s,
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+.terms-back-btn:hover {
+    color: #FFFFFF;
+    background-color: #6D4C41;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(93, 64, 55, 0.28);
+}
+
+/* 제출 및 초기화 버튼이 들어 있는 마지막 문단 */
+.signup-header + form > p:last-child {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+
+    margin-top: 30px;
+}
+
+/* 제출 및 초기화 버튼 공통 */
+.signup-header + form input[type="submit"],
+.signup-header + form input[type="reset"] {
+    min-width: 150px;
+    padding: 12px 20px;
+
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: bold;
+
+    border-radius: 10px;
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s,
+        color 0.2s,
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+/* 회원가입 버튼: 더 구체적인 선택자로 특이도 적용 */
+.signup-header + form input[type="submit"] {
+    color: #FFFFFF;
+    background-color: #8D6E63;
+    border: 1px solid #8D6E63;
+    box-shadow: 0 4px 10px rgba(93, 64, 55, 0.2);
+}
+
+/* 다시 작성 버튼 */
+.signup-header + form input[type="reset"] {
+    color: #6D4C41;
+    background-color: #FFFFFF;
+    border: 1px solid #BCAAA4;
+}
+
+/* 버튼 hover 효과 */
+.signup-header + form input[type="submit"]:hover,
+.signup-header + form input[type="reset"]:hover {
+    transform: translateY(-2px);
+}
+
+.signup-header + form input[type="submit"]:hover {
+    background-color: #6D4C41;
+    box-shadow: 0 6px 14px rgba(93, 64, 55, 0.28);
+}
+
+.signup-header + form input[type="reset"]:hover {
+    background-color: #FFF5F8;
+}
+
+/* 화면 너비가 작을 때 입력 항목을 세로로 배치 */
+@media (max-width: 700px) {
+    .signup-header {
+        padding: 10px 12px;
+    }
+
+    .signup-header h1 {
+        font-size: 24px;
+    }
+
+    .signup-header + form {
+        width: 94%;
+        margin-top: 120px;
+    }
+
+    .signup-header + form > fieldset {
+        padding: 22px 18px;
+    }
+
+    .signup-header + form fieldset p > label[for] {
+        display: block;
+        width: auto;
+        margin-bottom: 7px;
+    }
+
+    .signup-header + form input[type="text"],
+    .signup-header + form input[type="password"],
+    .signup-header + form input[type="tel"],
+    .signup-header + form input[type="date"],
+    .signup-header + form #userPwCheck,
+    .signup-header + form #userEmail,
+    .signup-header + form select {
+        width: 100%;
+    }
+
+    .signup-header + form #emailDomain {
+        min-width: 0;
+        margin-top: 8px;
+    }
+
+    .signup-header + form #checkIdButton {
+        margin-top: 8px;
+        margin-left: 0;
+    }
+
+    .signup-header + form #idCheckMessage,
+    .signup-header + form #passwordCheckMessage,
+    .signup-header + form #districtArea,
+    .signup-header + form #townArea {
+        margin-left: 0;
+    }
+
+    .signup-header + form > p:last-child {
+        flex-direction: column;
+    }
+
+    .signup-header + form input[type="submit"],
+    .signup-header + form input[type="reset"] {
+        width: 100%;
+    }
 }
