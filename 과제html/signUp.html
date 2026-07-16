@@ -8,54 +8,145 @@
     <link rel="stylesheet" href="../과제css/style.css">
 </head>
 <body>
-    <h1>👤 회원가입</h1>
-    <p><b>SKALA 회원가입 페이지입니다.</b></p>
+    <header class="signup-header">
+        <h1>👤 회원가입</h1>
+        <p><b>SKALA 회원가입 페이지입니다.</b></p>
+    </header>
     <form action="signUpResult.html" method="get">
         <fieldset>
-            <legend>계정 정보</legend>
+            <legend>계정 정보(필수)</legend>
+            <!-- ###############  아이디   ##################-->
             <p>
                 <label for="userId">아이디 : </label>
                 <input type="text" id="userId" name="userId" minlength="4" maxlength="12"
                 pattern="[A-Za-z0-9]{4,12}" title="영문과 숫자만 사용하여 4~12자로 입력해 주세요." required placeholder="4~12자 영문/숫자">
+
+                <!-- 아이디 중복확인 버튼 추가-->
+                 <button type="button" id="checkIdButton">중복 확인</button>
                 <small> (필수) </small>
             </p>
+            <p id="idCheckMessage"></p>
             
+            <!-- ###############  비밀번호   ##################-->
             <p>
                 <label for="userPw">비밀번호 : </label>
                 <input type="password" id="userPw" name="userPw" minlength="8" 
                 title="비밀번호는 8자 이상 입력해 주세요." required placeholder="8자 이상 입력">
                 <small> (필수) </small>
             </p>
+            
+            <!-- ###############  비밀번호 확인  ##################-->
+            <p>
+                <label for="userPwCheck">비밀번호 확인 : </label>
 
+                <input
+                    type="password"
+                    id="userPwCheck" 
+                    minlength="8"
+                    title="비밀번호를 한 번 더 입력해 주세요."
+                    required
+                    placeholder="비밀번호를 한 번 더 입력해 주세요"
+                >
+
+                <small>(필수)</small>
+            </p>
+
+        <p id="passwordCheckMessage"></p>
+
+            <!-- ###############  이메일   ##################-->
             <p>
                 <label for="userEmail">이메일 : </label>
                 <input type="text" id="userEmail" name="userEmail" required placeholder="example">
                 @
-                <select name = "emailDomain">
-                    <option value="direct">직접 입력</option>
+                <select 
+                    name = "emailDomain"
+                    id = "emailDomain"
+                >
+                    <option value="">직접 입력</option>
+                    <option value="sk.com">sk.com</option>
                     <option value="naver.com">naver.com</option>
                     <option value="gmail.com">gmail.com</option>
                     <option value="daum.net">daum.net</option>
+                    <option value="kakao.com">kakao.com</option>
+                    
                 </select>
+                <small> (필수) </small>
             </p>
+
         </fieldset>
 
         <fieldset>
             <legend>개인 프로필 정보</legend>
+
+            <!-- ############## 이름 ############### -->
             <p>
                 <label for="userName">이름: </label>
                 <input type="text" id="userName" name="userName" required>
+                <small> (필수) </small>
             </p>
+
+            <!-- ############## 생년월일 ############### -->
             <p>
                 <label for="userBirth">생년월일: </label>
                 <input type="date" id="userBirth" name="userBirth">
             </p>
+
+            <!-- ############## 전화번호 입력창 ############### -->
+            <p>
+                <label for="userTel">전화번호 : </label>
+                <input
+                    type="tel"  
+                    id="userTel"
+                    name="userTel"
+                    placeholder="010-0000-0000"
+                    pattern="010-[0-9]{4}-[0-9]{4}"
+                    title="010-0000-0000 형식으로 입력해 주세요."
+                >
+            </p>   
+
+
+            <!-- ############## 성별 ############### -->
             <p>
                 성별:
                 <label><input type="radio" name="gender" value="male" checked> 남성</label>
                 <label><input type="radio" name="gender" value="female"> 여성</label>
                 <label><input type="radio" name="gender" value="none"> 선택안함</label>
             </p>
+
+            <!-- ############## 지역 입력창 ############### -->
+            <p>
+                <label for="region">지역 : </label>
+
+                <select id="region" name="region">
+                    <option value="">== 시/도 선택 ==</option>
+                    <option value="seoul">서울특별시</option>
+                    <option value="busan">부산광역시</option>
+                    <option value="daegu">대구광역시</option>
+                    <option value="incheon">인천광역시</option>
+                    <option value="gwangju">광주광역시</option>
+                    <option value="daejeon">대전광역시</option>
+                    <option value="ulsan">울산광역시</option>
+                    <option value="sejong">세종특별자치시</option>
+                    <option value="gyeonggi">경기도</option>
+                    <option value="gangwon">강원특별자치도</option>
+                    <option value="chungbuk">충청북도</option>
+                    <option value="chungnam">충청남도</option>
+                    <option value="jeonbuk">전북특별자치도</option>
+                    <option value="jeonnam">전라남도</option>
+                    <option value="gyeongbuk">경상북도</option>
+                    <option value="gyeongnam">경상남도</option>
+                    <option value="jeju">제주특별자치도</option>
+                </select>
+            </p>
+
+            <!-- JS에서 시/군/구 선택창 생성 예정 -->
+            <div id="districtArea"></div>
+
+            <!-- JS에서 읍/면/동 선택창 생성 예정 -->
+            <div id="townArea"></div>
+
+
+            <!-- ############## 관심 분야 ############### -->
             <p>
                 관심 분야 (중복 선택 가능): <br>
                 <label><input type="checkbox" name="interest" value="frontend"> 웹 프론트엔드 (Vue.js/HTML)</label><br>
@@ -77,6 +168,7 @@
         </fieldset>
 
         <fieldset>
+            <!--################### 자기소개 입력 ##########################-->
             <legend>자기소개</legend>
             <p>
                 <label for ="intro"> 나를 표현하는 한 줄 소개 또는 가입 인사: </label><br>
@@ -84,10 +176,36 @@
             </p>
         </fieldset>
 
+        <!-- ############### 약관 동의 ################## -->
+        <fieldset>
+            <legend>약관 동의</legend>
+
+            <p>
+            <label>
+                <input
+                    type="checkbox"
+                    id="agree"
+                    name="agree"
+                    value="yes"
+                    required
+                >
+                이용약관 및 개인정보 수집에 동의합니다.
+            </label>
+
+            <small>(필수)</small>
+
+            <a href="terms.html" target="_blank"> 
+                [약관 보기]
+            </a>
+        </p>
+        </fieldset>
+
         <p>
             <input type = "submit" value="동의하고 회원가입">
             <input type = "reset" value="다시 작성">
         </p>
     </form>
+
+<script src="../과제js/script.js"></script>
 </body>
 </html>
