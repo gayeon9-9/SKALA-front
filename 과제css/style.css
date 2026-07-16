@@ -437,14 +437,19 @@ html {
    회원가입 페이지 (signUp.html)
 ===================================================== */
 
-/* 모든 입력 요소의 실제 크기에 padding과 border를 포함 */
+/* hidden 속성이 붙은 요소는 확실하게 숨김 */
+[hidden] {
+    display: none !important;
+}
+
+/* 회원가입 페이지 크기 계산 방식 */
 .signup-header,
 .signup-header + form,
 .signup-header + form * {
     box-sizing: border-box;
 }
 
-/* 화면 상단에 고정되는 회원가입 헤더 */
+/* 화면 상단 고정 헤더 */
 .signup-header {
     position: fixed;
     top: 0;
@@ -461,7 +466,6 @@ html {
     z-index: 1000;
 }
 
-/* 공통 h1 스타일을 회원가입 헤더에서는 간단하게 재설정 */
 .signup-header h1 {
     margin: 0;
     padding: 0;
@@ -474,14 +478,14 @@ html {
     background-color: transparent;
 }
 
-/* 헤더 안내 문구 */
 .signup-header p {
     margin: 4px 0 0;
+
     color: #8D6E63;
     font-size: 14px;
 }
 
-/* 회원가입 폼 전체 너비 및 고정 헤더 아래 여백 */
+/* 회원가입 폼 */
 .signup-header + form {
     width: 90%;
     max-width: 850px;
@@ -489,7 +493,7 @@ html {
     margin: 135px auto 60px;
 }
 
-/* 계정 정보, 개인 프로필 등 각 입력 영역 */
+/* 각 입력 영역 */
 .signup-header + form > fieldset {
     margin: 0 0 28px;
     padding: 28px 32px;
@@ -500,7 +504,6 @@ html {
     box-shadow: 0 5px 15px rgba(93, 64, 55, 0.1);
 }
 
-/* fieldset 제목 */
 .signup-header + form > fieldset > legend {
     padding: 0 12px;
 
@@ -509,13 +512,13 @@ html {
     font-weight: bold;
 }
 
-/* 각 입력 행의 위아래 간격 */
 .signup-header + form fieldset p {
     margin: 18px 0;
 }
 
-/* 아이디, 비밀번호 등의 항목 이름 */
-.signup-header + form fieldset p > label[for] {
+/* 각 항목의 왼쪽 제목 */
+.signup-header + form fieldset p > label[for],
+.signup-header + form .dynamic-address-row > label {
     display: inline-block;
     width: 145px;
 
@@ -524,7 +527,7 @@ html {
     vertical-align: middle;
 }
 
-/* text, password, tel, date 입력창 공통 디자인 */
+/* 입력창 공통 */
 .signup-header + form input[type="text"],
 .signup-header + form input[type="password"],
 .signup-header + form input[type="tel"],
@@ -542,19 +545,21 @@ html {
     border-radius: 8px;
 
     outline: none;
+
     transition:
         border-color 0.2s,
         box-shadow 0.2s,
         background-color 0.2s;
 }
 
-/* 비밀번호 확인창은 안내 문구가 길어 조금 더 넓게 표시 */
+/* 비밀번호 확인 입력창 */
 .signup-header + form #userPwCheck {
     width: 390px;
 }
 
-/* 드롭다운 메뉴 */
+/* 선택창 공통 */
 .signup-header + form select {
+    min-width: 180px;
     padding: 10px 12px;
 
     color: #5D4037;
@@ -569,21 +574,37 @@ html {
     cursor: pointer;
 }
 
-/* 이메일 아이디 입력칸 */
+/* 이메일 아이디 */
 .signup-header + form #userEmail {
     width: 210px;
 }
 
-/* 이메일 도메인 선택창 */
-.signup-header + form #emailDomain {
-    min-width: 145px;
+/* 이메일 @ 표시 */
+.signup-header + form .email-symbol {
+    display: inline-block;
+    margin: 0 5px;
+
+    font-weight: bold;
+}
+
+/* 드롭다운과 직접입력창이 동일한 위치에 표시되는 영역 */
+.signup-header + form .replace-input-area {
+    display: inline-block;
+    min-width: 180px;
+
+    vertical-align: middle;
+}
+
+/* 직접입력창의 크기를 기존 드롭다운과 맞춤 */
+.signup-header + form #directEmailDomain,
+.signup-header + form #directJoinPath {
+    width: 210px;
 }
 
 /* 자기소개 입력창 */
 .signup-header + form textarea {
     width: 100%;
     min-height: 130px;
-    margin-top: 10px;
     padding: 12px 14px;
 
     color: #5D4037;
@@ -604,7 +625,7 @@ html {
         background-color 0.2s;
 }
 
-/* 입력창이나 선택창을 클릭했을 때 */
+/* 입력 요소 포커스 */
 .signup-header + form input:focus,
 .signup-header + form select:focus,
 .signup-header + form textarea:focus {
@@ -613,37 +634,36 @@ html {
     box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.16);
 }
 
-/* 자기소개 제목과 입력창을 가로로 배치 */
+/* 자기소개 문구와 입력창 가로 정렬 */
 .signup-header + form .intro-row {
     display: flex;
     align-items: flex-start;
     gap: 15px;
 }
 
-/* 자기소개 안내 문구 */
 .signup-header + form .intro-row label {
-    width: 260px;
+    width: 280px;
     flex-shrink: 0;
     margin-top: 10px;
 
     font-weight: bold;
 }
 
-/* 기존 textarea의 width: 100%를 자기소개 부분에서만 다시 설정 */
 .signup-header + form .intro-row textarea {
     flex: 1;
     width: auto;
     margin-top: 0;
 }
 
-/* 필수 항목 안내 */
+/* 필수 문구 */
 .signup-header + form small {
     margin-left: 6px;
+
     color: #A0522D;
     font-size: 12px;
 }
 
-/* 라디오 버튼과 체크박스의 항목 문구 */
+/* 라디오 및 체크박스 라벨 */
 .signup-header + form label:has(input[type="radio"]),
 .signup-header + form label:has(input[type="checkbox"]) {
     display: inline-block;
@@ -654,17 +674,47 @@ html {
     cursor: pointer;
 }
 
-/* 라디오 버튼과 체크박스 자체 */
 .signup-header + form input[type="radio"],
 .signup-header + form input[type="checkbox"] {
     margin-right: 5px;
+
     accent-color: #8D6E63;
     cursor: pointer;
 }
 
-/* 관심 분야는 줄 간격을 조금 넓게 표시 */
-.signup-header + form input[name="interest"] {
-    margin-top: 8px;
+/* 성별 제목 */
+.signup-header + form .choice-title {
+    display: inline-block;
+    width: 145px;
+
+    font-weight: bold;
+}
+
+/* 관심 분야 */
+.signup-header + form .interest-group {
+    margin: 20px 0;
+}
+
+.signup-header + form .interest-title {
+    margin-bottom: 8px;
+
+    font-weight: bold;
+}
+
+.signup-header + form .interest-group label {
+    display: block;
+    width: fit-content;
+    margin: 8px 0;
+
+    cursor: pointer;
+}
+
+/* 관심 분야 그 외 직접 입력창 */
+.signup-header + form #otherInterest {
+    display: block;
+    width: 330px;
+    margin-top: 10px;
+    margin-left: 24px;
 }
 
 /* 아이디 중복확인 버튼 */
@@ -681,22 +731,22 @@ html {
     border-radius: 8px;
 
     cursor: pointer;
+
     transition:
         color 0.2s,
         background-color 0.2s,
         transform 0.2s;
 }
 
-/* 중복확인 버튼에 마우스를 올렸을 때 */
 .signup-header + form #checkIdButton:hover {
     color: #FFFFFF;
     background-color: #8D6E63;
+
     transform: translateY(-1px);
 }
 
-/* 아이디 및 비밀번호 확인 결과가 표시될 영역 */
-.signup-header + form #idCheckMessage,
-.signup-header + form #passwordCheckMessage {
+/* 검증 문구 공통 */
+.signup-header + form .validation-message {
     min-height: 20px;
     margin: -8px 0 10px 145px;
 
@@ -704,13 +754,29 @@ html {
     font-weight: bold;
 }
 
-/* JS에서 생성할 시·군·구와 읍·면·동 영역 */
-.signup-header + form #districtArea,
-.signup-header + form #townArea {
-    margin: 10px 0 10px 145px;
+.signup-header + form .success-message {
+    color: #2E7D32;
 }
 
-/* 약관 보기 링크 */
+.signup-header + form .error-message {
+    color: #C62828;
+}
+
+.signup-header + form .guide-message {
+    color: #A0522D;
+}
+
+/* JS로 생성되는 주소 입력줄 */
+.signup-header + form #districtArea,
+.signup-header + form #townArea {
+    margin: 0;
+}
+
+.signup-header + form .dynamic-address-row {
+    margin: 14px 0;
+}
+
+/* 약관 보기 */
 .signup-header + form a[href="terms.html"] {
     display: inline-block;
     margin-left: 8px;
@@ -725,14 +791,14 @@ html {
     text-decoration: none;
 }
 
-/* 약관 보기 링크에 마우스를 올렸을 때 */
 .signup-header + form a[href="terms.html"]:hover {
     color: #FFFFFF;
     background-color: #8D6E63;
+
     text-decoration: none;
 }
 
-/* 약관 페이지 돌아가기 버튼 */
+/* 약관 페이지의 돌아가기 버튼 */
 .terms-back-btn {
     display: inline-block;
     margin-top: 20px;
@@ -745,6 +811,7 @@ html {
 
     font-weight: bold;
     text-decoration: none;
+
     box-shadow: 0 4px 10px rgba(93, 64, 55, 0.2);
 
     transition:
@@ -756,13 +823,15 @@ html {
 .terms-back-btn:hover {
     color: #FFFFFF;
     background-color: #6D4C41;
+
     text-decoration: none;
     transform: translateY(-2px);
+
     box-shadow: 0 6px 14px rgba(93, 64, 55, 0.28);
 }
 
-/* 제출 및 초기화 버튼이 들어 있는 마지막 문단 */
-.signup-header + form > p:last-child {
+/* 제출 버튼 영역 */
+.signup-header + form .form-buttons {
     display: flex;
     justify-content: center;
     gap: 14px;
@@ -770,7 +839,6 @@ html {
     margin-top: 30px;
 }
 
-/* 제출 및 초기화 버튼 공통 */
 .signup-header + form input[type="submit"],
 .signup-header + form input[type="reset"] {
     min-width: 150px;
@@ -790,22 +858,20 @@ html {
         box-shadow 0.2s;
 }
 
-/* 회원가입 버튼: 더 구체적인 선택자로 특이도 적용 */
 .signup-header + form input[type="submit"] {
     color: #FFFFFF;
     background-color: #8D6E63;
     border: 1px solid #8D6E63;
+
     box-shadow: 0 4px 10px rgba(93, 64, 55, 0.2);
 }
 
-/* 다시 작성 버튼 */
 .signup-header + form input[type="reset"] {
     color: #6D4C41;
     background-color: #FFFFFF;
     border: 1px solid #BCAAA4;
 }
 
-/* 버튼 hover 효과 */
 .signup-header + form input[type="submit"]:hover,
 .signup-header + form input[type="reset"]:hover {
     transform: translateY(-2px);
@@ -813,6 +879,7 @@ html {
 
 .signup-header + form input[type="submit"]:hover {
     background-color: #6D4C41;
+
     box-shadow: 0 6px 14px rgba(93, 64, 55, 0.28);
 }
 
@@ -820,7 +887,7 @@ html {
     background-color: #FFF5F8;
 }
 
-/* 화면 너비가 작을 때 입력 항목을 세로로 배치 */
+/* 작은 화면 */
 @media (max-width: 700px) {
     .signup-header {
         padding: 10px 12px;
@@ -839,7 +906,9 @@ html {
         padding: 22px 18px;
     }
 
-    .signup-header + form fieldset p > label[for] {
+    .signup-header + form fieldset p > label[for],
+    .signup-header + form .dynamic-address-row > label,
+    .signup-header + form .choice-title {
         display: block;
         width: auto;
         margin-bottom: 7px;
@@ -851,12 +920,18 @@ html {
     .signup-header + form input[type="date"],
     .signup-header + form #userPwCheck,
     .signup-header + form #userEmail,
-    .signup-header + form select {
+    .signup-header + form select,
+    .signup-header + form #directEmailDomain,
+    .signup-header + form #directJoinPath {
         width: 100%;
     }
 
-    .signup-header + form #emailDomain {
-        min-width: 0;
+    .signup-header + form .replace-input-area {
+        width: 100%;
+        margin-top: 8px;
+    }
+
+    .signup-header + form .email-symbol {
         margin-top: 8px;
     }
 
@@ -865,14 +940,24 @@ html {
         margin-left: 0;
     }
 
-    .signup-header + form #idCheckMessage,
-    .signup-header + form #passwordCheckMessage,
-    .signup-header + form #districtArea,
-    .signup-header + form #townArea {
+    .signup-header + form .validation-message {
         margin-left: 0;
     }
 
-    .signup-header + form > p:last-child {
+    .signup-header + form .intro-row {
+        flex-direction: column;
+    }
+
+    .signup-header + form .intro-row label {
+        width: auto;
+        margin-top: 0;
+    }
+
+    .signup-header + form .intro-row textarea {
+        width: 100%;
+    }
+
+    .signup-header + form .form-buttons {
         flex-direction: column;
     }
 
