@@ -8,12 +8,12 @@
 </head>
 
 <body class="signup-page">
-    <!-- 스크롤해도 위에 고정되는 헤더 -->
+    <!-- 스크롤해도 위에 헤더 고정되도록 설정 -->
     <header class="signup-header">
         <div class="header-inner">
             <div>
                 <h1>SKALA 회원가입</h1>
-                <p>필수 정보를 입력하고 새로운 여정을 시작하세요.</p>
+                <p>필수 정보를 입력하고 SKALA에서 새로운 여정을 시작하세요.</p>
             </div>
 
             <div class="signup-progress" aria-label="필수 정보 입력 진행률">
@@ -98,22 +98,19 @@
                 </div>
 
                 <div class="form-row">
-                    <label for="emailId">이메일 <span class="required-mark">*</span></label>
+                    <label for="userEmail">이메일 <span class="required-mark">*</span></label>
                     <div class="field-area">
-                        <!-- 이메일 아이디와 도메인을 따로 입력 -->
+                        <!-- 이메일 입력 후 도메인을 선택하면 자동으로 붙음 -->
                         <div class="email-parts">
                             <input
-                                type="text"
-                                id="emailId"
-                                name="emailId"
-                                pattern="[A-Za-z0-9._%+-]+"
-                                title="이메일 아이디를 영문, 숫자, 특수문자로 입력해 주세요."
-                                placeholder="이메일 아이디"
+                                type="email"
+                                id="userEmail"
+                                name="userEmail"
+                                placeholder="example@naver.com"
                                 required
                             >
-                            <span class="email-symbol">@</span>
                             <div class="email-domain-area">
-                                <select id="emailDomain" name="emailDomain" required>
+                                <select id="emailDomain">
                                     <option value="">도메인 선택</option>
                                     <option value="sk.com">sk.com</option>
                                     <option value="naver.com">naver.com</option>
@@ -125,7 +122,6 @@
                                 <input
                                     type="text"
                                     id="directEmailDomain"
-                                    name="directEmailDomain"
                                     pattern="[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
                                     title="example.com 형식으로 입력해 주세요."
                                     placeholder="도메인 직접 입력"
@@ -133,18 +129,9 @@
                                 >
                             </div>
                         </div>
-
-                        <!-- 두 값을 합친 이메일이 실제로 전송됨 -->
-                        <input
-                            type="email"
-                            id="userEmail"
-                            name="userEmail"
-                            class="combined-email"
-                            tabindex="-1"
-                            aria-hidden="true"
-                            required
-                        >
-                        <small id="emailPreview" class="validation-message">완성 이메일: -</small>
+                        <small id="emailPreview" class="validation-message">
+                            이메일 전체 주소를 입력하거나 도메인을 선택해 주세요.
+                        </small>
                     </div>
                 </div>
             </fieldset>

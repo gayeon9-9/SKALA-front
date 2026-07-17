@@ -163,29 +163,15 @@ main {
 
 .email-parts {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(150px, 0.8fr);
+    grid-template-columns: minmax(0, 1fr) minmax(155px, 0.55fr);
     gap: 8px;
     align-items: center;
-}
-
-.email-symbol {
-    color: var(--primary-dark);
-    font-weight: 700;
 }
 
 .email-domain-area,
 .email-domain-area select,
 .email-domain-area input {
     width: 100%;
-}
-
-.combined-email {
-    position: absolute;
-    width: 1px !important;
-    height: 1px;
-    padding: 0 !important;
-    opacity: 0;
-    pointer-events: none;
 }
 
 input,
@@ -496,10 +482,6 @@ textarea {
 
     .email-parts {
         grid-template-columns: 1fr;
-    }
-
-    .email-symbol {
-        display: none;
     }
 
     .choice-options,

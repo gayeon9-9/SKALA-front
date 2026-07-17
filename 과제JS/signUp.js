@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // 자주 사용하는 HTML 요소 가져오는 부분 정리
+    // 자주 사용하는 HTML 요소 가져오는 부분 정리 
     const form = document.getElementById("signupForm");
     const userId = document.getElementById("userId");
     const checkIdButton = document.getElementById("checkIdButton");
@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const strengthBar = document.getElementById("passwordStrengthBar");
     const strengthText = document.getElementById("passwordStrengthText");
     const passwordLengthMessage = document.getElementById("passwordLengthMessage");
-    const emailId = document.getElementById("emailId");
     const emailDomain = document.getElementById("emailDomain");
     const directEmailDomain = document.getElementById("directEmailDomain");
     const userEmail = document.getElementById("userEmail");
@@ -32,8 +31,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const progressText = document.getElementById("progressText");
     const progressBar = document.getElementById("progressBar");
 
-    // 중복 확인 테스트용 아이디 : 이미 사용 중 아이디로 뜨게 설정
-    const usedIds = ["admin", "skala", "test1234"];
+    // 중복 확인 테스트용 아이디
+    const usedIds = ["admin", "skala", "gayeon", "test1234"];
     let isIdChecked = false;
 
     function getLocalDateString(date) {
@@ -43,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return `${year}-${month}-${day}`;
     }
 
-    // 생년월일은 오늘 이후 날짜 선택 불가하게 설정
+    // 생년월일은 오늘 이후 날짜 선택 불가
     userBirth.max = getLocalDateString(new Date());
 
     function setMessage(element, text, className = "") {
@@ -83,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
         updateProgress();
     });
 
-    // 비밀번호와 비밀번호 확인이 같은지 검사하는 부분
+    // 비밀번호와 비밀번호 확인이 같은지 검사
     function checkPasswordMatch() {
         userPwCheck.setCustomValidity("");
 
@@ -204,17 +203,22 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // 이메일 아이디와 도메인을 합쳐서 전송할 값 만들기
-    function updateEmail() {
-        const id = emailId.value.trim();
-        const domain = emailDomain.value === "direct"
-            ? directEmailDomain.value.trim()
-            : emailDomain.value;
+    // 입력된 이메일에서 앞부분만 가져오기
+    function getEmailId() {
+        const email = userEmail.value.trim();
+        return email.includes("@") ? email.split("@")[0] : email;
+    }
 
-        userEmail.value = id && domain ? `${id}@${domain}` : "";
-        emailPreview.textContent = userEmail.value
-            ? `완성 이메일: ${userEmail.value}`
-            : "완성 이메일: -";
+    // 선택한 도메인을 이메일 뒤에 붙이기
+    function applyEmailDomain(domain) {
+        const id = getEmailId();
+
+        if (id && domain) {
+            userEmail.value = `${id}@${domain}`;
+            emailPreview.textContent = `완성 이메일: ${userEmail.value}`;
+        } else {
+            emailPreview.textContent = "이메일 아이디를 먼저 입력해 주세요.";
+        }
 
         updateProgress();
     }
@@ -224,7 +228,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const isDirect = this.value === "direct";
 
         this.hidden = isDirect;
-        this.required = !isDirect;
         directEmailDomain.hidden = !isDirect;
         directEmailDomain.required = isDirect;
 
@@ -232,13 +235,33 @@ document.addEventListener("DOMContentLoaded", function () {
             directEmailDomain.focus();
         } else {
             directEmailDomain.value = "";
+            applyEmailDomain(this.value);
         }
-
-        updateEmail();
     });
 
-    emailId.addEventListener("input", updateEmail);
-    directEmailDomain.addEventListener("input", updateEmail);
+    userEmail.addEventListener("input", function () {
+        emailPreview.textContent = this.value
+            ? `입력 이메일: ${this.value}`
+            : "이메일 전체 주소를 입력하거나 도메인을 선택해 주세요.";
+        updateProgress();
+    });
+
+    // 직접 입력한 도메인을 이메일에 적용
+    directEmailDomain.addEventListener("input", function () {
+        applyEmailDomain(this.value.trim());
+    });
+
+    // 도메인을 먼저 고른 경우 입력칸을 벗어날 때 이메일 완성
+    userEmail.addEventListener("blur", function () {
+        if (
+            this.value !== "" &&
+            !this.value.includes("@") &&
+            emailDomain.value &&
+            emailDomain.value !== "direct"
+        ) {
+            applyEmailDomain(emailDomain.value);
+        }
+    });
 
     // 직접 입력값이 비어 있으면 다시 도메인 목록으로 변경
     directEmailDomain.addEventListener("blur", function () {
@@ -249,9 +272,10 @@ document.addEventListener("DOMContentLoaded", function () {
         this.hidden = true;
         this.required = false;
         emailDomain.hidden = false;
-        emailDomain.required = true;
         emailDomain.value = "";
-        updateEmail();
+        emailPreview.textContent =
+            "이메일 전체 주소를 입력하거나 도메인을 선택해 주세요.";
+        updateProgress();
     });
 
     // 시·도별 시·군·구 목록
@@ -424,9 +448,8 @@ document.addEventListener("DOMContentLoaded", function () {
             directEmailDomain.hidden = true;
             directEmailDomain.required = false;
             emailDomain.hidden = false;
-            emailDomain.required = true;
-            userEmail.value = "";
-            emailPreview.textContent = "완성 이메일: -";
+            emailPreview.textContent =
+                "이메일 전체 주소를 입력하거나 도메인을 선택해 주세요.";
             directJoinPath.hidden = true;
             directJoinPath.required = false;
             districtArea.innerHTML = "";
