@@ -3,30 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원가입완료</title>
+    <title>회원가입 완료</title>
 
-    <link rel="stylesheet" href="../과제css/style.css">
+    <link rel="stylesheet" href="../과제css/signUpResult.css">
 </head>
-<body>
-    <h1> 회원가입을 진심으로 축하합니다! 🎉</h1>
-    <p><b>SKALA</b>의 회원이 되신 것을 환영합니다.</p>
-    <hr>
+<body class="result-page">
+    <header class="result-header">
+        <h1>SKALA 회원가입 완료 페이지</h1>
 
-    <h3>💡 안내 사항</h3>
-    <ul>
-        <li>입력하신 이메일 주소로 가입 확인 메일이 발송되었습니다. </li>
-        <li>보안을 위해 첫 로그인 후 비밀번호를 다시 한번 확인해 주세요. </li>
-        <li>작성하신 프로필 정보는 마이페이지에서 언제든지 수정이 가능합니다. </li>
-        
-    </ul>
-    <hr>
+        <nav>
+            <a href="index.html">메인</a>
+            <a href="myTrip.html">여행</a>
+            <a href="signUp.html">회원가입</a>
+        </nav>
+    </header>
 
-    <h3>➡️ 이동하기</h3>
-    <P>아래 링크를 클릭하면 이전에 작성한 다른 페이지로 이동할 수 있습니다.</P>
-    <ul>
-        <li><a href="myProfile.html">👋 나의 프로필(myProfile)</a></li>
-        <li><a href="(실습)holiday.html">😎 나의 휴일(myHoliday)</a></li>
-        <li><a href="myClass.html">📚 나의 수업(myClass)</a></li>
-    </ul>
+    <main class="result-main">
+
+        <section class="result-card">
+
+            <!-- 회원가입 완료 표시 -->
+            <div class="complete-icon">✓</div>
+
+            <h2>회원가입이 완료되었습니다</h2>
+
+            <p class="welcome-message">
+                <strong id="welcomeName">회원</strong>님,<br>
+                SKALA 회원가입을 환영합니다! 🎉
+            </p>
+
+            <!-- 회원번호와 가입일시 -->
+            <div class="join-summary">
+
+                <div class="summary-item">
+                    <span class="summary-title">회원번호</span>
+                    <strong id="memberNumber">-</strong>
+                </div>
+
+                <div class="summary-item">
+                    <span class="summary-title">가입일시</span>
+                    <strong id="joinDate">-</strong>
+                </div>
+
+            </div>
+
+            <section class="member-info">
+
+                <h3>가입 정보</h3>
+
+                <table>
+                    <caption class="blind">회원가입 시 입력한 정보</caption>
+
+                    <tbody>
+                        <tr>
+                            <th scope="row">아이디</th>
+                            <td id="resultId">-</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">이름</th>
+                            <td id="resultName">-</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">이메일</th>
+                            <td id="resultEmail">-</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">생년월일</th>
+                            <td id="resultBirth">-</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">전화번호</th>
+                            <td id="resultTel">-</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">성별</th>
+                            <td id="resultGender">-</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">지역</th>
+                            <td id="resultRegion">-</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">관심 분야</th>
+                            <td>
+                                <ul id="interestList" class="interest-list">
+                                    <li>선택한 관심 분야가 없습니다.</li>
+                                </ul>
+
+                                <p id="interestCount" class="interest-count">
+                                    총 0개 선택
+                                </p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">가입 경로</th>
+                            <td id="resultJoinPath">-</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">자기소개</th>
+                            <td id="resultIntroduction" class="introduction-text">
+                                작성하지 않았습니다.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">이용약관</th>
+                            <td id="resultTerms">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </section>
+
+            <div class="result-buttons">
+                <a href="index.html" class="main-button">메인으로</a>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 SKALA 가입 페이지</p>
+    </footer>
+
+    <script src="../과제js/signUpResult.js"></script>
 </body>
 </html>
+2. 파란색으로 바꾼 signUpResult.css 전

@@ -78,6 +78,7 @@
                             </div>
                             <small id="passwordStrengthText">안전도: 입력 전</small>
                         </div>
+                        <small id="passwordLengthMessage" class="validation-message"></small>
                     </div>
                 </div>
 
@@ -97,16 +98,53 @@
                 </div>
 
                 <div class="form-row">
-                    <label for="userEmail">이메일 <span class="required-mark">*</span></label>
+                    <label for="emailId">이메일 <span class="required-mark">*</span></label>
                     <div class="field-area">
+                        <!-- 이메일 아이디와 도메인을 따로 입력 -->
+                        <div class="email-parts">
+                            <input
+                                type="text"
+                                id="emailId"
+                                name="emailId"
+                                pattern="[A-Za-z0-9._%+-]+"
+                                title="이메일 아이디를 영문, 숫자, 특수문자로 입력해 주세요."
+                                placeholder="이메일 아이디"
+                                required
+                            >
+                            <span class="email-symbol">@</span>
+                            <div class="email-domain-area">
+                                <select id="emailDomain" name="emailDomain" required>
+                                    <option value="">도메인 선택</option>
+                                    <option value="sk.com">sk.com</option>
+                                    <option value="naver.com">naver.com</option>
+                                    <option value="gmail.com">gmail.com</option>
+                                    <option value="daum.net">daum.net</option>
+                                    <option value="kakao.com">kakao.com</option>
+                                    <option value="direct">직접 입력</option>
+                                </select>
+                                <input
+                                    type="text"
+                                    id="directEmailDomain"
+                                    name="directEmailDomain"
+                                    pattern="[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
+                                    title="example.com 형식으로 입력해 주세요."
+                                    placeholder="도메인 직접 입력"
+                                    hidden
+                                >
+                            </div>
+                        </div>
+
+                        <!-- 두 값을 합친 이메일이 실제로 전송됨 -->
                         <input
                             type="email"
                             id="userEmail"
                             name="userEmail"
-                            placeholder="example@sk.com"
+                            class="combined-email"
+                            tabindex="-1"
+                            aria-hidden="true"
                             required
                         >
-                        <small class="validation-message">이메일 전체 주소를 입력해 주세요.</small>
+                        <small id="emailPreview" class="validation-message">완성 이메일: -</small>
                     </div>
                 </div>
             </fieldset>
@@ -186,7 +224,7 @@
                     </div>
                 </div>
 
-                <!-- 시·도를 고르면 JS에서 시·군·구를 만들어 주도록 함 -->
+                <!-- 시·도를 고르면 JS에서 시·군·구를 만들어 줌 -->
                 <div id="districtArea"></div>
                 <div id="townArea"></div>
 
@@ -194,12 +232,30 @@
                 <fieldset class="choice-fieldset">
                     <legend>관심 분야 <small>(중복 선택 가능)</small></legend>
                     <div class="choice-options interest-options">
-                        <label><input type="checkbox" name="interest" value="프론트엔드"> 프론트엔드</label>
-                        <label><input type="checkbox" name="interest" value="디자인"> 디자인</label>
-                        <label><input type="checkbox" name="interest" value="백엔드"> 백엔드</label>
-                        <label><input type="checkbox" name="interest" value="데이터베이스"> 데이터베이스</label>
-                        <label><input type="checkbox" name="interest" value="클라우드·인프라"> 클라우드·인프라</label>
-                        <label><input type="checkbox" id="otherInterestCheck"> 그 외</label>
+                        <label class="interest-card">
+                            <input type="checkbox" name="interest" value="프론트엔드">
+                            <span><strong>프론트엔드</strong><small>HTML · CSS · JavaScript</small></span>
+                        </label>
+                        <label class="interest-card">
+                            <input type="checkbox" name="interest" value="디자인">
+                            <span><strong>디자인</strong><small>UI · UX · 웹 디자인</small></span>
+                        </label>
+                        <label class="interest-card">
+                            <input type="checkbox" name="interest" value="백엔드">
+                            <span><strong>백엔드</strong><small>서버 · API 개발</small></span>
+                        </label>
+                        <label class="interest-card">
+                            <input type="checkbox" name="interest" value="데이터베이스">
+                            <span><strong>데이터베이스</strong><small>데이터 저장 · 관리</small></span>
+                        </label>
+                        <label class="interest-card">
+                            <input type="checkbox" name="interest" value="클라우드·인프라">
+                            <span><strong>클라우드·인프라</strong><small>배포 · 서버 운영</small></span>
+                        </label>
+                        <label class="interest-card">
+                            <input type="checkbox" id="otherInterestCheck">
+                            <span><strong>그 외</strong><small>직접 입력</small></span>
+                        </label>
                     </div>
                     <input
                         type="text"

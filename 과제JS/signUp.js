@@ -832,3 +832,4 @@ document.addEventListener("DOMContentLoaded", function () {
     /* 처음 페이지가 열렸을 때 진행률 초기화 */
     updateProgress();
 });
+

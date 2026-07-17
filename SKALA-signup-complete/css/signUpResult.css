@@ -1,0 +1,327 @@
+:root {
+    /* 결과 페이지에서 같이 사용할 색상 */
+    --primary: #7656b5;
+    --primary-dark: #5d4198;
+    --pink: #d46195;
+    --pink-bg: #fff6fa;
+    --text: #342d42;
+    --muted: #766d82;
+    --line: #e5dceb;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 85% 12%, #eadffd 0, transparent 24%),
+        radial-gradient(circle at 8% 20%, #f8dce8 0, transparent 23%),
+        linear-gradient(180deg, var(--pink-bg), #f7f3ff);
+    font-family: Arial, "Apple SD Gothic Neo", sans-serif;
+}
+
+.blind {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+
+.result-header {
+    /* 스크롤해도 헤더 고정 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 70px;
+    padding: 0 24px;
+    color: var(--white);
+    background: linear-gradient(135deg, #c95c90, var(--primary));
+    box-shadow: 0 4px 18px rgba(80, 48, 130, 0.2);
+}
+
+.header-inner {
+    width: min(1000px, 100%);
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.result-header h1 {
+    margin: 0;
+    font-size: 23px;
+    letter-spacing: 1px;
+}
+
+.result-header a {
+    padding: 8px 12px;
+    color: var(--white);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.result-header a:hover {
+    background-color: rgba(255, 255, 255, 0.17);
+}
+
+.result-header .brand-link,
+.result-header .header-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    border: 1px solid rgba(255, 255, 255, 0.48);
+    box-shadow: 0 4px 10px rgba(62, 35, 102, 0.12);
+}
+
+.result-header .brand-link {
+    padding: 8px 16px;
+    background-color: rgba(255, 255, 255, 0.14);
+    font-size: 18px;
+    letter-spacing: 1.2px;
+}
+
+.result-header .header-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    font-weight: 700;
+}
+
+.result-header .brand-link:hover,
+.result-header .header-button:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
+}
+
+.result-main {
+    min-height: 100vh;
+    padding: 120px 20px 65px;
+}
+
+.result-card {
+    /* 가입 결과 전체를 감싸는 카드 */
+    width: min(790px, 100%);
+    margin: 0 auto;
+    padding: 45px 46px;
+    background-color: rgba(255, 255, 255, 0.96);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    box-shadow: 0 18px 45px rgba(88, 58, 125, 0.13);
+    text-align: center;
+}
+
+.complete-icon {
+    width: 78px;
+    height: 78px;
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    background: linear-gradient(135deg, var(--pink), var(--primary));
+    border-radius: 50%;
+    font-size: 40px;
+    font-weight: 700;
+    box-shadow: 0 10px 23px rgba(118, 86, 181, 0.25);
+    animation: completePop 0.5s ease;
+}
+
+@keyframes completePop {
+    0% { transform: scale(0); }
+    80% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.eyebrow {
+    margin: 0 0 7px;
+    color: var(--pink);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+}
+
+.result-card h2 {
+    margin: 0 0 14px;
+    color: var(--primary-dark);
+    font-size: 29px;
+}
+
+.welcome-message {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.welcome-message strong {
+    color: var(--primary-dark);
+}
+
+.join-summary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+    margin: 31px 0;
+}
+
+.summary-item {
+    padding: 17px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    background: linear-gradient(135deg, #fff5fa, #f3effd);
+    border: 1px solid var(--line);
+    border-radius: 13px;
+}
+
+.summary-item span {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.summary-item strong {
+    color: var(--primary-dark);
+    font-size: 15px;
+}
+
+.member-info {
+    text-align: left;
+}
+
+.member-info h3 {
+    margin: 0 0 14px;
+    padding-left: 11px;
+    color: var(--primary-dark);
+    border-left: 5px solid var(--pink);
+    font-size: 20px;
+}
+
+table {
+    width: 100%;
+    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+}
+
+th,
+td {
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--line);
+    line-height: 1.55;
+}
+
+th {
+    width: 145px;
+    color: var(--primary-dark);
+    background-color: #f8f2fb;
+    text-align: left;
+}
+
+td {
+    color: #51495b;
+    background-color: var(--white);
+    word-break: break-word;
+}
+
+tr:last-child th,
+tr:last-child td {
+    border-bottom: none;
+}
+
+.introduction-text {
+    white-space: pre-wrap;
+}
+
+.result-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 11px;
+    margin-top: 31px;
+}
+
+.btn {
+    min-width: 145px;
+    padding: 12px 20px;
+    color: var(--primary-dark);
+    background-color: var(--white);
+    border: 1px solid #cfc3d6;
+    border-radius: 10px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+    background-color: #fdeaf2;
+    transform: translateY(-2px);
+}
+
+.btn.btn-primary {
+    /* 기본 버튼보다 메인 버튼 색상을 우선 적용 */
+    color: var(--white);
+    background: linear-gradient(135deg, var(--pink), var(--primary));
+    border-color: transparent;
+    box-shadow: 0 7px 16px rgba(99, 65, 160, 0.2);
+}
+
+.btn.btn-primary:hover {
+    background: linear-gradient(135deg, #c64e85, var(--primary-dark));
+}
+
+footer {
+    padding: 24px;
+    color: #eee7f8;
+    background-color: #43345e;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+}
+
+@media (max-width: 650px) {
+    .result-main {
+        padding: 105px 14px 45px;
+    }
+
+    .result-card {
+        padding: 35px 18px;
+    }
+
+    .result-card h2 {
+        font-size: 24px;
+    }
+
+    .join-summary {
+        grid-template-columns: 1fr;
+    }
+
+    th,
+    td {
+        display: block;
+        width: 100%;
+    }
+
+    th {
+        padding-bottom: 7px;
+        border-bottom: none;
+    }
+
+    td {
+        padding-top: 7px;
+    }
+
+    .result-buttons {
+        flex-direction: column;
+    }
+}
