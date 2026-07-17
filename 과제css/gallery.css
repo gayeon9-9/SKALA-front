@@ -1,0 +1,557 @@
+/* 페이지 내부 부드러운 앵커 이동 조절 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ==========================================
+   1. :root에 SK 브랜드 컬러 기반 변수 설정
+   ========================================== */
+:root {
+    --bg-primary: #f8f9fa;        
+    --bg-navbar: #ffffff;
+    --text-primary: #111111;      
+    --text-muted: #555555;
+    --card-bg: #ffffff;
+    --card-back-bg: #fff5f5;      
+    --primary-color: #e1231a;     /* SK 메인 레드 */
+    --secondary-color: #f16529;   /* SK 서브 오렌지 */
+    --badge-bg: #e1231a;
+    --shadow-normal: 0 4px 12px rgba(225, 35, 26, 0.06); 
+    --shadow-hover: 0 12px 24px rgba(225, 35, 26, 0.16);
+}
+
+body.dark {
+    --bg-primary: #121212;
+    --bg-navbar: #1e1e1e;
+    --text-primary: #f8f9fa;
+    --text-muted: #a8a8a8;
+    --card-bg: #1e1e1e;
+    --card-back-bg: #2d2d2d;
+    --primary-color: #e1231a;     
+    --secondary-color: #f16529;
+    --badge-bg: #e1231a;
+    --shadow-normal: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.5);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    padding-top: 195px; /* 네비게이션 고정 상단바 영역 확보 */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ==========================================
+   2. 상단 이동 시 가려짐 방지를 위한 정밀 스크롤 마진
+   ========================================== */
+#hero {
+    scroll-margin-top: 230px;
+}
+.gallery-wrapper-sec {
+    scroll-margin-top: 220px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1rem 0;
+}
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    border-left: 5px solid var(--primary-color);
+    padding-left: 12px;
+    margin-bottom: 0.5rem;
+}
+.country-album {
+    scroll-margin-top: 215px; /* 상세 기록 구역 정밀 조절 */
+}
+#details-section {
+    scroll-margin-top: 215px;
+}
+
+/* ==========================================
+   3. 상단바 레이아웃 고정 (Flexbox)
+   ========================================== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-navbar);
+    padding: 0 2rem;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    z-index: 1001;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--primary-color); 
+}
+
+.nav-menu {
+    margin-left: auto; 
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.nav-menu a:hover {
+    color: var(--primary-color);
+}
+
+.toggle-btn {
+    margin-left: 1.5rem;
+    background: none;
+    border: 1px solid var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.toggle-btn:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+
+/* ==========================================
+   4. 상단 고정 탭 메뉴 (Scrollspy 대응)
+   ========================================== */
+.trip-nav {
+    position: fixed; 
+    top: 65px;       
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-navbar);
+    text-align: center;
+    padding: 10px 0 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    z-index: 1000;
+}
+
+.tabs-notice {
+    margin-bottom: 6px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.nav-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.nav-tabs a {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    border: 1px solid var(--primary-color);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.nav-tabs a:hover {
+    color: #ffffff;
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+/* 현재 활성화된 구역 하이라이트 클래스 */
+.nav-tabs a.active {
+    color: #ffffff !important;
+    background-color: var(--primary-color) !important;
+    box-shadow: 0 4px 10px rgba(225, 35, 26, 0.3);
+}
+
+/* ==========================================
+   5. 히어로 애니메이션 구역
+   ========================================== */
+.hero-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 3rem 1rem 1rem;
+}
+
+.hero-title {
+    font-size: 2.6rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.hero-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.3s; 
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================
+   6. Grid 배치 플립 카드 (전체 클릭 이동 최적화)
+   ========================================== */
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 1rem 0 2.5rem;
+}
+
+/* 카드 전체를 링크(a)로 사용하기 위한 스타일링 */
+.card {
+    height: 360px;
+    perspective: 1000px; 
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    cursor: pointer;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
+    border-radius: 15px;
+    box-shadow: var(--shadow-normal);
+}
+
+.card:hover .card-inner {
+    transform: rotateY(180deg) translateY(-8px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; 
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(225, 35, 26, 0.15);
+}
+
+/* 카드 앞면 처리 */
+.card-front {
+    background-color: var(--card-bg);
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+
+.card-image-placeholder {
+    height: 55%;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.card-content {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    height: 45%;
+    justify-content: space-between;
+}
+
+.card-badge {
+    align-self: flex-start;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    color: #ffffff;
+    background-color: var(--secondary-color);
+}
+
+.card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+/* 가짜 버튼 (클릭 영역은 카드 전체로 대체됨) */
+.card-move-btn {
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 0.8rem;
+    padding: 6px 14px;
+    background-color: #fff0f0;
+    border: 1px solid rgba(225, 35, 26, 0.3);
+    border-radius: 20px;
+    color: var(--primary-color);
+    font-weight: 700;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+/* 카드 전체에 마우스를 올렸을 때 하단 버튼도 같이 붉게 활성화 연동 */
+.card:hover .card-move-btn {
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+
+body.dark .card-move-btn {
+    background-color: #331a1a;
+    border-color: rgba(225, 35, 26, 0.5);
+}
+
+/* 카드 뒷면 처리 (뒤집히기 전 마우스 간섭 완전 차단) */
+.card-back {
+    background-color: var(--card-back-bg);
+    transform: rotateY(180deg); 
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 2px solid var(--primary-color);
+    z-index: 1;
+    pointer-events: none; 
+}
+
+/* Hover 시 레이어 전면 교차 */
+.card:hover .card-front {
+    z-index: 1;
+    pointer-events: none;
+}
+.card:hover .card-back {
+    z-index: 2;
+    pointer-events: auto;
+}
+
+.back-title {
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 4px;
+    font-weight: 700;
+}
+
+.back-desc {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.section-divider {
+    border: none;
+    border-top: 1px dashed var(--primary-color);
+    max-width: 1100px;
+    margin: 1.5rem auto 3rem;
+}
+
+/* ==========================================
+   7. 사진 및 상세 내용 레이아웃
+   ========================================== */
+.details-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.country-album {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(225, 35, 26, 0.15);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: var(--shadow-normal);
+}
+
+.country-album h2 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--primary-color); 
+}
+
+.gallery {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.gallery figure {
+    width: 290px;
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+    background-color: var(--bg-primary);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.gallery img {
+    display: block;
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+.gallery figure:hover img {
+    transform: scale(1.04);
+}
+
+.gallery figcaption {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.country-album p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-top: 15px;
+}
+
+/* 푸터 및 탑 버튼 */
+.trip-footer {
+    padding: 60px 0 40px;
+    text-align: center;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.back-to-top {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    display: inline-block;
+    padding: 10px 18px;
+    color: #ffffff;
+    background-color: var(--primary-color); 
+    border-radius: 50px;
+    box-shadow: var(--shadow-hover);
+    text-decoration: none;
+    transition: transform 0.2s, background-color 0.2s;
+    z-index: 500;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.back-to-top:hover {
+    transform: translateY(-4px);
+    background-color: var(--secondary-color);
+}
+
+/* ==========================================
+   8. 반응형 미디어 쿼리
+   ========================================== */
+@media (max-width: 900px) {
+    body {
+        padding-top: 220px; 
+    }
+    .trip-nav {
+        top: 65px;
+    }
+    .gallery-wrapper-sec {
+        scroll-margin-top: 245px;
+    }
+    .country-album {
+        scroll-margin-top: 240px;
+    }
+    .gallery-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .gallery figure {
+        width: 47%;
+        flex-grow: 1;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding-top: 250px;
+    }
+    .nav-menu {
+        display: none; 
+    }
+    .gallery-wrapper-sec {
+        scroll-margin-top: 275px;
+    }
+    .country-album {
+        scroll-margin-top: 270px;
+    }
+    .gallery-container {
+        grid-template-columns: 1fr;
+    }
+    .hero-title {
+        font-size: 2rem;
+    }
+    .gallery figure {
+        width: 100%;
+    }
+    .nav-tabs a {
+        font-size: 0.82rem;
+        padding: 5px 10px;
+    }
+}
+
+/* 접근성 미디어 쿼리 */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-delay: 0s !important;
+        animation-duration: 0s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0s !important;
+        scroll-behavior: auto !important;
+    }
+    .card:hover .card-inner {
+        transform: rotateY(180deg);
+    }
+}
