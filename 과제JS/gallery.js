@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     
     /* -------------------------------------------
-       1. 다크모드 토글 기능 (추가됨)
+       1. 다크모드 토글 기능
        ------------------------------------------- */
     const themeToggleBtn = document.getElementById("theme-toggle");
     
@@ -21,16 +21,45 @@ document.addEventListener("DOMContentLoaded", () => {
             
             if (document.body.classList.contains("dark")) {
                 themeToggleBtn.textContent = "☀️ 라이트모드";
-                localStorage.setItem("theme", "dark"); // 다크모드 상태 저장
+                localStorage.setItem("theme", "dark");
             } else {
                 themeToggleBtn.textContent = "🌙 다크모드";
-                localStorage.setItem("theme", "light"); // 라이트모드 상태 저장
+                localStorage.setItem("theme", "light");
             }
         });
     }
 
     /* -------------------------------------------
-       2. 하단 상세 이미지 크게 보기 모달 인터랙션
+       2. 여정 카드 개별 클릭 시 뒤집기 (Flip) 구현
+       ------------------------------------------- */
+    const cards = document.querySelectorAll(".card");
+    
+    cards.forEach(card => {
+        card.addEventListener("click", (e) => {
+            // 카드 앞면의 '상세 기록 이동' 링크(a 태그) 클릭 시에는 뒤집히지 않고 링크 이동하도록 예외 처리
+            if (e.target.classList.contains("card-move-btn")) {
+                return; 
+            }
+            // 뒤집기 상태 토글
+            card.classList.toggle("is-flipped");
+        });
+    });
+
+    cards.forEach(card => {
+    card.addEventListener("keydown", (e) => {
+        // 카드에 포커스된 상태에서 Enter나 Space를 누르면 클릭과 동일하게 동작
+        if (e.key === "Enter" || e.key === " ") {
+            if (e.target.classList.contains("card-move-btn")) {
+                return;
+            }
+            e.preventDefault(); // Space 누를 때 페이지가 스크롤되는 것 방지
+            card.classList.toggle("is-flipped");
+        }
+    });
+});
+
+    /* -------------------------------------------
+       3. 하단 상세 이미지 크게 보기 모달 인터랙션
        ------------------------------------------- */
     const modal = document.getElementById("image-modal");
     const modalImg = document.getElementById("modal-img");
@@ -42,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
         img.addEventListener("click", () => {
             if(modal && modalImg) {
                 modal.classList.add("active");
-                modalImg.src = img.src; // 현재 클릭한 썸네일 소스를 모달 큰 이미지에 대입
+                modalImg.src = img.src; 
                 document.body.style.overflow = "hidden"; // 모달 오픈 시 본문 스크롤 잠금
             }
         });

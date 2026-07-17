@@ -11,12 +11,15 @@
     <!-- 상단바 -->
     <header class="navbar">
         <div class="logo"><span class="sk-red">SK</span>ALA 4th Journey</div>
-        <nav class="nav-menu">
-            <a href="#hero">소개</a>
-            <a href="#gallery-section">여정 카드</a>
-            <a href="#details-section">상세 기록</a>
-        </nav>
-        <button id="theme-toggle" class="toggle-btn">🌙 다크모드</button>
+        <!-- flex 컨테이너 안에서 우측 정렬을 위해 nav-menu-wrapper 추가 -->
+        <div class="nav-menu-wrapper">
+            <nav class="nav-menu">
+                <a href="#hero">소개</a>
+                <a href="#gallery-section">여정 카드</a>
+                <a href="#details-section">상세 기록</a>
+            </nav>
+            <button id="theme-toggle" class="toggle-btn">🌙 다크모드</button>
+        </div>
     </header>
 
     <!-- 상단 고정 탭 메뉴 -->
@@ -32,7 +35,7 @@
         </div>
     </nav>
 
-    <!-- 소개 섹션 (SK 브랜드 컬러 입체 그라데이션) -->
+    <!-- 소개 섹션 (히어로 등장 애니메이션 적용) -->
     <section id="hero" class="hero-section">
         <div class="hero-content">
             <h1 class="hero-title"><span class="highlight-white">SK AI Leader Academy</span></h1>
@@ -46,17 +49,19 @@
         <main id="gallery" class="gallery-container">
             
             <!-- 카드 1 -->
-            <a href="#card-sec-1" class="card">
-                <div class="card-inner">
-                    <div class="card-front">
-                        <div class="card-image-area brand-bg-red">
-                            <div class="brand-logo-text">SKALA</div>
-                            <div class="brand-logo-sub">ABOUT</div>
-                        </div>
+            <div class="card">
+                <div class="card" tabindex="0">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-image-area brand-bg-red">
+                                <div class="brand-logo-text">SKALA</div>
+                                <div class="brand-logo-sub">ABOUT</div>
+                            </div>
                         <div class="card-content">
                             <div class="card-badge">ABOUT</div>
                             <h3 class="card-title">SK AI Leader Academy</h3>
-                            <span class="card-move-btn">상세 기록 이동</span>
+                            <!-- a 태그로 복원하여 기능 및 키보드 접근성 확보 -->
+                            <a href="#card-sec-1" class="card-move-btn">상세 기록 이동</a>
                         </div>
                     </div>
                     <div class="card-back">
@@ -65,10 +70,10 @@
                             탄탄한 이론 교육부터 현직자 프로젝트 그리고 SK 채용 연계까지 지원합니다.</p>
                     </div>
                 </div>
-            </a>
+            </div>
 
             <!-- 카드 2 -->
-            <a href="#card-sec-2" class="card">
+            <div class="card">
                 <div class="card-inner">
                     <div class="card-front">
                         <div class="card-image-area brand-bg-orange">
@@ -78,7 +83,8 @@
                         <div class="card-content">
                             <div class="card-badge">PROCESS</div>
                             <h3 class="card-title">서류 / SKCT / AI 면접</h3>
-                            <span class="card-move-btn">상세 기록 이동</span>
+                            <!-- a 태그로 복원하여 기능 및 키보드 접근성 확보 -->
+                            <a href="#card-sec-2" class="card-move-btn">상세 기록 이동</a>
                         </div>
                     </div>
                     <div class="card-back">
@@ -86,10 +92,10 @@
                         <p class="back-desc"><b>1단계 이력서&자기소개서</b><br>비전공자도 지원이 가능하기에 실무 능력보다도 열정과 진실성을 담아 작성하세요.<br><b>2단계 SKCT</b><br>SKCT 중 인성검사만 보았습니다. SK인재상에 부합한 자세로 임하는게 중요합니다.<br><b>3단계 면접</b><br>인성질문과 역량질문이 나뉘어서 나오므로 자소서 기반으로 꼼꼼히 준비하세요.</p>
                     </div>
                 </div>
-            </a>
+            </div>
 
             <!-- 카드 3 -->
-            <a href="#card-sec-3" class="card">
+            <div class="card">
                 <div class="card-inner">
                     <div class="card-front">
                         <div class="card-image-area brand-bg-dark">
@@ -99,7 +105,8 @@
                         <div class="card-content">
                             <div class="card-badge">SUCCESS</div>
                             <h3 class="card-title">합격 및 교육 일정</h3>
-                            <span class="card-move-btn">상세 기록 이동</span>
+                            <!-- a 태그로 복원하여 기능 및 키보드 접근성 확보 -->
+                            <a href="#card-sec-3" class="card-move-btn">상세 기록 이동</a>
                         </div>
                     </div>
                     <div class="card-back">
@@ -107,10 +114,10 @@
                         <p class="back-desc">최종 합격 메일 받고 입과까지 2~3주 정도 소요됩니다. 5개월간 펼쳐질 인텐시브 코스 일정을 확인하고 다짐한 기록.</p>
                     </div>
                 </div>
-            </a>
+            </div>
 
             <!-- 카드 4 -->
-            <a href="#card-sec-4" class="card">
+            <div class="card">
                 <div class="card-inner">
                     <div class="card-front">
                         <div class="card-image-area brand-bg-red">
@@ -120,7 +127,8 @@
                         <div class="card-content">
                             <div class="card-badge">CAMPUS</div>
                             <h3 class="card-title">입과식 & 첫인상</h3>
-                            <span class="card-move-btn">상세 기록 이동</span>
+                            <!-- a 태그로 복원하여 기능 및 키보드 접근성 확보 -->
+                            <a href="#card-sec-4" class="card-move-btn">상세 기록 이동</a>
                         </div>
                     </div>
                     <div class="card-back">
@@ -128,10 +136,10 @@
                         <p class="back-desc">출입카드 및 웰컴키트와 공부에 몰입할 수 있도록 쾌적하게 세팅된 고사양 PC 인프라 환경 기술.</p>
                     </div>
                 </div>
-            </a>
+            </div>
 
             <!-- 카드 5 -->
-            <a href="#card-sec-5" class="card">
+            <div class="card">
                 <div class="card-inner">
                     <div class="card-front">
                         <div class="card-image-area brand-bg-orange">
@@ -141,7 +149,8 @@
                         <div class="card-content">
                             <div class="card-badge">DAILY</div>
                             <h3 class="card-title">수업실습 & 제공 식사</h3>
-                            <span class="card-move-btn">상세 기록 이동</span>
+                            <!-- a 태그로 복원하여 기능 및 키보드 접근성 확보 -->
+                            <a href="#card-sec-5" class="card-move-btn">상세 기록 이동</a>
                         </div>
                     </div>
                     <div class="card-back">
@@ -149,10 +158,10 @@
                         <p class="back-desc">오전의 파이썬·SQL 머리 싸움 뒤 찾아오는 고품질 구내식당 메뉴! 든든히 먹고 오후 세션을 버팁니다.</p>
                     </div>
                 </div>
-            </a>
+            </div>
 
             <!-- 카드 6 -->
-            <a href="#card-sec-6" class="card">
+            <div class="card">
                 <div class="card-inner">
                     <div class="card-front">
                         <div class="card-image-area brand-bg-dark">
@@ -162,7 +171,8 @@
                         <div class="card-content">
                             <div class="card-badge">DIARY</div>
                             <h3 class="card-title">중간 소감과 다짐</h3>
-                            <span class="card-move-btn">상세 기록 이동</span>
+                            <!-- a 태그로 복원하여 기능 및 키보드 접근성 확보 -->
+                            <a href="#card-sec-6" class="card-move-btn">상세 기록 이동</a>
                         </div>
                     </div>
                     <div class="card-back">
@@ -170,7 +180,7 @@
                         <p class="back-desc">비전공자 걱정은 뒤로하고, 매일 코드를 짜고 TIL을 쓰며 어제보다 한 걸음씩 확실히 성장 중입니다.</p>
                     </div>
                 </div>
-            </a>
+            </div>
         </main>
     </section>
 

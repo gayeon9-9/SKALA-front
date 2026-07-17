@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="할 일을 퀘스트처럼 관리하는 인터랙티브 할 일 관리 앱">
+    <title>LEVEL UP: TODAY</title>
+    <link rel="stylesheet" href="../과제css/planning.css">
+</head>
+<body>
+    <main class="app-shell">
+        <aside class="dashboard-panel">
+            <header class="brand-header">
+                <p class="eyebrow">INTERACTIVE TASK MANAGER</p>
+                <button id="themeToggle" class="icon-button" type="button" aria-label="다크 모드로 변경">
+                    <span aria-hidden="true">☾</span>
+                </button>
+            </header>
+
+            <section class="intro-section" aria-labelledby="appTitle">
+                <h1 id="appTitle"><span>LEVEL UP:</span><span>TODAY</span></h1>
+                <p>오늘의 작은 완료가 내일의 레벨을 만든다</p>
+                <time id="currentDate" datetime=""></time>
+            </section>
+
+            <section class="quote-card" aria-labelledby="quoteTitle">
+                <div class="card-heading-row">
+                    <h2 id="quoteTitle">TODAY'S MESSAGE</h2>
+                    <button id="quoteRefresh" class="text-button" type="button" aria-label="오늘의 한마디 다시 불러오기">↻ 새로고침</button>
+                </div>
+                <blockquote>
+                    <p id="quoteText">오늘의 한마디를 불러오는 중...</p>
+                    <cite id="quoteAuthor"></cite>
+                </blockquote>
+            </section>
+
+            <section class="progress-card" aria-labelledby="xpTitle">
+                <p id="xpTitle" class="card-label">TODAY'S XP</p>
+                <div class="xp-score" aria-live="polite">
+                    <strong id="xpEarned">0</strong>
+                    <span>/ <strong id="xpTotal">0</strong> XP</span>
+                </div>
+
+                <div class="progress-heading">
+                    <span>XP 달성률</span>
+                    <strong id="progressPercent">0%</strong>
+                </div>
+                <div class="progress-track" role="progressbar" aria-label="오늘의 XP 달성률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+                <p id="progressMessage" class="progress-message">첫 번째 퀘스트를 시작해 보세요!</p>
+            </section>
+        </aside>
+
+        <section class="task-panel" aria-labelledby="taskTitle">
+            <header class="task-header">
+                <div>
+                    <p class="eyebrow">QUEST BOARD</p>
+                    <h2 id="taskTitle">TODAY'S QUESTS</h2>
+                </div>
+                <p>중요한 일을 선택하고 오늘의 경험치를 채워보세요.</p>
+            </header>
+
+            <form id="todoForm" class="todo-form" novalidate>
+                <label class="sr-only" for="todoInput">새로운 할 일</label>
+                <input id="todoInput" name="todo" type="text" maxlength="60" placeholder="새로운 퀘스트를 입력하세요" autocomplete="off">
+
+                <label class="sr-only" for="categorySelect">카테고리</label>
+                <select id="categorySelect" name="category">
+                    <option value="study">학습</option>
+                    <option value="life">생활</option>
+                    <option value="work">업무</option>
+                    <option value="etc">기타</option>
+                </select>
+
+                <label class="sr-only" for="prioritySelect">중요도</label>
+                <select id="prioritySelect" name="priority">
+                    <option value="normal">보통 · 20 XP</option>
+                    <option value="high">높음 · 30 XP</option>
+                    <option value="low">낮음 · 10 XP</option>
+                </select>
+
+                <button class="add-button" type="submit"><span aria-hidden="true">＋</span> 퀘스트 추가</button>
+            </form>
+            <p id="inputMessage" class="input-message" aria-live="polite"></p>
+
+            <nav id="filterGroup" class="filter-group" aria-label="할 일 필터">
+                <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">
+                    전체 <span id="allCount">0</span>
+                </button>
+                <button class="filter-button" type="button" data-filter="active" aria-pressed="false">
+                    진행중 <span id="activeCount">0</span>
+                </button>
+                <button class="filter-button" type="button" data-filter="completed" aria-pressed="false">
+                    완료 <span id="completedCount">0</span>
+                </button>
+            </nav>
+
+            <div class="category-filter-area">
+                <span class="category-filter-label">카테고리</span>
+                <nav id="categoryFilterGroup" class="category-filter-group" aria-label="카테고리 필터">
+                    <button class="category-filter-button active" type="button" data-category="all" aria-pressed="true">전체</button>
+                    <button class="category-filter-button" type="button" data-category="study" aria-pressed="false">학습</button>
+                    <button class="category-filter-button" type="button" data-category="life" aria-pressed="false">생활</button>
+                    <button class="category-filter-button" type="button" data-category="work" aria-pressed="false">업무</button>
+                    <button class="category-filter-button" type="button" data-category="etc" aria-pressed="false">기타</button>
+                </nav>
+            </div>
+
+            <ul id="todoList" class="todo-list" aria-label="할 일 목록"></ul>
+
+            <div id="clearBanner" class="clear-banner" role="status" hidden>
+                <strong>QUEST CLEAR!</strong>
+                <span>오늘의 모든 퀘스트를 완료했습니다. 🎉</span>
+            </div>
+
+            <details id="trashDetails" class="trash-panel">
+                <summary>
+                    <span>최근 삭제함</span>
+                    <strong id="deletedCount">0</strong>
+                </summary>
+                <p class="trash-help">삭제한 퀘스트를 복원하거나 영구 삭제할 수 있습니다.</p>
+                <ul id="deletedList" class="deleted-list" aria-label="최근 삭제한 할 일"></ul>
+            </details>
+
+            <footer class="summary">
+                <span>전체 <strong id="summaryTotal">0</strong>개</span>
+                <span class="summary-line" aria-hidden="true"></span>
+                <span>완료 <strong id="summaryCompleted">0</strong>개</span>
+            </footer>
+        </section>
+    </main>
+    <!-- storage.js는 app.js에서 연결 예정 -->
+    <script type="module" src="../과제js/app.js"></script>
+</body>
+</html>
