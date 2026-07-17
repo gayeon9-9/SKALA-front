@@ -2,328 +2,741 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+
+    <!-- 모바일 화면에서도 실제 기기 너비를 기준으로 반응형이 적용되도록 설정 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>from Zero to SKALA</title>
+
+    <title>From Zero to SKALA</title>
+
+    <!-- CSS 파일 연결 -->
     <link rel="stylesheet" href="../과제css/gallery.css">
 </head>
+
 <body id="top" class="skala-page">
 
-    <!-- 상단바 -->
+    <!-- =========================================
+         상단바
+         과제 기준:
+         로고, 메뉴, 다크모드 버튼을 Flexbox로 정렬
+         ========================================= -->
     <header class="navbar">
-        <div class="logo"><span class="sk-red">SK</span>ALA 4th Journey</div>
-        <!-- flex 컨테이너 안에서 우측 정렬을 위해 nav-menu-wrapper 추가 -->
+
+        <a href="#top" class="logo">
+            <span class="sk-red">SK</span>ALA 4th Journey
+        </a>
+
         <div class="nav-menu-wrapper">
-            <nav class="nav-menu">
+
+            <!-- 600px 이하 화면에서는 CSS Media Query로 숨김 -->
+            <nav class="nav-menu" aria-label="주요 메뉴">
                 <a href="#hero">소개</a>
                 <a href="#gallery-section">여정 카드</a>
                 <a href="#details-section">상세 기록</a>
             </nav>
-            <button id="theme-toggle" class="toggle-btn">🌙 다크모드</button>
+
+            <!--
+                과제 기준:
+                버튼을 클릭하면 body에 dark 클래스를 추가하거나 제거하여
+                CSS 변수 값만 바꾸는 방식으로 다크모드를 구현
+            -->
+            <button
+                type="button"
+                id="theme-toggle"
+                class="toggle-btn"
+                aria-label="다크모드로 변경"
+                aria-pressed="false"
+            >
+                🌙 다크모드
+            </button>
+
         </div>
     </header>
 
-    <!-- 상단 고정 탭 메뉴 -->
-    <nav class="trip-nav">
-        <p class="tabs-notice">버튼을 눌러서 해당 위치로 이동해 보세요.</p>
+    <!-- =========================================
+         여정별 이동 탭
+         ========================================= -->
+    <nav class="trip-nav" aria-label="여정 카드 상세 이동 메뉴">
+
+        <p class="tabs-notice">
+            여정을 눌러 해당 기록으로 바로 이동할 수 있어요.
+        </p>
+
         <div class="nav-tabs">
             <a href="#card-sec-1" class="tab-item">🔴 아카데미 소개</a>
-            <a href="#card-sec-2" class="tab-item">🔴 3단계 선발과정</a>
-            <a href="#card-sec-3" class="tab-item">🔴 합격 & 교육일정</a>
-            <a href="#card-sec-4" class="tab-item">🟠 입과식 & 시설</a>
-            <a href="#card-sec-5" class="tab-item">🟠 교육 & 점심일과</a>
-            <a href="#card-sec-6" class="tab-item">🟠 나의 성장소감</a>
+            <a href="#card-sec-2" class="tab-item">🔴 3단계 선발 과정</a>
+            <a href="#card-sec-3" class="tab-item">🔴 합격 및 교육 일정</a>
+            <a href="#card-sec-4" class="tab-item">🟠 입과식 및 시설</a>
+            <a href="#card-sec-5" class="tab-item">🟠 교육 및 점심 일과</a>
+            <a href="#card-sec-6" class="tab-item">🟠 나의 성장 기록</a>
         </div>
+
     </nav>
 
-    <!-- 소개 섹션 (히어로 등장 애니메이션 적용) -->
-    <section id="hero" class="hero-section">
-        <div class="hero-content">
-            <h1 class="hero-title"><span class="highlight-white">SK AI Leader Academy</span></h1>
-            <p class="hero-subtitle">AI 시대, 핵심 인재로 도약하는 5개월간의 여정 기록</p>
-        </div>
-    </section>
+    <main>
 
-    <!-- 여정 카드 갤러리 섹션 -->
-    <section id="gallery-section" class="gallery-wrapper-sec">
-        <h2 class="section-title">✨ 나의 AI 레이싱 여정 카드</h2>
-        <main id="gallery" class="gallery-container">
-            
-            <!-- 카드 1 -->
-            <div class="card">
-                <div class="card" tabindex="0">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <div class="card-image-area brand-bg-red">
-                                <div class="brand-logo-text">SKALA</div>
-                                <div class="brand-logo-sub">ABOUT</div>
+        <!-- =========================================
+             히어로 영역
+             과제 기준:
+             제목과 부제에 @keyframes 등장 애니메이션 적용
+             서로 다른 delay를 주어 순차적으로 나타나게 구성
+             ========================================= -->
+        <section id="hero" class="hero-section">
+
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    SK AI Leader Academy
+                </h1>
+
+                <p class="hero-subtitle">
+                    AI 인재로 성장하기 위해 시작한 5개월간의 여정을 기록해 나가고 있습니다.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- =========================================
+             여정 카드 갤러리
+             과제 기준:
+             카드 6개 이상
+             CSS Grid를 사용하여 기본 화면에서 3열 배치
+             ========================================= -->
+        <section id="gallery-section" class="gallery-wrapper-sec">
+
+            <h2 class="section-title">
+                ✨ 나의 SKALA 성장 여정
+            </h2>
+
+            <p class="section-description">
+                카드를 누르면 뒷면에서 각 과정에 대한 간단한 설명을 확인할 수 있어요.
+            </p>
+
+            <div id="gallery" class="gallery-container">
+
+                <!-- 카드 1 -->
+                <article class="card-wrapper">
+
+                    <div
+                        class="card"
+                        tabindex="0"
+                        role="button"
+                        aria-label="SK AI Leader Academy 소개 카드 뒤집기"
+                        aria-pressed="false"
+                    >
+
+                        <div class="card-inner">
+
+                            <div class="card-front">
+
+                                <div class="card-image-area brand-bg-red">
+                                    <span class="brand-logo-text">SKALA</span>
+                                    <span class="brand-logo-sub">ABOUT</span>
+                                </div>
+
+                                <div class="card-content">
+                                    <span class="card-badge">ABOUT</span>
+
+                                    <h3 class="card-title">
+                                        SK AI Leader Academy
+                                    </h3>
+
+                                    <a href="#card-sec-1" class="card-move-btn">
+                                        상세 기록 보기
+                                    </a>
+                                </div>
+
                             </div>
-                        <div class="card-content">
-                            <div class="card-badge">ABOUT</div>
-                            <h3 class="card-title">SK AI Leader Academy</h3>
-                            <!-- a 태그로 복원하여 기능 및 키보드 접근성 확보 -->
-                            <a href="#card-sec-1" class="card-move-btn">상세 기록 이동</a>
-                        </div>
-                    </div>
-                    <div class="card-back">
-                        <h4 class="back-title">💡 SKALA란?</h4>
-                        <p class="back-desc">SK Ai Leader Academy의 약자로, SK에서 주관하는 실무 중심의 AI 인재 양성 과정입니다. 
-                            탄탄한 이론 교육부터 현직자 프로젝트 그리고 SK 채용 연계까지 지원합니다.</p>
-                    </div>
-                </div>
-            </div>
 
-            <!-- 카드 2 -->
-            <div class="card">
-                <div class="card-inner">
-                    <div class="card-front">
-                        <div class="card-image-area brand-bg-orange">
-                            <div class="brand-logo-text">SKCT</div>
-                            <div class="brand-logo-sub">PROCESS</div>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-badge">PROCESS</div>
-                            <h3 class="card-title">서류 / SKCT / AI 면접</h3>
-                            <!-- a 태그로 복원하여 기능 및 키보드 접근성 확보 -->
-                            <a href="#card-sec-2" class="card-move-btn">상세 기록 이동</a>
-                        </div>
-                    </div>
-                    <div class="card-back">
-                        <h4 class="back-title">🎯 3단계 관문 돌파 팁</h4>
-                        <p class="back-desc"><b>1단계 이력서&자기소개서</b><br>비전공자도 지원이 가능하기에 실무 능력보다도 열정과 진실성을 담아 작성하세요.<br><b>2단계 SKCT</b><br>SKCT 중 인성검사만 보았습니다. SK인재상에 부합한 자세로 임하는게 중요합니다.<br><b>3단계 면접</b><br>인성질문과 역량질문이 나뉘어서 나오므로 자소서 기반으로 꼼꼼히 준비하세요.</p>
-                    </div>
-                </div>
-            </div>
+                            <div class="card-back">
 
-            <!-- 카드 3 -->
-            <div class="card">
-                <div class="card-inner">
-                    <div class="card-front">
-                        <div class="card-image-area brand-bg-dark">
-                            <div class="brand-logo-text">PASS</div>
-                            <div class="brand-logo-sub">SUCCESS</div>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-badge">SUCCESS</div>
-                            <h3 class="card-title">합격 및 교육 일정</h3>
-                            <!-- a 태그로 복원하여 기능 및 키보드 접근성 확보 -->
-                            <a href="#card-sec-3" class="card-move-btn">상세 기록 이동</a>
-                        </div>
-                    </div>
-                    <div class="card-back">
-                        <h4 class="back-title">📅 새로운 시작의 이정표</h4>
-                        <p class="back-desc">최종 합격 메일 받고 입과까지 2~3주 정도 소요됩니다. 5개월간 펼쳐질 인텐시브 코스 일정을 확인하고 다짐한 기록.</p>
-                    </div>
-                </div>
-            </div>
+                                <h4 class="back-title">
+                                    💡 SKALA란?
+                                </h4>
 
-            <!-- 카드 4 -->
-            <div class="card">
-                <div class="card-inner">
-                    <div class="card-front">
-                        <div class="card-image-area brand-bg-red">
-                            <div class="brand-logo-text">CAMPUS</div>
-                            <div class="brand-logo-sub">WELCOME</div>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-badge">CAMPUS</div>
-                            <h3 class="card-title">입과식 & 첫인상</h3>
-                            <!-- a 태그로 복원하여 기능 및 키보드 접근성 확보 -->
-                            <a href="#card-sec-4" class="card-move-btn">상세 기록 이동</a>
-                        </div>
-                    </div>
-                    <div class="card-back">
-                        <h4 class="back-title">🎁 웰컴 키트와 최상급 시설</h4>
-                        <p class="back-desc">출입카드 및 웰컴키트와 공부에 몰입할 수 있도록 쾌적하게 세팅된 고사양 PC 인프라 환경 기술.</p>
-                    </div>
-                </div>
-            </div>
+                                <p class="back-desc">
+                                    SK AI Leader Academy의 줄임말로,
+                                    SK에서 운영하는 실무 중심 AI 인재 양성 과정입니다.
+                                    기초 교육부터 프로젝트, 채용 연계 과정까지 함께 진행됩니다.
+                                </p>
 
-            <!-- 카드 5 -->
-            <div class="card">
-                <div class="card-inner">
-                    <div class="card-front">
-                        <div class="card-image-area brand-bg-orange">
-                            <div class="brand-logo-text">GROWTH</div>
-                            <div class="brand-logo-sub">DAILY</div>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-badge">DAILY</div>
-                            <h3 class="card-title">수업실습 & 제공 식사</h3>
-                            <!-- a 태그로 복원하여 기능 및 키보드 접근성 확보 -->
-                            <a href="#card-sec-5" class="card-move-btn">상세 기록 이동</a>
-                        </div>
-                    </div>
-                    <div class="card-back">
-                        <h4 class="back-title">🧠 뇌를 풀 가동하는 하루</h4>
-                        <p class="back-desc">오전의 파이썬·SQL 머리 싸움 뒤 찾아오는 고품질 구내식당 메뉴! 든든히 먹고 오후 세션을 버팁니다.</p>
-                    </div>
-                </div>
-            </div>
+                            </div>
 
-            <!-- 카드 6 -->
-            <div class="card">
-                <div class="card-inner">
-                    <div class="card-front">
-                        <div class="card-image-area brand-bg-dark">
-                            <div class="brand-logo-text">RUNNER</div>
-                            <div class="brand-logo-sub">DIARY</div>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-badge">DIARY</div>
-                            <h3 class="card-title">중간 소감과 다짐</h3>
-                            <!-- a 태그로 복원하여 기능 및 키보드 접근성 확보 -->
-                            <a href="#card-sec-6" class="card-move-btn">상세 기록 이동</a>
                         </div>
                     </div>
-                    <div class="card-back">
-                        <h4 class="back-title">🌙 조금씩 스며드는 성장</h4>
-                        <p class="back-desc">비전공자 걱정은 뒤로하고, 매일 코드를 짜고 TIL을 쓰며 어제보다 한 걸음씩 확실히 성장 중입니다.</p>
+                </article>
+
+                <!-- 카드 2 -->
+                <article class="card-wrapper">
+
+                    <div
+                        class="card"
+                        tabindex="0"
+                        role="button"
+                        aria-label="3단계 선발 과정 카드 뒤집기"
+                        aria-pressed="false"
+                    >
+
+                        <div class="card-inner">
+
+                            <div class="card-front">
+
+                                <div class="card-image-area brand-bg-orange">
+                                    <span class="brand-logo-text">SKCT</span>
+                                    <span class="brand-logo-sub">PROCESS</span>
+                                </div>
+
+                                <div class="card-content">
+                                    <span class="card-badge">PROCESS</span>
+
+                                    <h3 class="card-title">
+                                        서류 · SKCT · AI 면접
+                                    </h3>
+
+                                    <a href="#card-sec-2" class="card-move-btn">
+                                        상세 기록 보기
+                                    </a>
+                                </div>
+
+                            </div>
+
+                            <div class="card-back">
+
+                                <h4 class="back-title">
+                                    🎯 3단계 선발 과정
+                                </h4>
+
+                                <p class="back-desc">
+                                    <strong>1단계 서류</strong><br>
+                                    지원 동기와 실제 경험을 솔직하게 담았습니다.<br><br>
+
+                                    <strong>2단계 SKCT</strong><br>
+                                    인성검사에서는 일관성 있게 답변하는 것이 중요했습니다.<br><br>
+
+                                    <strong>3단계 AI 면접</strong><br>
+                                    자기소개서와 경험을 기준으로 인성과 역량 질문을 준비했습니다.
+                                </p>
+
+                            </div>
+
+                        </div>
                     </div>
-                </div>
-            </div>
-        </main>
-    </section>
+                </article>
 
-    <hr class="section-divider">
+                <!-- 카드 3 -->
+                <article class="card-wrapper">
 
-    <!-- 하단 상세 기록 섹션 -->
-    <section id="details-section" class="details-container">
-        <!-- 섹션 1 -->
-        <section id="card-sec-1" class="country-album">
-            <h2>🚀 SK AI Leader Academy 소개</h2>
-            <div class="gallery">
-                <figure>
-                    <img src="../media/skala-소개.png" alt="SKALA 교육 비전 이미지">
-                    <figcaption>SKALA 비전 및 로드맵</figcaption>
-                </figure>
-                <figure>
-                    <img src="../media/skala-교육과정.png" alt="SKALA 커리큘럼 소개">
-                    <figcaption>실전형 AI 인재 육성 커리큘럼</figcaption>
-                </figure>
+                    <div
+                        class="card"
+                        tabindex="0"
+                        role="button"
+                        aria-label="합격 및 교육 일정 카드 뒤집기"
+                        aria-pressed="false"
+                    >
+
+                        <div class="card-inner">
+
+                            <div class="card-front">
+
+                                <div class="card-image-area brand-bg-dark">
+                                    <span class="brand-logo-text">PASS</span>
+                                    <span class="brand-logo-sub">SUCCESS</span>
+                                </div>
+
+                                <div class="card-content">
+                                    <span class="card-badge">SUCCESS</span>
+
+                                    <h3 class="card-title">
+                                        합격 및 교육 일정
+                                    </h3>
+
+                                    <a href="#card-sec-3" class="card-move-btn">
+                                        상세 기록 보기
+                                    </a>
+                                </div>
+
+                            </div>
+
+                            <div class="card-back">
+
+                                <h4 class="back-title">
+                                    📅 새로운 시작
+                                </h4>
+
+                                <p class="back-desc">
+                                    최종 합격 안내를 받은 뒤 입과까지 약 2~3주의 준비 기간이 있었습니다.
+                                    5개월간 진행될 교육 일정을 확인하며 새로운 시작을 준비했습니다.
+                                </p>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 카드 4 -->
+                <article class="card-wrapper">
+
+                    <div
+                        class="card"
+                        tabindex="0"
+                        role="button"
+                        aria-label="입과식과 교육 시설 카드 뒤집기"
+                        aria-pressed="false"
+                    >
+
+                        <div class="card-inner">
+
+                            <div class="card-front">
+
+                                <div class="card-image-area brand-bg-red">
+                                    <span class="brand-logo-text">CAMPUS</span>
+                                    <span class="brand-logo-sub">WELCOME</span>
+                                </div>
+
+                                <div class="card-content">
+                                    <span class="card-badge">CAMPUS</span>
+
+                                    <h3 class="card-title">
+                                        입과식과 교육 시설
+                                    </h3>
+
+                                    <a href="#card-sec-4" class="card-move-btn">
+                                        상세 기록 보기
+                                    </a>
+                                </div>
+
+                            </div>
+
+                            <div class="card-back">
+
+                                <h4 class="back-title">
+                                    🎁 웰컴 키트와 교육 공간
+                                </h4>
+
+                                <p class="back-desc">
+                                    입과식에서는 출입카드와 웰컴 키트를 받았습니다.
+                                    교육장에는 수업에 집중할 수 있도록 맥북과 와이드 모니터가 준비되어 있었습니다.
+                                </p>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 카드 5 -->
+                <article class="card-wrapper">
+
+                    <div
+                        class="card"
+                        tabindex="0"
+                        role="button"
+                        aria-label="수업 실습과 점심 일과 카드 뒤집기"
+                        aria-pressed="false"
+                    >
+
+                        <div class="card-inner">
+
+                            <div class="card-front">
+
+                                <div class="card-image-area brand-bg-orange">
+                                    <span class="brand-logo-text">GROWTH</span>
+                                    <span class="brand-logo-sub">DAILY</span>
+                                </div>
+
+                                <div class="card-content">
+                                    <span class="card-badge">DAILY</span>
+
+                                    <h3 class="card-title">
+                                        수업 실습과 점심 일과
+                                    </h3>
+
+                                    <a href="#card-sec-5" class="card-move-btn">
+                                        상세 기록 보기
+                                    </a>
+                                </div>
+
+                            </div>
+
+                            <div class="card-back">
+
+                                <h4 class="back-title">
+                                    🧠 집중해서 배우는 하루
+                                </h4>
+
+                                <p class="back-desc">
+                                    오전과 오후에 이론 수업과 실습을 함께 진행합니다.
+                                    점심시간에는 동기들과 식사하며 잠시 쉬고,
+                                    오후 수업을 다시 이어갑니다.
+                                </p>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 카드 6 -->
+                <article class="card-wrapper">
+
+                    <div
+                        class="card"
+                        tabindex="0"
+                        role="button"
+                        aria-label="중간 성장 기록 카드 뒤집기"
+                        aria-pressed="false"
+                    >
+
+                        <div class="card-inner">
+
+                            <div class="card-front">
+
+                                <div class="card-image-area brand-bg-dark">
+                                    <span class="brand-logo-text">RUNNER</span>
+                                    <span class="brand-logo-sub">DIARY</span>
+                                </div>
+
+                                <div class="card-content">
+                                    <span class="card-badge">GROWTH</span>
+
+                                    <h3 class="card-title">
+                                        중간 성장 기록
+                                    </h3>
+
+                                    <a href="#card-sec-6" class="card-move-btn">
+                                        상세 기록 보기
+                                    </a>
+                                </div>
+
+                            </div>
+
+                            <div class="card-back">
+
+                                <h4 class="back-title">
+                                    🌙 조금씩 쌓이는 성장
+                                </h4>
+
+                                <p class="back-desc">
+                                    처음에는 비전공자로서 수업을 잘 따라갈 수 있을지 걱정했습니다.
+                                    지금은 매일 코드를 작성하고 복습하며
+                                    어제보다 조금씩 성장하고 있습니다.
+                                </p>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </article>
+
             </div>
-            <p>
-                SKALA는 AX(AI Transformation) 시대를 선도할 실무형 인재 육성 과정입니다. <br>
-                기초 프로그래밍부터 고급 인공지능 모델링, 실제 대기업 인프라 연계형 프로젝트 구현까지 밀도 높게 진행됩니다.
-            </p>
         </section>
 
-        <!-- 섹션 2 -->
-        <section id="card-sec-2" class="country-album">
-            <h2>📝 3단계 선발 관문 (서류 · SKCT · AI면접)</h2>
-            <div class="gallery">
-                <figure>
-                    <img src="../media/skala-서류제출.png" alt="서류 제출 완료 안내">
-                    <figcaption>이력서 및 자기소개서 제출</figcaption>
-                </figure>
-                <figure>
-                    <img src="../media/sk로고.png" alt="SK 인재상">
-                    <figcaption>SKCT 대비</figcaption>
-                </figure>
-                <figure>
-                    <img src="../media/AI면접.png" alt="AI 면접 카메라 세팅">
-                    <figcaption>AI 면접 진행 화면(AI활용 예시 이미지)</figcaption>
-                </figure>
-            </div>
-            <p>
-                직장 경력에서 AI 직무로 전환하기 위함과 SKALA에서의 꿈꾸는 모습 등 진정성 있는 스토리를 자소서에 녹여냈습니다. <br>
-                개인적으로는 상반기(4개월 이내)에 SK계열사의 SKCT를 본 적이 있어서 SKCT전형은 자동 PASS되었고, AI 면접은 밝은 조명 아래서 카메라 아이컨택을 일정하게 유지하며 진행했습니다.
-            </p>
+        <hr class="section-divider">
+
+        <!-- =========================================
+             상세 기록 영역
+             ========================================= -->
+        <section id="details-section" class="details-container">
+
+            <!-- 상세 기록 1 -->
+            <section id="card-sec-1" class="country-album">
+
+                <h2>🚀 SK AI Leader Academy 소개</h2>
+
+                <div class="gallery">
+
+                    <figure>
+                        <img
+                            src="../media/skala-소개.png"
+                            alt="SKALA 교육 소개"
+                        >
+                        <figcaption>
+                            SKALA 소개
+                        </figcaption>
+                    </figure>
+
+                    <figure>
+                        <img
+                            src="../media/skala-교육과정.png"
+                            alt="SKALA 교육 과정 소개"
+                        >
+                        <figcaption>
+                            실무형 AI 인재 육성 과정
+                        </figcaption>
+                    </figure>
+
+                </div>
+
+                <p>
+                    SKALA는 AX 시대를 이끌 실무형 인재를 육성하는 과정입니다.<br>
+                    기초 프로그래밍부터 AI 모델링, 실제 기업 프로젝트까지 단계별로 배우게 됩니다.
+                </p>
+
+            </section>
+
+            <!-- 상세 기록 2 -->
+            <section id="card-sec-2" class="country-album">
+
+                <h2>📝 3단계 선발 과정</h2>
+
+                <div class="gallery">
+
+                    <figure>
+                        <img
+                            src="../media/skala-서류제출.png"
+                            alt="SKALA 서류 제출 완료 화면"
+                        >
+                        <figcaption>
+                            이력서 및 자기소개서 제출
+                        </figcaption>
+                    </figure>
+
+                    <figure>
+                        <img
+                            src="../media/sk로고.png"
+                            alt="SK 로고와 SKCT 준비 이미지"
+                        >
+                        <figcaption>
+                            SKCT 준비
+                        </figcaption>
+                    </figure>
+
+                    <figure>
+                        <img
+                            src="../media/AI면접.png"
+                            alt="AI 면접을 위한 카메라 설정 이미지"
+                        >
+                        <figcaption>
+                            AI 면접 준비 예시
+                        </figcaption>
+                    </figure>
+
+                </div>
+
+                <p>
+                    서류에는 직장 경력에서 AI 분야로 직무를 전환하고 싶은 이유와
+                    SKALA에서 이루고 싶은 목표를 솔직하게 작성했습니다.<br>
+
+                    최근 SK 계열사의 SKCT를 응시한 이력이 있어 해당 전형은 기존 결과로 대체되었고,
+                    AI 면접에서는 카메라를 바라보며 차분하게 답변하려고 노력했습니다.
+                </p>
+
+            </section>
+
+            <!-- 상세 기록 3 -->
+            <section id="card-sec-3" class="country-album">
+
+                <h2>🎉 최종 합격 및 준비 과정</h2>
+
+                <div class="gallery">
+
+                    <figure>
+                        <img
+                            src="../media/skala-합격.png"
+                            alt="SKALA 최종 합격 안내 메일"
+                        >
+                        <figcaption>
+                            최종 합격 안내 메일
+                        </figcaption>
+                    </figure>
+
+                    <figure>
+                        <img
+                            src="../media/skala-교육과정.png"
+                            alt="SKALA 5개월 교육 과정"
+                        >
+                        <figcaption>
+                            5개월간의 교육 일정
+                        </figcaption>
+                    </figure>
+
+                    <figure>
+                        <img
+                            src="../media/udemy.png"
+                            alt="입과 전 제공된 온라인 교육 사이트"
+                        >
+                        <figcaption>
+                            입과 전 제공된 온라인 강의
+                        </figcaption>
+                    </figure>
+
+                </div>
+
+                <p>
+                    최종 합격 안내를 받았을 때의 기쁨이 아직도 기억에 남습니다.<br>
+                    입과 전에는 낯선 환경과 새로운 수업을 잘 따라갈 수 있을지 걱정도 되었지만,
+                    안내받은 온라인 강의를 확인하며 조금씩 준비했습니다.
+                </p>
+
+            </section>
+
+            <!-- 상세 기록 4 -->
+            <section id="card-sec-4" class="country-album">
+
+                <h2>🏫 입과식, 웰컴 키트와 교육 시설</h2>
+
+                <div class="gallery">
+
+                    <figure>
+                        <img
+                            src="../media/입소식.jpeg"
+                            alt="SKALA 입과식 현장"
+                        >
+                        <figcaption>
+                            SKALA 입과식
+                        </figcaption>
+                    </figure>
+
+                    <figure>
+                        <img
+                            src="../media/skala-웰컴키트.jpeg"
+                            alt="SKALA 웰컴 키트 구성"
+                        >
+                        <figcaption>
+                            웰컴 키트
+                        </figcaption>
+                    </figure>
+
+                    <figure>
+                        <img
+                            src="../media/skala-교육장2.jpeg"
+                            alt="SKALA 교육장과 라운지"
+                        >
+                        <figcaption>
+                            교육장 내 라운지
+                        </figcaption>
+                    </figure>
+
+                </div>
+
+                <p>
+                    입과식 날 책상 위에는 맥북과 웰컴 키트가 준비되어 있었습니다.<br>
+                    코드를 편하게 확인할 수 있는 와이드 모니터와 쾌적한 교육 공간 덕분에
+                    수업에 더 집중할 수 있었습니다.
+                </p>
+
+            </section>
+
+            <!-- 상세 기록 5 -->
+            <section id="card-sec-5" class="country-album">
+
+                <h2>🍽️ 교육 일과 및 점심시간</h2>
+
+                <div class="gallery">
+
+                    <figure>
+                        <img
+                            src="../media/학업.jpg"
+                            alt="프론트엔드 수업 실습 화면"
+                        >
+                        <figcaption>
+                            HTML, CSS, JavaScript 실습
+                        </figcaption>
+                    </figure>
+
+                    <figure>
+                        <img
+                            src="../media/점심.jpg"
+                            alt="SKALA에서 제공된 점심 식사"
+                        >
+                        <figcaption>
+                            SKALA 제공 식사
+                        </figcaption>
+                    </figure>
+
+                </div>
+
+                <p>
+                    첫 주에는 Git과 GitHub를 배우고,
+                    HTML, CSS, JavaScript를 사용해 직접 웹페이지를 만들어 보았습니다.<br>
+
+                    점심시간에는 멀리 나가지 않고도 동기들과 함께 식사하며
+                    오후 수업을 위한 에너지를 채울 수 있었습니다.
+                </p>
+
+            </section>
+
+            <!-- 상세 기록 6 -->
+            <section id="card-sec-6" class="country-album">
+
+                <h2>✍️ 미래 AI 인재로서의 성장 기록</h2>
+
+                <div class="gallery">
+
+                    <figure>
+                        <img
+                            src="../media/출입증2.jpg"
+                            alt="출입증"
+                        >
+                        <figcaption>
+                            언젠가는 사원증이 될 출입증
+                        </figcaption>
+                    </figure>
+
+                </div>
+
+                <p>
+                    처음에는 많은 개념을 한꺼번에 배워야 한다는 점이 걱정되었습니다.<br>
+                    이해되지 않는 부분은 동기들에게 물어보고,
+                    수업이 끝난 뒤에는 다시 복습하며 조금씩 따라가고 있습니다.<br>
+
+                    지금은 출입증으로 사용하고 있는 이 카드를
+                    나중에는 SK 사원증으로 바꾸는 것이 제 목표입니다.
+                </p>
+
+            </section>
+
         </section>
 
-        <!-- 섹션 3 -->
-        <section id="card-sec-3" class="country-album">
-            <h2>🎉 최종 합격 및 준비사항</h2>
-            <div class="gallery">
-                <figure>
-                    <img src="../media/skala-합격.png" alt="SKALA 최종 합격 통보 메일">
-                    <figcaption>최종 합격 안내 메일</figcaption>
-                </figure>
-                <figure>
-                    <img src="../media/skala-교육과정.png" alt="5개월 전체 타임라인 캘린더">
-                    <figcaption>5개월간의 교육 과정</figcaption>
-                </figure>
-                <figure>
-                    <img src="../media/udemy.png" alt="SK제공 무료교육 사이트">
-                    <figcaption>(입과 전 제공) 교육 사이트</figcaption>
-                </figure>
-            </div>
-            <p>
-                최초 합격 통보 시의 기쁨이 아직도 생생합니다. <br>
-                입과 전까지 생소한 지역에서 생소한 내용을 잘 따라갈 수 있을까라는 걱정과 기대감을 가졌었고, 입과 전 진행한 OT내용에 따라 앞으로 진행할 사항에 대해 안내해주신 교육 사이트(udemy)와 강의를 미리 확인하며 준비 시간을 가졌습니다.
-            </p>
-        </section>
+    </main>
 
-        <!-- 섹션 4 -->
-        <section id="card-sec-4" class="country-album">
-            <h2>🏫 입과식 웰컴키트 & 쾌적한 교육 시설</h2>
-            <div class="gallery">
-                <figure>
-                    <img src="../media/입소식.jpeg" alt="SKALA 입과 당일 날 개소식 풍경">
-                    <figcaption>SKALA 입과 당일</figcaption>
-                </figure>
-                <figure>
-                    <img src="../media/skala-웰컴키트.jpeg" alt="SKALA 웰컴 굿즈 구성 사진">
-                    <figcaption>웰컴 키트 패키지 </figcaption>
-                </figure>
-                <figure>
-                    <img src="../media/skala-교육장2.jpeg" alt="고사양 PC와 와이드 듀얼 모니터 세팅">
-                    <figcaption>교육장 내 라운지</figcaption>
-                </figure>
-            </div>
-            <p>
-                입과식 날 책상 위에 놓여있던 최신형 맥북과 웰컴 기트(텀블러, 이어폰)들이 소속감을 높여주었습니다. <br>
-                무엇보다 코드를 한눈에 확인할 수 있는 와이드 모니터와 쾌적한 고사양 장비 덕분에 학업에 잘 집중할 수 있습니다.<br>
-                SKALA에서 훈련생들을 위해 리모델링 해주신 교육 공간 및 라운지 등 교육장의 시설이 너무 깔끔하고 좋습니다!
-            </p>
-        </section>
-
-        <!-- 섹션 5 -->
-        <section id="card-sec-5" class="country-album">
-            <h2>🍽️ 교육 일과 및 기다려온 구내식당 점심시간</h2>
-            <div class="gallery">
-                <figure>
-                    <img src="../media/오전코딩.jpeg" alt="파이썬 실습 강의 화면">
-                    <figcaption>AM 09:00 데이터 실습 분석</figcaption>
-                </figure>
-                <figure>
-                    <img src="../media/식사.jpg" alt="식판에 알차게 담긴 식단">
-                    <figcaption>SKALA 제공 식사</figcaption>
-                </figure>
-            </div>
-            <p>
-                첫 주에는 GIT과 GITHUB 그리고 HTML, CSS, JAVASCRIPT를 배우며 프론트엔드에 대한 전반을 이해합니다. <br>
-                공부하다가 맞이하는 점심시간입니다. 매일 다채로운 식단 덕분에 멀리 나가지 않고도 동기들과 맛있는 충전의 시간을 보낼 수 있습니다.
-            </p>
-        </section>
-
-        <!-- 섹션 6 -->
-        <section id="card-sec-6" class="country-album">
-            <h2>✍️ AI 레이서의 중간 성장 소감 기록</h2>
-            <div class="gallery">
-                <figure>
-                    <img src="../media/til블로그.jpeg" alt="깃허브 TIL 잔디 기록 화면">
-                    <figcaption>매일 쌓아가는 TIL 블로그 기록</figcaption>
-                </figure>
-            </div>
-            <p>
-                처음에는 방대한 양의 개념을 다 소화할 수 있을까 걱정이 앞섰던 것도 사실입니다. <br>
-                하지만 매일 수업이 끝나고 작성하는 코드 한 줄, 에러를 잡고 남긴 TIL 기록들이 쌓여가는 것을 보며 스스로 성장의 확신을 얻고 있습니다. 끝까지 멋지게 완주하겠습니다!
-            </p>
-        </section>
-    </section>
-
-    <!-- 푸터 -->
+    <!-- =========================================
+         푸터
+         Flexbox를 사용하여 문구와 맨 위 이동 버튼 정렬
+         ========================================= -->
     <footer class="trip-footer">
-        <p>© SKALA 4기 AI 레이서의 성장 앨범 </p>
-        <a href="#top" class="back-to-top">↑ 맨 위로</a>
+
+        <p>
+            © SKALA 4기 미래 AI 인재 성장 기록
+        </p>
+
+        <a href="#top" class="back-to-top">
+            ↑ 맨 위로
+        </a>
+
     </footer>
 
-    <!-- 이미지 크게 보기 모달 팝업 영역 -->
-    <div id="image-modal" class="image-modal-overlay">
-        <span class="modal-close">&times;</span>
-        <img id="modal-img" class="modal-content-img" src="" alt="확대 이미지">
+    <!-- =========================================
+         이미지 확대 모달
+         상세 기록의 이미지를 클릭하면 큰 화면으로 표시
+         ========================================= -->
+    <div
+        id="image-modal"
+        class="image-modal-overlay"
+        role="dialog"
+        aria-modal="true"
+        aria-label="확대 이미지"
+        aria-hidden="true"
+    >
+
+        <button
+            type="button"
+            class="modal-close"
+            aria-label="확대 이미지 닫기"
+        >
+            &times;
+        </button>
+
+        <img
+            id="modal-img"
+            class="modal-content-img"
+            src=""
+            alt="확대된 상세 기록 이미지"
+        >
+
     </div>
 
+    <!-- JavaScript 파일 연결 -->
     <script src="../과제js/gallery.js"></script>
+
 </body>
 </html>

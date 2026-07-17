@@ -1,101 +1,301 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
-    /* -------------------------------------------
-       1. 다크모드 토글 기능
-       ------------------------------------------- */
-    const themeToggleBtn = document.getElementById("theme-toggle");
-    
-    // 이전에 사용자가 설정한 다크모드 세팅이 있는지 확인하고 적용
-    const savedTheme = localStorage.getItem("theme");
+    /* ==========================================
+       1. 다크모드 기능
+
+       과제 기준:
+       다크모드 버튼을 클릭하면 body에 dark 클래스를
+       추가하거나 제거합니다.
+
+       CSS에서는 body.dark에 새로운 디자인을 전부 작성하지 않고
+       기존 색상 변수의 값만 바꾸도록 구성했습니다.
+       ========================================== */
+
+    const themeToggleButton =
+        document.getElementById("theme-toggle");
+
+    const savedTheme =
+        localStorage.getItem("theme");
+
+
+    /**
+     * 현재 테마에 따라 버튼 글자와 접근성 속성을 변경하는 함수
+     */
+    function updateThemeButton() {
+        const isDarkMode =
+            document.body.classList.contains("dark");
+
+        if (isDarkMode) {
+            themeToggleButton.textContent =
+                "☀️ 라이트모드";
+
+            themeToggleButton.setAttribute(
+                "aria-label",
+                "라이트모드로 변경"
+            );
+
+            themeToggleButton.setAttribute(
+                "aria-pressed",
+                "true"
+            );
+        } else {
+            themeToggleButton.textContent =
+                "🌙 다크모드";
+
+            themeToggleButton.setAttribute(
+                "aria-label",
+                "다크모드로 변경"
+            );
+
+            themeToggleButton.setAttribute(
+                "aria-pressed",
+                "false"
+            );
+        }
+    }
+
+
+    /*
+       이전에 사용자가 다크모드를 선택했다면
+       페이지를 새로 열어도 다크모드가 유지되도록 설정합니다.
+    */
     if (savedTheme === "dark") {
         document.body.classList.add("dark");
-        if (themeToggleBtn) {
-            themeToggleBtn.textContent = "☀️ 라이트모드";
+    }
+
+
+    if (themeToggleButton) {
+        updateThemeButton();
+
+        themeToggleButton.addEventListener(
+            "click",
+            () => {
+                document.body.classList.toggle("dark");
+
+                const isDarkMode =
+                    document.body.classList.contains("dark");
+
+                /*
+                   선택한 테마를 localStorage에 저장하여
+                   새로고침 이후에도 유지되도록 했습니다.
+                */
+                if (isDarkMode) {
+                    localStorage.setItem(
+                        "theme",
+                        "dark"
+                    );
+                } else {
+                    localStorage.setItem(
+                        "theme",
+                        "light"
+                    );
+                }
+
+                updateThemeButton();
+            }
+        );
+    }
+
+
+    /* ==========================================
+       2. 카드 뒤집기 기능
+
+       과제의 필수 항목은 아니지만
+       카드의 내용을 앞면과 뒷면으로 나누어
+       추가 설명을 확인할 수 있도록 구현했습니다.
+
+       마우스 클릭뿐 아니라 Tab 키로 카드에 이동한 뒤
+       Enter 또는 Space 키로도 뒤집을 수 있습니다.
+       ========================================== */
+
+    const cards =
+        document.querySelectorAll(".card");
+
+
+    /**
+     * 선택한 카드를 뒤집거나 원래 상태로 되돌리는 함수
+     */
+    function toggleCard(card) {
+        card.classList.toggle("is-flipped");
+
+        const isFlipped =
+            card.classList.contains("is-flipped");
+
+        card.setAttribute(
+            "aria-pressed",
+            String(isFlipped)
+        );
+    }
+
+
+    cards.forEach((card) => {
+        card.addEventListener(
+            "click",
+            (event) => {
+                /*
+                   상세 기록 보기 링크를 누른 경우에는
+                   카드가 뒤집히지 않고 해당 위치로 이동합니다.
+                */
+                if (
+                    event.target.closest(".card-move-btn")
+                ) {
+                    return;
+                }
+
+                toggleCard(card);
+            }
+        );
+
+
+        card.addEventListener(
+            "keydown",
+            (event) => {
+                /*
+                   카드 안의 링크에 포커스가 있는 경우에는
+                   링크의 기본 키보드 기능이 작동하도록 둡니다.
+                */
+                if (
+                    event.target.closest(".card-move-btn")
+                ) {
+                    return;
+                }
+
+                if (
+                    event.key === "Enter" ||
+                    event.key === " "
+                ) {
+                    /*
+                       Space 키를 눌렀을 때
+                       페이지가 아래로 움직이는 기본 동작을 막습니다.
+                    */
+                    event.preventDefault();
+
+                    toggleCard(card);
+                }
+            }
+        );
+    });
+
+
+    /* ==========================================
+       3. 이미지 확대 모달
+
+       상세 기록의 이미지를 클릭하면
+       이미지를 화면 중앙에 크게 표시합니다.
+       ========================================== */
+
+    const modal =
+        document.getElementById("image-modal");
+
+    const modalImage =
+        document.getElementById("modal-img");
+
+    const closeButton =
+        document.querySelector(".modal-close");
+
+    const galleryImages =
+        document.querySelectorAll(".gallery img");
+
+
+    /**
+     * 이미지 확대 모달을 여는 함수
+     */
+    function openModal(image) {
+        if (!modal || !modalImage) {
+            return;
+        }
+
+        modalImage.src = image.src;
+        modalImage.alt =
+            `${image.alt} 확대 이미지`;
+
+        modal.classList.add("active");
+
+        modal.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+        /*
+           모달이 열려 있는 동안
+           뒤쪽 페이지가 스크롤되지 않도록 설정합니다.
+        */
+        document.body.style.overflow =
+            "hidden";
+
+        if (closeButton) {
+            closeButton.focus();
         }
     }
 
-    // 버튼 클릭 시 다크모드 토글 및 텍스트 전환
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener("click", () => {
-            document.body.classList.toggle("dark");
-            
-            if (document.body.classList.contains("dark")) {
-                themeToggleBtn.textContent = "☀️ 라이트모드";
-                localStorage.setItem("theme", "dark");
-            } else {
-                themeToggleBtn.textContent = "🌙 다크모드";
-                localStorage.setItem("theme", "light");
-            }
-        });
-    }
 
-    /* -------------------------------------------
-       2. 여정 카드 개별 클릭 시 뒤집기 (Flip) 구현
-       ------------------------------------------- */
-    const cards = document.querySelectorAll(".card");
-    
-    cards.forEach(card => {
-        card.addEventListener("click", (e) => {
-            // 카드 앞면의 '상세 기록 이동' 링크(a 태그) 클릭 시에는 뒤집히지 않고 링크 이동하도록 예외 처리
-            if (e.target.classList.contains("card-move-btn")) {
-                return; 
-            }
-            // 뒤집기 상태 토글
-            card.classList.toggle("is-flipped");
-        });
-    });
-
-    cards.forEach(card => {
-    card.addEventListener("keydown", (e) => {
-        // 카드에 포커스된 상태에서 Enter나 Space를 누르면 클릭과 동일하게 동작
-        if (e.key === "Enter" || e.key === " ") {
-            if (e.target.classList.contains("card-move-btn")) {
-                return;
-            }
-            e.preventDefault(); // Space 누를 때 페이지가 스크롤되는 것 방지
-            card.classList.toggle("is-flipped");
-        }
-    });
-});
-
-    /* -------------------------------------------
-       3. 하단 상세 이미지 크게 보기 모달 인터랙션
-       ------------------------------------------- */
-    const modal = document.getElementById("image-modal");
-    const modalImg = document.getElementById("modal-img");
-    const closeBtn = document.querySelector(".modal-close");
-    const galleryImages = document.querySelectorAll(".gallery img");
-
-    // 상세 이미지 클릭 시 모달 열기
-    galleryImages.forEach(img => {
-        img.addEventListener("click", () => {
-            if(modal && modalImg) {
-                modal.classList.add("active");
-                modalImg.src = img.src; 
-                document.body.style.overflow = "hidden"; // 모달 오픈 시 본문 스크롤 잠금
-            }
-        });
-    });
-
-    // 닫기 기능 실행 함수
+    /**
+     * 이미지 확대 모달을 닫는 함수
+     */
     function closeModal() {
-        if(modal) {
-            modal.classList.remove("active");
-            document.body.style.overflow = "auto"; // 스크롤 잠금 해제
+        if (!modal || !modalImage) {
+            return;
         }
+
+        modal.classList.remove("active");
+
+        modal.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        modalImage.src = "";
+
+        document.body.style.overflow = "";
     }
 
-    // 닫기 버튼(X) 클릭 이벤트
-    if (closeBtn) {
-        closeBtn.addEventListener("click", closeModal);
+
+    galleryImages.forEach((image) => {
+        image.addEventListener(
+            "click",
+            () => {
+                openModal(image);
+            }
+        );
+    });
+
+
+    if (closeButton) {
+        closeButton.addEventListener(
+            "click",
+            closeModal
+        );
     }
 
-    // 검은 배경화면 영역 클릭 시에도 모달이 닫히도록 설정
+
     if (modal) {
-        modal.addEventListener("click", (e) => {
-            if (e.target === modal || e.target === closeBtn) {
+        modal.addEventListener(
+            "click",
+            (event) => {
+                /*
+                   확대 이미지가 아니라
+                   모달의 어두운 배경을 클릭했을 때 닫습니다.
+                */
+                if (event.target === modal) {
+                    closeModal();
+                }
+            }
+        );
+    }
+
+
+    /*
+       모달이 열린 상태에서 Escape 키를 누르면
+       모달을 닫을 수 있도록 했습니다.
+    */
+    document.addEventListener(
+        "keydown",
+        (event) => {
+            if (
+                event.key === "Escape" &&
+                modal?.classList.contains("active")
+            ) {
                 closeModal();
             }
-        });
-    }
+        }
+    );
 });
