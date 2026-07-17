@@ -1,19 +1,19 @@
 /* =====================================================
-   여행 페이지 수정 (myTrip.html)
+   여행 페이지 스타일
 ===================================================== */
 
-/* 페이지 안에서 링크를 누르면 부드럽게 이동 */
+/* 앵커 이동을 부드럽게 설정 */
 html {
     scroll-behavior: smooth;
 }
 
-/* 여행 페이지에만 고정 메뉴 여백 적용 */
+/* 고정 메뉴가 들어갈 위쪽 공간 */
 .trip-page {
     margin: 0;
     padding-top: 110px;
 }
 
-/* 앵커 이동 시 고정 메뉴에 제목이 가려지지 않도록 설정 */
+/* 앵커 이동 시 고정 메뉴에 제목이 가려지지 않게 설정 */
 .trip-page #albums,
 .trip-page #italy,
 .trip-page #france,
@@ -34,29 +34,39 @@ html {
     margin-right: auto;
 }
 
-/* 여행 페이지 상단 */
+/* =====================================================
+   상단 히어로 영역
+===================================================== */
+
 .trip-page .trip-header {
     position: relative;
     overflow: hidden;
+
     min-height: 330px;
     padding: 60px 30px;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 12px;
+
     color: #FFF8F5;
     text-align: center;
 
+    /* 히어로 배경 이미지 */
     background:
-        url("../media/에펠탑.jpeg") center/cover no-repeat;
+        url("../media/에펠탑.jpeg")
+        center / cover
+        no-repeat;
 
     border-radius: 0 0 20px 20px;
 }
 
-/* 히어로 배경 그라데이션 */
+/* 히어로 배경 이미지 위에 gradient 오버레이 적용 */
 .trip-page .trip-header::before {
     content: "";
+
     position: absolute;
     top: 0;
     right: 0;
@@ -72,20 +82,20 @@ html {
     z-index: 0;
 }
 
-/* 헤더 내용을 배경 위에 표시 */
+/* 헤더 내용을 오버레이 위에 표시 */
 .trip-page .trip-header > * {
     position: relative;
     z-index: 1;
 }
 
-/* 공통 h1 스타일 일부 해제 */
 .trip-page .trip-header h1 {
     margin: 0;
     padding: 0;
+
     color: #FFF8F5;
     font-size: 2.2rem;
+
     border: none;
-    border-radius: 0;
     background-color: transparent;
 }
 
@@ -98,251 +108,461 @@ html {
     margin-top: 10px;
 }
 
-/* 상단 이동 메뉴 */
+/* =====================================================
+   고정 내비게이션
+===================================================== */
+
 .trip-page .trip-nav {
+    /* 화면을 내려도 메뉴가 상단에 고정 */
     position: fixed;
     top: 0;
     left: 0;
+
     width: 100%;
     padding: 12px 0;
+
     text-align: center;
+
     background-color: #FFF8F5;
     box-shadow: 0 2px 8px rgba(93, 64, 55, 0.15);
+
     z-index: 1000;
 }
 
 .trip-page .trip-nav p {
     margin: 0 0 5px;
-    font-size: 0.85rem;
+
     color: #8D6E63;
+    font-size: 0.85rem;
 }
 
-/* 상단 이동 메뉴 버튼 */
 .trip-page .trip-nav a {
     display: inline-block;
 
     margin: 5px 15px;
     padding: 8px 15px;
+
     color: #6D4C41;
     background-color: #FFF8F5;
+
     border: 1px solid #BCAAA4;
     border-radius: 20px;
+
     text-decoration: none;
     transition: 0.2s;
 }
 
-/* 상단 메뉴에 마우스를 올렸을 때 */
+/* 내비게이션 버튼 hover */
 .trip-page .trip-nav a:hover {
     color: #FFF8F5;
     background-color: #8D6E63;
+
     text-decoration: none;
 }
 
-/* 메인 영역 */
+/* =====================================================
+   메인 영역
+===================================================== */
+
 .trip-page main {
     padding-top: 20px;
 }
 
-/* 나라별 앨범 카드 전체 배치 */
+/* 콘텐츠와 구분선이 겹치지 않도록 간격 설정 */
+.trip-page main > hr {
+    clear: both;
+
+    margin: 48px 0;
+
+    border: 0;
+    border-top: 1px solid #D7CCC8;
+}
+
+/* =====================================================
+   나라별 앨범 카드
+===================================================== */
+
 .trip-page .flag-list {
     display: flex;
+
     justify-content: center;
-    gap: 25px;
+    align-items: stretch;
     flex-wrap: wrap;
+
+    gap: 25px;
+
     margin-top: 30px;
     margin-bottom: 30px;
 }
 
-/* 나라별 앨범 카드 */
 .trip-page .flag-card {
+    display: flex;
+
     width: 220px;
+
     text-align: center;
 }
 
-/* 나라별 카드 안의 링크 */
 .trip-page .flag-card a {
-    display: block;
-    height: 100%;
+    /*
+        height: 100% 대신 min-height를 사용하여
+        카드가 구분선을 침범하지 않게 설정
+    */
+    display: flex;
+
+    width: 100%;
+    min-height: 240px;
     padding: 20px;
+
+    box-sizing: border-box;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     color: #5D4037;
     background-color: #FFFFFF;
+
     border: 2px solid #D7CCC8;
     border-radius: 15px;
+
     box-shadow: 0 5px 10px rgba(93, 64, 55, 0.15);
+
     text-decoration: none;
+
     transition:
         transform 0.3s,
         box-shadow 0.3s;
 }
 
-/* 국기 크기 */
+/* 국기 배치 */
 .trip-page .flag {
-    font-size: 60px;
+    display: flex;
+
+    min-height: 42px;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
 }
 
-/* 나라 이름 */
+/*
+    국기 이모지는 Windows에서 문자로 보일 수 있으므로
+    CSS로 국기를 만들어 동일하게 표시
+*/
+.trip-page .css-flag {
+    position: relative;
+
+    display: inline-block;
+    flex: 0 0 auto;
+
+    width: 60px;
+    height: 40px;
+
+    overflow: hidden;
+    box-sizing: border-box;
+
+    border: 1px solid rgba(93, 64, 55, 0.22);
+    border-radius: 4px;
+
+    box-shadow: 0 2px 5px rgba(93, 64, 55, 0.14);
+}
+
+/* 이탈리아 국기 */
+.trip-page .flag-italy {
+    background:
+        linear-gradient(
+            to right,
+            #009246 0 33.333%,
+            #FFFFFF 33.333% 66.666%,
+            #CE2B37 66.666% 100%
+        );
+}
+
+/* 프랑스 국기 */
+.trip-page .flag-france {
+    background:
+        linear-gradient(
+            to right,
+            #0055A4 0 33.333%,
+            #FFFFFF 33.333% 66.666%,
+            #EF4135 66.666% 100%
+        );
+}
+
+/* 오스트리아 국기 */
+.trip-page .flag-austria {
+    background:
+        linear-gradient(
+            to bottom,
+            #ED2939 0 33.333%,
+            #FFFFFF 33.333% 66.666%,
+            #ED2939 66.666% 100%
+        );
+}
+
+/* 체코 국기 */
+.trip-page .flag-czech {
+    background:
+        linear-gradient(
+            to bottom,
+            #FFFFFF 0 50%,
+            #D7141A 50% 100%
+        );
+}
+
+/* 체코 국기의 파란색 삼각형 */
+.trip-page .flag-czech::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 50%;
+    height: 100%;
+
+    background-color: #11457E;
+
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+/* 카드 안 나라 이름 */
 .trip-page .flag-card h3 {
     margin-top: 10px;
     margin-bottom: 5px;
 }
 
-/* 연도 */
+/* 카드 안 연도 */
 .trip-page .flag-card p {
     margin: 5px 0;
 }
 
-/* 앨범 보기 */
+/* 앨범 보기 표시 */
 .trip-page .flag-card small {
     display: inline-block;
+
     margin-top: 10px;
     padding: 5px 10px;
+
     background-color: #FFF5F8;
     border-radius: 12px;
 }
 
-/* 나라 카드에 마우스를 올렸을 때 */
+/* 카드 hover 시 확대 */
 .trip-page .flag-card a:hover {
     transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 10px 18px rgba(93, 64, 55, 0.25);
+
+    box-shadow:
+        0 10px 18px
+        rgba(93, 64, 55, 0.25);
+
     text-decoration: none;
 }
 
-/* 나라별 앨범 영역 */
+/* =====================================================
+   나라별 여행 앨범
+===================================================== */
+
+/* 국기와 제목을 가로로 배치 */
+.trip-page .country-heading {
+    display: flex;
+
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+/* 본문 제목 안의 국기는 작게 표시 */
+.trip-page .country-heading .css-flag {
+    width: 30px;
+    height: 20px;
+
+    border-radius: 2px;
+    box-shadow: none;
+}
+
 .trip-page .country-album {
     margin-top: 40px;
     margin-bottom: 40px;
     padding: 25px;
+
     background-color: #FFFFFF;
+
     border: 1px solid #D7CCC8;
     border-radius: 15px;
 }
 
-/* 2024 섹션 내부의 오스트리아·체코 영역 */
+/* 오스트리아·체코 내부 영역 */
 .trip-page .trip-country {
     margin-top: 30px;
     padding: 20px;
+
     background-color: #FFF8F5;
+
     border: 1px solid #D7CCC8;
     border-radius: 12px;
 }
 
-/* 오스트리아·체코 소제목 */
 .trip-page .trip-country h3 {
     margin-top: 0;
     color: #6D4C41;
 }
 
-/* 사진 전체 배치 */
+/* =====================================================
+   이미지 갤러리
+===================================================== */
+
 .trip-page .gallery {
     display: flex;
+
     justify-content: center;
-    gap: 20px;
     flex-wrap: wrap;
+
+    gap: 20px;
 }
 
-/* 사진과 설명 한 묶음 */
+/* figure와 figcaption을 하나의 카드로 구성 */
 .trip-page .gallery figure {
     width: 280px;
     margin: 0;
     padding: 10px;
+
     text-align: center;
+
     background-color: #FFF8F5;
+
     border: 1px solid #D7CCC8;
     border-radius: 12px;
+
     overflow: hidden;
 }
 
-/* 사진 크기 통일 */
 .trip-page .gallery img {
     display: block;
+
     width: 100%;
     height: 200px;
+
     object-fit: cover;
+
     border-radius: 8px;
+
     transition: transform 0.3s;
 }
 
-/* 사진에 마우스를 올렸을 때 확대 */
+/* 이미지 hover 시 확대 */
 .trip-page .gallery figure:hover img {
     transform: scale(1.05);
 }
 
-/* 사진 설명 */
 .trip-page .gallery figcaption {
     margin-top: 10px;
-    font-weight: bold;
+
     color: #6D4C41;
+    font-weight: bold;
 }
 
-/* 먹거리와 여행 팁 2단 배치 */
+/* =====================================================
+   먹거리와 여행 팁
+===================================================== */
+
+/* article과 aside를 2단으로 배치 */
 .trip-page .food-layout {
     display: flex;
+
     gap: 20px;
     align-items: stretch;
 }
 
-/* 먹거리와 여행 팁 박스 */
 .trip-page .food-content,
 .trip-page .travel-tip {
     flex: 1;
+
     padding: 20px;
 
     background-color: #FFFFFF;
+
     border: 1px solid #D7CCC8;
     border-radius: 12px;
 }
 
-/* 여행 팁 강조 */
+/* 여행 팁 aside 강조 */
 .trip-page .travel-tip {
     border-left: 6px solid #A1887F;
 }
 
-/* 영상 영역 */
+/* =====================================================
+   영상
+===================================================== */
+
 .trip-page #video {
     text-align: center;
 }
 
-/* 영상 크기 */
 .trip-page #video video {
     display: block;
+
     width: 100%;
     max-width: 600px;
+
     margin: 20px auto;
+
     border-radius: 12px;
 }
 
-/* 푸터 */
+/* =====================================================
+   푸터
+===================================================== */
+
 .trip-page footer {
     position: relative;
+
     padding: 30px 0;
+
     text-align: center;
 }
 
-/* 맨 위로 버튼 */
+/* 맨 위로 이동 버튼 */
 .trip-page footer a[href="#top"] {
     position: fixed;
     right: 25px;
     bottom: 25px;
+
     display: inline-block;
+
     padding: 10px 16px;
+
     color: #FFF8F5;
     background-color: #8D6E63;
+
     border-radius: 50px;
+
     box-shadow: 0 4px 10px rgba(93, 64, 55, 0.3);
+
     text-decoration: none;
+
     transform: translateY(0);
     transition: transform 0.2s;
+
     z-index: 500;
 }
 
 .trip-page footer a[href="#top"]:hover {
     color: #FFF8F5;
+
     text-decoration: none;
     transform: translateY(-4px);
 }
 
-/* 화면이 작을 때 */
+/* =====================================================
+   반응형 디자인
+===================================================== */
+
 @media (max-width: 800px) {
+
     .trip-page {
         padding-top: 150px;
     }
@@ -357,6 +577,7 @@ html {
         scroll-margin-top: 165px;
     }
 
+    /* 작은 화면에서 먹거리와 팁을 세로로 배치 */
     .trip-page .food-layout {
         flex-direction: column;
     }
@@ -384,4 +605,3 @@ html {
         bottom: 15px;
     }
 }
-

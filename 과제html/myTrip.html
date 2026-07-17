@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="이탈리아, 프랑스, 오스트리아, 체코 여행 기록">
+    <!-- 페이지 설명과 작성자 정보 -->
+    <meta
+        name="description"
+        content="이탈리아, 프랑스, 오스트리아, 체코 여행 기록"
+    >
     <meta name="author" content="성가연">
 
     <title>나의 여행 앨범</title>
@@ -14,9 +18,14 @@
 
 <body id="top" class="trip-page">
 
+    <!-- 시맨틱 요소 header 사용 -->
     <header class="trip-header">
         <h1>✈️ 나의 여행 앨범</h1>
-        <p>이탈리아 · 프랑스 · 오스트리아 · 체코, 나의 유럽 여행 기록</p>
+
+        <p>
+            이탈리아 · 프랑스 · 오스트리아 · 체코,
+            나의 유럽 여행 기록
+        </p>
 
         <audio controls>
             <source src="../media/music.mp3" type="audio/mpeg">
@@ -25,6 +34,7 @@
 
     <hr>
 
+    <!-- 고정 내비게이션과 앵커 링크 -->
     <nav class="trip-nav">
         <p>버튼을 누르면 해당 위치로 이동합니다.</p>
 
@@ -33,17 +43,34 @@
         <a href="#video">🎥 영상</a>
     </nav>
 
+    <!-- 페이지의 주요 내용 -->
     <main>
 
+        <!-- 나라별 여행 앨범 바로가기 -->
         <section id="albums">
             <h2>🌍 나라별 여행 앨범</h2>
-            <p>아래 앨범을 선택하면 해당 여행 기록으로 이동합니다.</p>
+
+            <p>
+                아래 앨범을 선택하면 해당 여행 기록으로 이동합니다.
+            </p>
 
             <div class="flag-list">
 
                 <article class="flag-card">
                     <a href="#italy">
-                        <div class="flag">🇮🇹</div>
+
+                        <!-- Windows에서도 깨지지 않도록 CSS 국기 사용 -->
+                        <div
+                            class="flag"
+                            role="img"
+                            aria-label="이탈리아 국기"
+                        >
+                            <span
+                                class="css-flag flag-italy"
+                                aria-hidden="true"
+                            ></span>
+                        </div>
+
                         <h3>Italy</h3>
                         <p>2019</p>
                         <small>📷 앨범 보기</small>
@@ -52,7 +79,18 @@
 
                 <article class="flag-card">
                     <a href="#france">
-                        <div class="flag">🇫🇷</div>
+
+                        <div
+                            class="flag"
+                            role="img"
+                            aria-label="프랑스 국기"
+                        >
+                            <span
+                                class="css-flag flag-france"
+                                aria-hidden="true"
+                            ></span>
+                        </div>
+
                         <h3>France</h3>
                         <p>2022</p>
                         <small>📷 앨범 보기</small>
@@ -61,7 +99,23 @@
 
                 <article class="flag-card">
                     <a href="#austria-czech">
-                        <div class="flag">🇦🇹 🇨🇿</div>
+
+                        <div
+                            class="flag"
+                            role="img"
+                            aria-label="오스트리아와 체코 국기"
+                        >
+                            <span
+                                class="css-flag flag-austria"
+                                aria-hidden="true"
+                            ></span>
+
+                            <span
+                                class="css-flag flag-czech"
+                                aria-hidden="true"
+                            ></span>
+                        </div>
+
                         <h3>Austria & Czech</h3>
                         <p>2024</p>
                         <small>📷 앨범 보기</small>
@@ -73,10 +127,22 @@
 
         <hr>
 
+        <!-- 이탈리아 여행 앨범 -->
         <section id="italy" class="country-album">
-            <h2>🇮🇹 2019 이탈리아</h2>
 
+            <h2 class="country-heading">
+                <span
+                    class="css-flag flag-italy"
+                    role="img"
+                    aria-label="이탈리아 국기"
+                ></span>
+
+                2019 이탈리아
+            </h2>
+
+            <!-- figure와 figcaption을 사용한 이미지 갤러리 -->
             <div class="gallery">
+
                 <figure>
                     <img
                         src="../media/콜로세움.jpeg"
@@ -100,20 +166,35 @@
                     >
                     <figcaption>피렌체 - 두오모 성당</figcaption>
                 </figure>
+
             </div>
 
             <p>
-                첫 유럽 여행지 이탈리아입니다. 유럽의 감성이 가장 잘 느껴진 여행지였습니다. <br>
-                '로마-피렌체-베니스'를 방문했고 그 중 로마와 피렌체의 모습이 인상적이었습니다.
+                첫 유럽 여행지 이탈리아입니다.
+                유럽의 감성이 가장 잘 느껴진 여행지였습니다.
+                <br>
+                '로마-피렌체-베니스'를 방문했고
+                그중 로마와 피렌체의 모습이 인상적이었습니다.
             </p>
         </section>
 
         <hr>
 
+        <!-- 프랑스 여행 앨범 -->
         <section id="france" class="country-album">
-            <h2>🇫🇷 2022 프랑스</h2>
+
+            <h2 class="country-heading">
+                <span
+                    class="css-flag flag-france"
+                    role="img"
+                    aria-label="프랑스 국기"
+                ></span>
+
+                2022 프랑스
+            </h2>
 
             <div class="gallery">
+
                 <figure>
                     <img
                         src="../media/에펠탑.jpeg"
@@ -137,27 +218,57 @@
                     >
                     <figcaption>파리 - 루브르 박물관</figcaption>
                 </figure>
+
             </div>
 
             <p>
-                파리의 애팰탑 풍경과 미술관이 기억에 남았습니다. <br>
-                (오르세 미술관과 루브르 박물관에서 고흐, 다빈치 등의 여러 화가의 작품을 감상하실 수 있습니다.)
+                파리의 에펠탑 풍경과 미술관이 기억에 남았습니다.
+                <br>
+                오르세 미술관과 루브르 박물관에서 고흐,
+                다빈치 등 여러 화가의 작품을 감상할 수 있습니다.
             </p>
         </section>
 
         <hr>
 
+        <!-- 오스트리아와 체코 여행 앨범 -->
         <section id="austria-czech" class="country-album">
-            <h2>🇦🇹 🇨🇿 2024 오스트리아 · 체코</h2>
+
+            <h2 class="country-heading">
+                <span
+                    class="css-flag flag-austria"
+                    role="img"
+                    aria-label="오스트리아 국기"
+                ></span>
+
+                <span
+                    class="css-flag flag-czech"
+                    role="img"
+                    aria-label="체코 국기"
+                ></span>
+
+                2024 오스트리아 · 체코
+            </h2>
 
             <p>
                 2024년에는 오스트리아와 체코를 함께 여행했습니다.
             </p>
 
+            <!-- 오스트리아 여행 내용 -->
             <article class="trip-country">
-                <h3>🇦🇹 오스트리아</h3>
+
+                <h3 class="country-heading">
+                    <span
+                        class="css-flag flag-austria"
+                        role="img"
+                        aria-label="오스트리아 국기"
+                    ></span>
+
+                    오스트리아
+                </h3>
 
                 <div class="gallery">
+
                     <figure>
                         <img
                             src="../media/오스트리아정원.jpeg"
@@ -181,17 +292,31 @@
                         >
                         <figcaption>빈 - 클림트의 키스</figcaption>
                     </figure>
+
                 </div>
 
                 <p>
-                    오스트리아는 현대식과 구식이 조화를 이루었고, 아름다운 정원과 건축물, 클림트의 작품이 기억에 남았습니다.
+                    오스트리아는 현대식과 구식이 조화를 이루었고,
+                    아름다운 정원과 건축물,
+                    클림트의 작품이 기억에 남았습니다.
                 </p>
             </article>
 
+            <!-- 체코 여행 내용 -->
             <article class="trip-country">
-                <h3>🇨🇿 체코</h3>
+
+                <h3 class="country-heading">
+                    <span
+                        class="css-flag flag-czech"
+                        role="img"
+                        aria-label="체코 국기"
+                    ></span>
+
+                    체코
+                </h3>
 
                 <div class="gallery">
+
                     <figure>
                         <img
                             src="../media/체스키크롬로프.jpeg"
@@ -215,21 +340,29 @@
                         >
                         <figcaption>프라하 - 존 레논 벽</figcaption>
                     </figure>
+
                 </div>
 
                 <p>
-                    동화 같은 체스키크롬로프와 프라하의 풍경이 인상적이었습니다. <br>
-                    (카를교의 야경과 밤에만 즐길 수 있는 버스킹도 좋았습니다!)
+                    동화 같은 체스키크롬로프와
+                    프라하의 풍경이 인상적이었습니다.
+                    <br>
+                    카를교의 야경과 밤에만 즐길 수 있는
+                    버스킹도 좋았습니다!
                 </p>
             </article>
+
         </section>
 
         <hr>
 
+        <!-- 먹거리와 여행 팁 -->
         <section id="food">
             <h2>🍽️ 여행 먹거리 & 💡 여행 팁</h2>
 
+            <!-- article과 aside를 사용한 2단 배치 -->
             <div class="food-layout">
+
                 <article class="food-content">
                     <h3>🍴 기억에 남는 음식</h3>
 
@@ -238,14 +371,17 @@
                             <b>이탈리아</b> :
                             피자, 파스타, 젤라또, 카푸치노
                         </li>
+
                         <li>
                             <b>프랑스</b> :
                             마카롱, 에스까르고, 오리꽁피
                         </li>
+
                         <li>
                             <b>오스트리아</b> :
                             슈니첼, 라즈베리 콩포트
                         </li>
+
                         <li>
                             <b>체코</b> :
                             코젤다크, 꼴레뇨, 굴라쉬
@@ -258,8 +394,8 @@
 
                     <ul>
                         <li>
-                            <b>인기 관광지 사전 예약 : </b>
-                            입장/마감 시간 확인하고 미리 예약하기
+                            <b>인기 관광지 사전 예약 :</b>
+                            입장·마감 시간을 확인하고 미리 예약하기
                         </li>
 
                         <li>
@@ -267,24 +403,28 @@
                         </li>
 
                         <li>
-                            <b>현금과 카드 모두 준비 : </b>
-                            현금만 받는 가게도 있으므로 모두 준비하고, 카드는 컨택트리스 카드로 준비 필요
+                            <b>현금과 카드 모두 준비 :</b>
+                            현금만 받는 가게도 있으므로 모두 준비하고,
+                            카드는 컨택트리스 카드로 준비하기
                         </li>
 
                         <li>
-                            <b>여권 및 귀중품 잘 챙기기 : </b>
+                            <b>여권 및 귀중품 잘 챙기기 :</b>
                             몸에 붙여서 소지할 수 있는 미니백 추천
                         </li>
                     </ul>
                 </aside>
+
             </div>
         </section>
 
         <hr>
 
+        <!-- 여행 영상 -->
         <section id="video">
             <h2>🎥 여행 영상</h2>
 
+            <!-- 과제 기준에 맞게 controls와 poster 사용 -->
             <video
                 controls
                 poster="../media/체코-맥주썸네일.jpeg"
@@ -294,19 +434,23 @@
                     src="../media/체코-맥주.mp4"
                     type="video/mp4"
                 >
+
                 동영상을 재생할 수 없습니다.
             </video>
 
             <p>
-                2024년 오스트리아-잘츠부르크 여행 당시의 영상입니다.<br>
-                영상 설명 : '거품 8 : 맥주 2' 비율로 따르자 직원분께서 놀라시고 다시 따라주시는 모습입니다.
+                2024년 오스트리아 잘츠부르크 여행 당시의 영상입니다.
+                <br>
+                영상 설명 : '거품 8 : 맥주 2' 비율로 따르자
+                직원분께서 놀라시고 다시 따라주시는 모습입니다.
             </p>
         </section>
 
     </main>
 
+    <!-- 페이지 하단 -->
     <footer>
-        <p>© 성가연의 여행 앨범 </p>
+        <p>© 성가연의 여행 앨범</p>
         <a href="#top">↑ 맨 위로</a>
     </footer>
 
