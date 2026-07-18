@@ -176,7 +176,7 @@ function renderDeletedTodos() {
     if (deletedTodos.length === 0) {
         const emptyItem = document.createElement("li");
         emptyItem.className = "deleted-empty";
-        emptyItem.textContent = "최근 삭제한 퀘스트가 없습니다.";
+        emptyItem.textContent = "최근 삭제한 일정이 없습니다.";
         deletedList.append(emptyItem);
         return;
     }
@@ -188,18 +188,18 @@ function renderDeletedTodos() {
 
 function getEmptyMessage() {
     if (currentCategory !== "all") {
-        return `${categoryNames[currentCategory]} 카테고리에 해당하는 퀘스트가 없습니다.`;
+        return `${categoryNames[currentCategory]} 카테고리에 해당하는 일정이 없습니다.`;
     }
 
     if (currentFilter === "active") {
-        return "진행 중인 퀘스트가 없습니다.";
+        return "진행 중인 일정이 없습니다.";
     }
 
     if (currentFilter === "completed") {
-        return "아직 완료한 퀘스트가 없습니다.";
+        return "아직 완료한 일정이 없습니다.";
     }
 
-    return "아직 등록된 퀘스트가 없습니다. 새로운 할 일을 추가해 보세요!";
+    return "아직 등록된 일정이 없습니다. 새로운 할 일을 추가해 보세요!";
 }
 
 function updateDashboard(todos) {
@@ -226,13 +226,13 @@ function updateDashboard(todos) {
     progressTrack.setAttribute("aria-valuenow", percentage);
 
     if (percentage === 0) {
-        progressMessage.textContent = "첫 번째 퀘스트를 시작해 보세요!";
+        progressMessage.textContent = "첫 번째 일정을 시작해 보세요!";
     } else if (percentage < 50) {
         progressMessage.textContent = "좋은 시작이에요. 계속 진행해 보세요!";
     } else if (percentage < 100) {
-        progressMessage.textContent = "절반 이상 완료했어요. 다음 퀘스트도 이어가세요.";
+        progressMessage.textContent = "절반 이상 완료했어요. 다음 할 일도 이어가세요.";
     } else {
-        progressMessage.textContent = "오늘의 모든 퀘스트를 완료했습니다!";
+        progressMessage.textContent = "오늘의 모든 일정을 완료했습니다!";
     }
 
     clearBanner.hidden = todos.length === 0 || completedTotal !== todos.length;
@@ -271,7 +271,7 @@ todoForm.addEventListener("submit", (event) => {
 
     addTodo(text, categorySelect.value, prioritySelect.value);
     todoInput.value = "";
-    inputMessage.textContent = "퀘스트가 추가되었습니다.";
+    inputMessage.textContent = "일정이 추가되었습니다.";
     todoInput.focus();
     render();
 });
@@ -294,7 +294,7 @@ todoList.addEventListener("click", (event) => {
 
     if (event.target.closest(".delete-button")) {
         deleteTodo(todoId);
-        inputMessage.textContent = "퀘스트를 최근 삭제함으로 이동했습니다.";
+        inputMessage.textContent = "일정이 최근 삭제함으로 이동했습니다.";
         render();
     }
 });
@@ -311,14 +311,14 @@ deletedList.addEventListener("click", (event) => {
 
     if (event.target.closest(".restore-button")) {
         restoreTodo(todoId);
-        inputMessage.textContent = "퀘스트를 복원했습니다.";
+        inputMessage.textContent = "일정을 복원했습니다.";
         render();
         return;
     }
 
     if (event.target.closest(".permanent-delete-button")) {
         permanentlyDeleteTodo(todoId);
-        inputMessage.textContent = "퀘스트를 영구 삭제했습니다.";
+        inputMessage.textContent = "일정을 영구 삭제했습니다.";
         render();
     }
 });
@@ -387,7 +387,7 @@ async function loadQuote() {
         quoteAuthor.textContent = `— ${data.author}`;
     } catch (error) {
         console.error(error);
-        quoteText.textContent = "“오늘의 작은 완료가 내일의 레벨을 만듭니다.”";
+        quoteText.textContent = "“해야할 일을 정리하고 하나씩 완료해 보세요.”";
         quoteAuthor.textContent = "— LEVEL UP: TODAY";
     } finally {
         quoteRefresh.disabled = false;
