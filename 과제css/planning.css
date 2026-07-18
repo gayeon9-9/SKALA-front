@@ -75,7 +75,7 @@ input[type="checkbox"] {
 button:focus-visible,
 input:focus-visible,
 select:focus-visible {
-    outline: 3px solid rgba(36, 85, 230, 0.25);
+    outline: 3px solid rgba(182, 95, 120, 0.25);
     outline-offset: 3px;
 }
 
@@ -161,10 +161,11 @@ select:focus-visible {
 }
 
 .intro-section h1::after {
-    width: 100%;
+    width: 70px;
     height: 4px;
-    margin-top: 20px;
+    margin-top: 18px;
     display: block;
+    border-radius: 999px;
     background: var(--blue);
     content: "";
 }
@@ -254,7 +255,7 @@ blockquote cite {
 
 .progress-heading {
     padding-top: 18px;
-    border-top: 2px dashed var(--line);
+    border-top: 2px solid var(--line);
 }
 
 .progress-heading span {
@@ -376,8 +377,8 @@ blockquote cite {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     margin-top: 12px;
-    border-top: 2px dashed var(--line);
-    border-bottom: 2px dashed var(--line);
+    border-top: 2px solid var(--line);
+    border-bottom: 2px solid var(--line);
 }
 
 .filter-button {
@@ -519,7 +520,7 @@ blockquote cite {
 }
 
 .todo-checkbox:focus-visible + .custom-checkbox {
-    outline: 3px solid rgba(36, 85, 230, 0.25);
+    outline: 3px solid rgba(182, 95, 120, 0.25);
     outline-offset: 3px;
 }
 

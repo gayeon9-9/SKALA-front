@@ -387,8 +387,8 @@ async function loadQuote() {
         quoteAuthor.textContent = `— ${data.author}`;
     } catch (error) {
         console.error(error);
-        quoteText.textContent = "“해야할 일을 정리하고 하나씩 완료해 보세요.”";
-        quoteAuthor.textContent = "— LEVEL UP: TODAY";
+        quoteText.textContent = "“해야 할 일을 정리하고 하나씩 완료해 보세요.”";
+        quoteAuthor.textContent = "— 오늘의 할 일";
     } finally {
         quoteRefresh.disabled = false;
     }
