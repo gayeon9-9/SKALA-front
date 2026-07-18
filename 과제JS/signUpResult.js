@@ -65,7 +65,7 @@ function getRegionText() {
         .join(" ");
 }
 
-// 입력한 회원 정보를 결과 표에 넣기
+// 입력한 회원 정보를 결과 표에 넣기 (비밀번호는 제외함)
 function showMemberInformation() {
     const userName = getParam("userName");
 
