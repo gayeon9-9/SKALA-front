@@ -417,6 +417,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 제출 전에 비밀번호가 일치하는지 마지막으로 확인
     form.addEventListener("submit", function (event) {
+        // 아이디 중복 확인 여부 검사
+        if (!isIdChecked) {
+            event.preventDefault();
+            alert("아이디 중복 확인을 해주세요.");
+            userId.focus();
+            return;
+        }
+
+
         if (!checkPasswordMatch()) {
             event.preventDefault();
             userPwCheck.reportValidity();
