@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성가연의 Universe</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>성가연의 유니버스 🚀</h1>
+            <p>나의 프로필, 학습 기록, 휴일 계획과 여행 이야기를 모아둔 Hub 페이지입니다.</p>
+        </header>
+
+        <nav aria-label="주요 메뉴">
+            <h3>📂 바로가기 메뉴</h3>
+            <ul>
+                <li><a href="myProfile.html">소개 (Profile)</a></li>
+                <li><a href="myClass.html">수업 시간표 (Class)</a></li>
+                <li><a href="myHoliday.html">휴일 계획 (Holiday)</a></li>
+                <li><a href="myTrip.html">여행 앨범 (Album)</a></li>
+                <li><a href="signUp.html">👤 회원가입 (Sign Up)</a></li>
+            </ul>
+        </nav>
+
+        <hr>
+
+        <div class="content-wrapper">
+            <main>
+                <h2>📌 오늘의 주요 소식</h2>
+
+                <section>
+                    <h3>최근 공지 및 업데이트</h3>
+
+                    <article>
+                        <h4>[업데이트] 오사카 여행 기록 추가 완료!</h4>
+                        <p>
+                            오사카 여행의 사진과 메모를 여행 앨범에 정리했습니다.
+                            여행 페이지에서 기억에 남은 순간을 확인할 수 있습니다.
+                        </p>
+                        <p>
+                            여행 기간:
+                            <time datetime="2026-07-06">2026년 7월 6일</time>
+                            ~
+                            <time datetime="2026-07-10">2026년 7월 10일</time>
+                        </p>
+                        <p><a href="myTrip.html">여행 앨범 바로가기 →</a></p>
+                    </article>
+
+                    <article>
+                        <h4>[업데이트] SKALA 4기 학습 시작!</h4>
+                        <p>
+                            HTML, CSS, JavaScript를 활용해 나만의 웹 페이지를 만들고
+                            학습 결과를 차근차근 기록하고 있습니다.
+                        </p>
+                        <p>시작일: <time datetime="2026-07-14">2026년 7월 14일</time></p>
+                    </article>
+                </section>
+
+                <section>
+                    <h3>✨ 오늘의 한마디</h3>
+                    <p>작은 기능도 직접 구현하며 나만의 웹 유니버스를 완성해 나가겠습니다.</p>
+                </section>
+            </main>
+
+            <aside>
+                <h2>🌤️ 실시간 정보</h2>
+
+                <section>
+                    <h3>🌍 실시간 세계 날씨</h3>
+                    <label for="city-select">날씨를 확인할 도시</label>
+                    <select id="city-select">
+                        <option value="none">도시를 선택하세요</option>
+                        <option value="37.56,126.97">대한민국 서울 🇰🇷</option>
+                        <option value="35.18,129.07">대한민국 부산 🇰🇷</option>
+                        <option value="33.50,126.53">대한민국 제주 🇰🇷</option>
+                        <option value="34.69,135.50">일본 오사카 🇯🇵</option>
+                        <option value="35.67,139.65">일본 도쿄 🇯🇵</option>
+                        <option value="48.85,2.35">프랑스 파리 🇫🇷</option>
+                    </select>
+
+                    <div id="weather-box" aria-live="polite">
+                        <p>도시를 선택하면 위치와 실시간 날씨가 표시됩니다.</p>
+                    </div>
+                </section>
+
+                <hr>
+
+                <section class="game-area">
+                    <h3>🎮 자바스크립트 놀이터</h3>
+                    <button type="button" class="btn-submit" onclick="startGame()">업다운 게임 🚀</button>
+                    <button type="button" class="btn-submit" onclick="checkGrade()">성적 계산기 📊</button>
+                    <button type="button" class="btn-submit" onclick="showMyBag()">내 가방 보기 🎒</button>
+                </section>
+            </aside>
+        </div>
+
+        <hr>
+
+        <footer>
+            <p>
+                추천 학습 사이트:
+                <a href="https://www.w3schools.com" target="_blank" rel="noopener noreferrer">W3Schools</a>
+            </p>
+            <p><small>© 2026 성가연의 SKALA 학습 포털</small></p>
+        </footer>
+    </div>
+
+    <script src="../script/upDown.js"></script>
+    <script src="../script/grade.js"></script>
+    <script src="../script/bag.js"></script>
+    <script type="module" src="../script/realtimeInfo.js"></script>
+</body>
+</html>
