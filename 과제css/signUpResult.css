@@ -325,3 +325,45 @@ footer p {
         flex-direction: column;
     }
 }
+/* 회원가입 완료 페이지 - 바로가기 */
+
+.shortcut-links {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e8dcf2;
+    text-align: center;
+}
+
+.shortcut-links h3 {
+    margin: 0 0 15px;
+    color: #4f3d65;
+}
+
+.shortcut-links ul {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.shortcut-links li {
+    margin: 0;
+}
+
+.shortcut-links a {
+    display: inline-block;
+    padding: 10px 14px;
+    color: #6f48a8;
+    background-color: #f7f1fc;
+    border: 1px solid #d7c4e8;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.shortcut-links a:hover {
+    color: #ffffff;
+    background-color: #9b59b6;
+}
