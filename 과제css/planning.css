@@ -1,39 +1,39 @@
 :root {
-    --page-bg: #e9edf2;
-    --dashboard-bg: #f4f6f8;
-    --panel-bg: #ffffff;
+    --page-bg: #f7f1f2;
+    --dashboard-bg: #f3e7e9;
+    --panel-bg: #fffafa;
     --card-bg: #ffffff;
-    --text: #17191d;
-    --muted: #68707c;
-    --line: #d6dce4;
-    --line-strong: #b8c0cc;
-    --blue: #2455e6;
-    --blue-soft: #e9efff;
-    --green: #1ca65b;
-    --green-soft: #e8f7ee;
-    --coral: #f06d57;
-    --coral-soft: #fff0ec;
-    --purple: #7046c9;
-    --shadow: 0 24px 70px rgba(31, 42, 61, 0.14);
+    --text: #3f3234;
+    --muted: #826f73;
+    --line: #eadadd;
+    --line-strong: #d8bec4;
+    --blue: #b65f78;
+    --blue-soft: #f8e8ed;
+    --green: #758b73;
+    --green-soft: #edf3ec;
+    --coral: #c96363;
+    --coral-soft: #faeaea;
+    --purple: #8b6b7c;
+    --shadow: 0 18px 50px rgba(92, 62, 70, 0.1);
 }
 
 :root[data-theme="dark"] {
-    --page-bg: #16191f;
-    --dashboard-bg: #1d2128;
-    --panel-bg: #232830;
-    --card-bg: #292f38;
-    --text: #f3f5f7;
-    --muted: #a7b0bd;
-    --line: #3b4350;
-    --line-strong: #586271;
-    --blue: #6f94ff;
-    --blue-soft: #27345d;
-    --green: #44cb7e;
-    --green-soft: #1c4931;
-    --coral: #ff8b77;
-    --coral-soft: #512e2a;
-    --purple: #aa83ff;
-    --shadow: 0 28px 80px rgba(0, 0, 0, 0.3);
+    --page-bg: #211a1c;
+    --dashboard-bg: #2a2023;
+    --panel-bg: #30262a;
+    --card-bg: #382c30;
+    --text: #f8eff1;
+    --muted: #c4adb3;
+    --line: #4d3c41;
+    --line-strong: #6a5158;
+    --blue: #e395aa;
+    --blue-soft: #573541;
+    --green: #9caf98;
+    --green-soft: #354236;
+    --coral: #e89090;
+    --coral-soft: #593536;
+    --purple: #c19aae;
+    --shadow: 0 24px 65px rgba(0, 0, 0, 0.28);
 }
 
 * {
@@ -87,7 +87,7 @@ select:focus-visible {
     grid-template-columns: minmax(340px, 410px) minmax(0, 1fr);
     overflow: hidden;
     border: 1px solid var(--line);
-    border-radius: 24px;
+    border-radius: 20px;
     background: var(--panel-bg);
     box-shadow: var(--shadow);
 }
@@ -149,11 +149,11 @@ select:focus-visible {
 
 .intro-section h1 {
     margin: 0;
-    font-family: Impact, "Arial Narrow", sans-serif;
-    font-size: clamp(3rem, 4.1vw, 3.8rem);
-    font-weight: 900;
-    line-height: 0.95;
-    letter-spacing: -0.035em;
+    font-family: inherit;
+    font-size: clamp(2.6rem, 4.1vw, 3.6rem);
+    font-weight: 850;
+    line-height: 1.05;
+    letter-spacing: -0.055em;
 }
 
 .intro-section h1 span {
@@ -182,9 +182,9 @@ select:focus-visible {
 .quote-card,
 .progress-card {
     border: 1px solid var(--line);
-    border-radius: 14px;
+    border-radius: 16px;
     background: var(--card-bg);
-    box-shadow: 0 10px 24px rgba(31, 42, 61, 0.07);
+    box-shadow: 0 4px 14px rgba(92, 62, 70, 0.05);
 }
 
 .quote-card {
@@ -239,10 +239,11 @@ blockquote cite {
 }
 
 .xp-score > strong {
-    font-family: Impact, "Arial Narrow", sans-serif;
-    font-size: 3.6rem;
+    font-family: inherit;
+    font-size: 3.3rem;
+    font-weight: 850;
     line-height: 1;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.04em;
 }
 
 .xp-score > span {
@@ -278,7 +279,11 @@ blockquote cite {
     width: 0;
     height: 100%;
     border-radius: inherit;
-    background: linear-gradient(90deg, var(--green), #42cf7e);
+    background: linear-gradient(
+        90deg,
+        #b65f78,
+        #d58ca0
+    );
     transition: width 350ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -356,8 +361,8 @@ blockquote cite {
 }
 
 .add-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(36, 85, 230, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(182, 95, 120, 0.45);
 }
 
 .input-message {
@@ -535,25 +540,34 @@ blockquote cite {
     gap: 8px;
 }
 
-.category-badge,
-.priority-badge {
-    padding: 5px 9px;
-    border: 1px solid currentColor;
-    border-radius: 6px;
-    font-size: 0.72rem;
-    font-weight: 800;
+.category-badge {
+    position: relative;
+    padding-left: 17px;
+    color: var(--muted);
+}
+
+.category-badge::before {
+    position: absolute;
+    top: 50%;
+    left: 7px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+    transform: translateY(-50%);
+    content: "";
 }
 
 .category-badge.study {
-    color: var(--blue);
+    color: #a15e73;
 }
 
 .category-badge.life {
-    color: var(--green);
+    color: #758b73;
 }
 
 .category-badge.work {
-    color: var(--purple);
+    color: #8b6b7c;
 }
 
 .category-badge.etc {
