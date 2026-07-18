@@ -22,10 +22,8 @@
     --sk-red: #e60012;
     --sk-red-dark: #bd000e;
     --sk-red-hero: #d80010;
-
     --sk-orange: #f9a11b;
     --sk-orange-dark: #e08500;
-
     --sk-dark: #1f2022;
     --black-color: #111111;
     --white-color: #ffffff;
@@ -34,10 +32,8 @@
     --bg-primary: #f5f6f8;
     --bg-secondary: #ffffff;
     --bg-muted: #f0f1f4;
-
     --text-primary: #17181a;
     --text-secondary: #5c6068;
-
     --border-color: #e1e3e8;
     --accent-color: var(--sk-red);
 
